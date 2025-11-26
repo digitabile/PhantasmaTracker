@@ -201,7 +201,9 @@ class CardTracker {
         container.querySelectorAll('.card-checkbox').forEach(checkbox => {
             checkbox.addEventListener('change', (e) => {
                 e.stopPropagation();
-                this.toggleCardOwnership(e.target.dataset.cardNumber);
+                const cardNumber = e.target.dataset.cardNumber;
+                const variant = e.target.dataset.variant; // Will be undefined for single-variant cards
+                this.toggleCardOwnership(cardNumber, variant);
             });
         });
 
@@ -218,51 +220,120 @@ class CardTracker {
     }
 
     createCardHTML(card) {
-        const isOwned = this.ownedCards.has(card.number);
+        const cardNum = parseInt(card.number);
+        const hasVariants = cardNum >= 1 && cardNum <= 94; // Main set has reverse holo variants
+
         const typeColor = TYPE_COLORS[card.type] || '#999';
-        const price = this.cardPrices.get(card.number);
 
-        return `
-            <div class="card-item ${isOwned ? 'owned' : ''}" data-card-number="${card.number}">
-                <input type="checkbox"
-                       class="card-checkbox"
-                       data-card-number="${card.number}"
-                       ${isOwned ? 'checked' : ''}>
+        // For cards with variants, check both normal and reverse holo ownership
+        const isOwnedNormal = this.ownedCards.has(`${card.number}-normal`);
+        const isOwnedReverseHolo = this.ownedCards.has(`${card.number}-reverseHolo`);
+        const isOwnedAny = isOwnedNormal || isOwnedReverseHolo;
 
-                <div class="card-image-container">
-                    <img src="${card.imageUrl}"
-                         alt="${card.name}"
-                         class="card-image"
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                    <div class="card-placeholder" style="display: none;">
-                        <div class="card-number">#${card.number}</div>
-                        <div>${card.type}</div>
+        // For cards without variants, use simple ownership check
+        const isOwned = hasVariants ? isOwnedAny : this.ownedCards.has(card.number);
+
+        // Get prices
+        const priceNormal = this.cardPrices.get(`${card.number}-normal`) || this.cardPrices.get(card.number);
+        const priceReverseHolo = this.cardPrices.get(`${card.number}-reverseHolo`);
+
+        if (hasVariants) {
+            // Render card with two checkboxes for normal and reverse holo
+            return `
+                <div class="card-item ${isOwnedAny ? 'owned' : ''}" data-card-number="${card.number}">
+                    <div class="card-variants">
+                        <label class="variant-checkbox" title="Non-foil">
+                            <input type="checkbox"
+                                   class="card-checkbox"
+                                   data-card-number="${card.number}"
+                                   data-variant="normal"
+                                   ${isOwnedNormal ? 'checked' : ''}>
+                            <span class="variant-label">Non-foil</span>
+                        </label>
+                        <label class="variant-checkbox" title="Reverse Holo">
+                            <input type="checkbox"
+                                   class="card-checkbox"
+                                   data-card-number="${card.number}"
+                                   data-variant="reverseHolo"
+                                   ${isOwnedReverseHolo ? 'checked' : ''}>
+                            <span class="variant-label">Rev Holo</span>
+                        </label>
+                    </div>
+
+                    <div class="card-image-container">
+                        <img src="${card.imageUrl}"
+                             alt="${card.name}"
+                             class="card-image"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <div class="card-placeholder" style="display: none;">
+                            <div class="card-number">#${card.number}</div>
+                            <div>${card.type}</div>
+                        </div>
+                    </div>
+
+                    <div class="card-info">
+                        <div class="card-header">
+                            <span class="card-number-badge">#${card.number}</span>
+                            <span class="card-type-badge" style="background-color: ${typeColor}">
+                                ${card.type}
+                            </span>
+                        </div>
+                        <div class="card-name">${card.name}</div>
+                        <div class="card-rarity">${card.rarity}</div>
+                        <div class="card-price">
+                            ${priceNormal ? `$${priceNormal.toFixed(2)}` : '<span class="price-loading">Loading...</span>'}
+                            ${priceReverseHolo ? ` / $${priceReverseHolo.toFixed(2)}` : ''}
+                        </div>
                     </div>
                 </div>
+            `;
+        } else {
+            // Render card with single checkbox (holofoil only)
+            return `
+                <div class="card-item ${isOwned ? 'owned' : ''}" data-card-number="${card.number}">
+                    <input type="checkbox"
+                           class="card-checkbox"
+                           data-card-number="${card.number}"
+                           ${isOwned ? 'checked' : ''}>
 
-                <div class="card-info">
-                    <div class="card-header">
-                        <span class="card-number-badge">#${card.number}</span>
-                        <span class="card-type-badge" style="background-color: ${typeColor}">
-                            ${card.type}
-                        </span>
+                    <div class="card-image-container">
+                        <img src="${card.imageUrl}"
+                             alt="${card.name}"
+                             class="card-image"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <div class="card-placeholder" style="display: none;">
+                            <div class="card-number">#${card.number}</div>
+                            <div>${card.type}</div>
+                        </div>
                     </div>
-                    <div class="card-name">${card.name}</div>
-                    <div class="card-rarity">${card.rarity}</div>
-                    <div class="card-price">
-                        ${price ? `$${price.toFixed(2)}` : '<span class="price-loading">Loading...</span>'}
+
+                    <div class="card-info">
+                        <div class="card-header">
+                            <span class="card-number-badge">#${card.number}</span>
+                            <span class="card-type-badge" style="background-color: ${typeColor}">
+                                ${card.type}
+                            </span>
+                        </div>
+                        <div class="card-name">${card.name}</div>
+                        <div class="card-rarity">${card.rarity}</div>
+                        <div class="card-price">
+                            ${priceNormal ? `$${priceNormal.toFixed(2)}` : '<span class="price-loading">Loading...</span>'}
+                        </div>
                     </div>
                 </div>
-            </div>
-        `;
+            `;
+        }
     }
 
     // Card Ownership Management
-    toggleCardOwnership(cardNumber) {
-        if (this.ownedCards.has(cardNumber)) {
-            this.ownedCards.delete(cardNumber);
+    toggleCardOwnership(cardNumber, variant) {
+        // If variant is specified (for main set cards with multiple variants)
+        const key = variant ? `${cardNumber}-${variant}` : cardNumber;
+
+        if (this.ownedCards.has(key)) {
+            this.ownedCards.delete(key);
         } else {
-            this.ownedCards.add(cardNumber);
+            this.ownedCards.add(key);
         }
 
         this.saveToLocalStorage();
@@ -271,7 +342,13 @@ class CardTracker {
 
     // Statistics
     updateStats() {
-        const totalCards = this.cards.length;
+        // Calculate total possible cards including variants
+        // Main set cards (001-094) have 2 variants each (normal + reverse holo)
+        // Other cards (095-130) have 1 variant each
+        const mainSetCards = this.cards.filter(c => parseInt(c.number) >= 1 && parseInt(c.number) <= 94);
+        const otherCards = this.cards.filter(c => parseInt(c.number) > 94);
+        const totalCards = (mainSetCards.length * 2) + otherCards.length;
+
         const ownedCount = this.ownedCards.size;
         const percentage = totalCards > 0 ? Math.round((ownedCount / totalCards) * 100) : 0;
 
@@ -282,8 +359,8 @@ class CardTracker {
 
         // Calculate total value
         let totalValue = 0;
-        this.ownedCards.forEach(cardNumber => {
-            const price = this.cardPrices.get(cardNumber);
+        this.ownedCards.forEach(key => {
+            const price = this.cardPrices.get(key);
             if (price) totalValue += price;
         });
         document.getElementById('total-value').textContent = `$${totalValue.toFixed(2)}`;
@@ -476,9 +553,46 @@ class CardTracker {
         const card = this.cards.find(c => c.number === cardNumber);
         if (!card) return;
 
-        const isOwned = this.ownedCards.has(cardNumber);
+        const cardNum = parseInt(card.number);
+        const hasVariants = cardNum >= 1 && cardNum <= 94;
+
+        // Check ownership for variants
+        let isOwned, ownershipStatus, priceDisplay;
+        if (hasVariants) {
+            const isOwnedNormal = this.ownedCards.has(`${cardNumber}-normal`);
+            const isOwnedReverseHolo = this.ownedCards.has(`${cardNumber}-reverseHolo`);
+            const priceNormal = this.cardPrices.get(`${cardNumber}-normal`);
+            const priceReverseHolo = this.cardPrices.get(`${cardNumber}-reverseHolo`);
+
+            isOwned = isOwnedNormal || isOwnedReverseHolo;
+
+            // Show ownership status for both variants
+            if (isOwnedNormal && isOwnedReverseHolo) {
+                ownershipStatus = '✅ Both variants owned';
+            } else if (isOwnedNormal) {
+                ownershipStatus = '✅ Non-foil owned | ❌ Reverse Holo needed';
+            } else if (isOwnedReverseHolo) {
+                ownershipStatus = '❌ Non-foil needed | ✅ Reverse Holo owned';
+            } else {
+                ownershipStatus = '❌ Neither variant owned';
+            }
+
+            // Display prices for both variants
+            priceDisplay = `
+                <p><strong>Estimated Prices:</strong></p>
+                <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                    <li><strong>Non-foil:</strong> ${priceNormal ? `$${priceNormal.toFixed(2)}` : 'Loading...'}</li>
+                    <li><strong>Reverse Holo:</strong> ${priceReverseHolo ? `$${priceReverseHolo.toFixed(2)}` : 'Loading...'}</li>
+                </ul>
+            `;
+        } else {
+            isOwned = this.ownedCards.has(cardNumber);
+            const price = this.cardPrices.get(cardNumber);
+            ownershipStatus = isOwned ? '✅ Owned' : '❌ Not owned';
+            priceDisplay = `<p><strong>Estimated Price:</strong> ${price ? `$${price.toFixed(2)}` : 'Loading...'}</p>`;
+        }
+
         const typeColor = TYPE_COLORS[card.type] || '#999';
-        const price = this.cardPrices.get(cardNumber);
 
         // Generate pricing links
         const cardNameEncoded = encodeURIComponent(card.name);
@@ -508,8 +622,8 @@ class CardTracker {
             <p><strong>Type:</strong> <span style="color: ${typeColor}; font-weight: bold;">${card.type}</span></p>
             <p><strong>Rarity:</strong> ${card.rarity}</p>
             <p><strong>Category:</strong> ${card.category}</p>
-            <p><strong>Estimated Price:</strong> ${price ? `$${price.toFixed(2)}` : 'Loading...'}</p>
-            <p><strong>Status:</strong> ${isOwned ? '✅ Owned' : '❌ Not owned'}</p>
+            ${priceDisplay}
+            <p><strong>Status:</strong> ${ownershipStatus}</p>
 
             <div style="margin-top: 1.5rem; padding: 1rem; background: #f3f4f6; border-radius: 8px;">
                 <p style="font-weight: 600; margin-bottom: 0.75rem; font-size: 0.95rem;">💰 Check Current Market Prices:</p>
@@ -559,7 +673,7 @@ class CardTracker {
         // Load real market prices from TCGPlayer and other reputable sources
         // Prices are based on current market values and updated regularly
 
-        const PRICE_VERSION = 'v3.0'; // Updated when pricing system changes
+        const PRICE_VERSION = 'v4.0'; // Updated when pricing system changes (v4.0 adds variants)
         const lastUpdate = localStorage.getItem('priceLastUpdate');
         const priceVersion = localStorage.getItem('priceVersion');
         const now = Date.now();
@@ -578,7 +692,7 @@ class CardTracker {
 
         // Clear old cached prices if version changed
         if (priceVersion !== PRICE_VERSION) {
-            console.log('Updating to new pricing system...');
+            console.log('Updating to new pricing system with variants...');
             this.cardPrices.clear();
         }
 
@@ -588,9 +702,21 @@ class CardTracker {
         // Load real market prices from CARD_PRICES
         // These prices are sourced from TCGPlayer, PriceCharting, and other market data
         this.cards.forEach(card => {
-            // Use real market price if available, otherwise use a default
-            const price = CARD_PRICES[card.number] || 0.15;
-            this.cardPrices.set(card.number, parseFloat(price.toFixed(2)));
+            const cardNum = parseInt(card.number);
+            const priceData = CARD_PRICES[card.number];
+
+            // Check if card has variants (main set cards 001-094)
+            if (cardNum >= 1 && cardNum <= 94 && typeof priceData === 'object') {
+                // Store prices for both variants
+                const normalPrice = priceData.normal || 0.15;
+                const reverseHoloPrice = priceData.reverseHolo || 0.25;
+                this.cardPrices.set(`${card.number}-normal`, parseFloat(normalPrice.toFixed(2)));
+                this.cardPrices.set(`${card.number}-reverseHolo`, parseFloat(reverseHoloPrice.toFixed(2)));
+            } else {
+                // Single variant cards (holofoil only)
+                const price = typeof priceData === 'number' ? priceData : 0.15;
+                this.cardPrices.set(card.number, parseFloat(price.toFixed(2)));
+            }
         });
 
         localStorage.setItem('priceLastUpdate', now.toString());

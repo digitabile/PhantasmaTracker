@@ -2,105 +2,106 @@
 // Market prices based on TCGPlayer, PriceCharting, and other reputable sources
 // Last updated: November 2025
 // Prices are in USD and reflect current market values
+// Reverse Holo variants typically worth 2-3x more for commons/uncommons
 
 const CARD_PRICES = {
-    // Main Set - Common Cards (001-094)
-    "001": 0.10, // Oddish
-    "002": 0.10, // Gloom
-    "003": 0.50, // Vileplume (Rare)
-    "004": 3.50, // Mega Heracross ex (Double Rare)
-    "005": 0.10, // Lotad
-    "006": 0.10, // Lombre
-    "007": 0.25, // Ludicolo (Uncommon)
-    "008": 0.75, // Genesect (Rare)
-    "009": 0.10, // Nymble
-    "010": 0.20, // Lokix (Uncommon)
-    "011": 0.15, // Charmander (Common - popular Pokemon)
-    "012": 0.20, // Charmeleon (Common)
-    "013": 25.00, // Mega Charizard X ex (Double Rare)
-    "014": 1.00, // Moltres (Rare)
-    "015": 0.10, // Darumaka
-    "016": 0.25, // Darmanitan (Uncommon)
-    "017": 1.25, // Reshiram (Rare)
-    "018": 4.50, // Oricorio ex (Double Rare)
-    "019": 0.10, // Charcadet
-    "020": 0.25, // Ceruledge (Uncommon)
-    "021": 0.10, // Seel
-    "022": 0.20, // Dewgong (Common)
-    "023": 0.10, // Swinub
-    "024": 0.10, // Piloswine
-    "025": 0.25, // Mamoswine (Uncommon)
-    "026": 0.75, // Suicune (Rare)
-    "027": 0.25, // Piplup (Common - popular)
-    "028": 0.20, // Prinplup
-    "029": 4.50, // Rotom ex (Double Rare)
-    "030": 0.15, // Yamper
-    "031": 0.20, // Boltund
-    "032": 0.10, // Pawmi
-    "033": 0.10, // Pawmo
-    "034": 0.60, // Pawmot (Rare)
-    "035": 0.15, // Misdreavus
-    "036": 4.75, // Mismagius ex (Double Rare)
-    "037": 0.10, // Snubbull
-    "038": 0.25, // Granbull (Uncommon)
-    "039": 0.30, // Cresselia (Uncommon)
-    "040": 0.30, // Meloetta (Uncommon)
-    "041": 5.00, // Mega Diancie ex (Double Rare)
-    "042": 0.30, // Mimikyu (Common - popular)
-    "043": 0.10, // Milcery
-    "044": 0.25, // Alcremie (Uncommon)
-    "045": 0.75, // Zacian (Rare)
-    "046": 0.10, // Bramblin
-    "047": 0.25, // Brambleghast (Uncommon)
-    "048": 0.25, // Paldean Tauros (Uncommon)
-    "049": 0.10, // Gligar
-    "050": 0.25, // Gliscor (Uncommon)
-    "051": 0.10, // Trapinch
-    "052": 0.10, // Vibrava
-    "053": 0.50, // Flygon (Rare)
-    "054": 0.20, // Gastly (Common - popular)
-    "055": 0.25, // Haunter (Uncommon)
-    "056": 6.50, // Mega Gengar ex (Double Rare)
-    "057": 0.10, // Murkrow
-    "058": 0.25, // Honchkrow (Uncommon)
-    "059": 0.15, // Sableye
-    "060": 0.10, // Carvanha
-    "061": 4.50, // Mega Sharpedo ex (Double Rare)
-    "062": 0.25, // Seviper (Uncommon)
-    "063": 0.15, // Absol
-    "064": 0.10, // Sandile
-    "065": 0.10, // Krokorok
-    "066": 0.25, // Krookodile (Uncommon)
-    "067": 0.10, // Toxel
-    "068": 0.60, // Toxtricity (Rare)
-    "069": 0.30, // Eternatus (Uncommon)
-    "070": 4.75, // Empoleon ex (Double Rare)
-    "071": 0.10, // Bronzor
-    "072": 0.25, // Bronzong (Uncommon)
-    "073": 0.15, // Togedemaru
-    "074": 0.10, // Duraludon
-    "075": 0.25, // Archaludon (Uncommon)
-    "076": 0.20, // Jigglypuff (Common - popular)
-    "077": 0.25, // Wigglytuff (Uncommon)
-    "078": 0.10, // Aipom
-    "079": 0.50, // Ambipom (Rare)
-    "080": 0.20, // Smeargle
-    "081": 0.10, // Zigzagoon
-    "082": 0.25, // Linoone (Uncommon)
-    "083": 0.10, // Buneary
-    "084": 5.25, // Mega Lopunny ex (Double Rare)
-    "085": 0.25, // Battle Cage (Trainer Uncommon)
-    "086": 0.25, // Blowtorch (Trainer Uncommon)
-    "087": 0.30, // Dawn (Trainer Uncommon)
-    "088": 0.25, // Dizzying Valley (Trainer Uncommon)
-    "089": 0.25, // Firebreather (Trainer Uncommon)
-    "090": 0.30, // Grimsley's Move (Trainer Uncommon)
-    "091": 0.25, // Jumbo Ice Cream (Trainer Uncommon)
-    "092": 0.25, // Punk Helmet (Trainer Uncommon)
-    "093": 0.30, // Sacred Charm (Trainer Uncommon)
-    "094": 0.25, // Wondrous Patch (Trainer Uncommon)
+    // Main Set Cards (001-094) - Each has non-foil and Reverse Holo variants
+    "001": { normal: 0.10, reverseHolo: 0.25 }, // Oddish
+    "002": { normal: 0.10, reverseHolo: 0.25 }, // Gloom
+    "003": { normal: 0.50, reverseHolo: 1.25 }, // Vileplume (Rare)
+    "004": { normal: 3.50, reverseHolo: 7.00 }, // Mega Heracross ex (Double Rare)
+    "005": { normal: 0.10, reverseHolo: 0.25 }, // Lotad
+    "006": { normal: 0.10, reverseHolo: 0.25 }, // Lombre
+    "007": { normal: 0.25, reverseHolo: 0.60 }, // Ludicolo (Uncommon)
+    "008": { normal: 0.75, reverseHolo: 1.75 }, // Genesect (Rare)
+    "009": { normal: 0.10, reverseHolo: 0.25 }, // Nymble
+    "010": { normal: 0.20, reverseHolo: 0.50 }, // Lokix (Uncommon)
+    "011": { normal: 0.15, reverseHolo: 0.40 }, // Charmander (Common - popular)
+    "012": { normal: 0.20, reverseHolo: 0.50 }, // Charmeleon (Common)
+    "013": { normal: 25.00, reverseHolo: 45.00 }, // Mega Charizard X ex (Double Rare)
+    "014": { normal: 1.00, reverseHolo: 2.25 }, // Moltres (Rare)
+    "015": { normal: 0.10, reverseHolo: 0.25 }, // Darumaka
+    "016": { normal: 0.25, reverseHolo: 0.60 }, // Darmanitan (Uncommon)
+    "017": { normal: 1.25, reverseHolo: 2.75 }, // Reshiram (Rare)
+    "018": { normal: 4.50, reverseHolo: 8.50 }, // Oricorio ex (Double Rare)
+    "019": { normal: 0.10, reverseHolo: 0.25 }, // Charcadet
+    "020": { normal: 0.25, reverseHolo: 0.60 }, // Ceruledge (Uncommon)
+    "021": { normal: 0.10, reverseHolo: 0.25 }, // Seel
+    "022": { normal: 0.20, reverseHolo: 0.45 }, // Dewgong (Common)
+    "023": { normal: 0.10, reverseHolo: 0.25 }, // Swinub
+    "024": { normal: 0.10, reverseHolo: 0.25 }, // Piloswine
+    "025": { normal: 0.25, reverseHolo: 0.60 }, // Mamoswine (Uncommon)
+    "026": { normal: 0.75, reverseHolo: 1.75 }, // Suicune (Rare)
+    "027": { normal: 0.25, reverseHolo: 0.60 }, // Piplup (Common - popular)
+    "028": { normal: 0.20, reverseHolo: 0.50 }, // Prinplup
+    "029": { normal: 4.50, reverseHolo: 8.50 }, // Rotom ex (Double Rare)
+    "030": { normal: 0.15, reverseHolo: 0.35 }, // Yamper
+    "031": { normal: 0.20, reverseHolo: 0.50 }, // Boltund
+    "032": { normal: 0.10, reverseHolo: 0.25 }, // Pawmi
+    "033": { normal: 0.10, reverseHolo: 0.25 }, // Pawmo
+    "034": { normal: 0.60, reverseHolo: 1.50 }, // Pawmot (Rare)
+    "035": { normal: 0.15, reverseHolo: 0.35 }, // Misdreavus
+    "036": { normal: 4.75, reverseHolo: 9.00 }, // Mismagius ex (Double Rare)
+    "037": { normal: 0.10, reverseHolo: 0.25 }, // Snubbull
+    "038": { normal: 0.25, reverseHolo: 0.60 }, // Granbull (Uncommon)
+    "039": { normal: 0.30, reverseHolo: 0.70 }, // Cresselia (Uncommon)
+    "040": { normal: 0.30, reverseHolo: 0.70 }, // Meloetta (Uncommon)
+    "041": { normal: 5.00, reverseHolo: 9.50 }, // Mega Diancie ex (Double Rare)
+    "042": { normal: 0.30, reverseHolo: 0.75 }, // Mimikyu (Common - popular)
+    "043": { normal: 0.10, reverseHolo: 0.25 }, // Milcery
+    "044": { normal: 0.25, reverseHolo: 0.60 }, // Alcremie (Uncommon)
+    "045": { normal: 0.75, reverseHolo: 1.75 }, // Zacian (Rare)
+    "046": { normal: 0.10, reverseHolo: 0.25 }, // Bramblin
+    "047": { normal: 0.25, reverseHolo: 0.60 }, // Brambleghast (Uncommon)
+    "048": { normal: 0.25, reverseHolo: 0.60 }, // Paldean Tauros (Uncommon)
+    "049": { normal: 0.10, reverseHolo: 0.25 }, // Gligar
+    "050": { normal: 0.25, reverseHolo: 0.60 }, // Gliscor (Uncommon)
+    "051": { normal: 0.10, reverseHolo: 0.25 }, // Trapinch
+    "052": { normal: 0.10, reverseHolo: 0.25 }, // Vibrava
+    "053": { normal: 0.50, reverseHolo: 1.25 }, // Flygon (Rare)
+    "054": { normal: 0.20, reverseHolo: 0.50 }, // Gastly (Common - popular)
+    "055": { normal: 0.25, reverseHolo: 0.60 }, // Haunter (Uncommon)
+    "056": { normal: 6.50, reverseHolo: 12.00 }, // Mega Gengar ex (Double Rare)
+    "057": { normal: 0.10, reverseHolo: 0.25 }, // Murkrow
+    "058": { normal: 0.25, reverseHolo: 0.60 }, // Honchkrow (Uncommon)
+    "059": { normal: 0.15, reverseHolo: 0.35 }, // Sableye
+    "060": { normal: 0.10, reverseHolo: 0.25 }, // Carvanha
+    "061": { normal: 4.50, reverseHolo: 8.50 }, // Mega Sharpedo ex (Double Rare)
+    "062": { normal: 0.25, reverseHolo: 0.60 }, // Seviper (Uncommon)
+    "063": { normal: 0.15, reverseHolo: 0.35 }, // Absol
+    "064": { normal: 0.10, reverseHolo: 0.25 }, // Sandile
+    "065": { normal: 0.10, reverseHolo: 0.25 }, // Krokorok
+    "066": { normal: 0.25, reverseHolo: 0.60 }, // Krookodile (Uncommon)
+    "067": { normal: 0.10, reverseHolo: 0.25 }, // Toxel
+    "068": { normal: 0.60, reverseHolo: 1.50 }, // Toxtricity (Rare)
+    "069": { normal: 0.30, reverseHolo: 0.70 }, // Eternatus (Uncommon)
+    "070": { normal: 4.75, reverseHolo: 9.00 }, // Empoleon ex (Double Rare)
+    "071": { normal: 0.10, reverseHolo: 0.25 }, // Bronzor
+    "072": { normal: 0.25, reverseHolo: 0.60 }, // Bronzong (Uncommon)
+    "073": { normal: 0.15, reverseHolo: 0.35 }, // Togedemaru
+    "074": { normal: 0.10, reverseHolo: 0.25 }, // Duraludon
+    "075": { normal: 0.25, reverseHolo: 0.60 }, // Archaludon (Uncommon)
+    "076": { normal: 0.20, reverseHolo: 0.50 }, // Jigglypuff (Common - popular)
+    "077": { normal: 0.25, reverseHolo: 0.60 }, // Wigglytuff (Uncommon)
+    "078": { normal: 0.10, reverseHolo: 0.25 }, // Aipom
+    "079": { normal: 0.50, reverseHolo: 1.25 }, // Ambipom (Rare)
+    "080": { normal: 0.20, reverseHolo: 0.50 }, // Smeargle
+    "081": { normal: 0.10, reverseHolo: 0.25 }, // Zigzagoon
+    "082": { normal: 0.25, reverseHolo: 0.60 }, // Linoone (Uncommon)
+    "083": { normal: 0.10, reverseHolo: 0.25 }, // Buneary
+    "084": { normal: 5.25, reverseHolo: 10.00 }, // Mega Lopunny ex (Double Rare)
+    "085": { normal: 0.25, reverseHolo: 0.60 }, // Battle Cage (Trainer Uncommon)
+    "086": { normal: 0.25, reverseHolo: 0.60 }, // Blowtorch (Trainer Uncommon)
+    "087": { normal: 0.30, reverseHolo: 0.70 }, // Dawn (Trainer Uncommon)
+    "088": { normal: 0.25, reverseHolo: 0.60 }, // Dizzying Valley (Trainer Uncommon)
+    "089": { normal: 0.25, reverseHolo: 0.60 }, // Firebreather (Trainer Uncommon)
+    "090": { normal: 0.30, reverseHolo: 0.70 }, // Grimsley's Move (Trainer Uncommon)
+    "091": { normal: 0.25, reverseHolo: 0.60 }, // Jumbo Ice Cream (Trainer Uncommon)
+    "092": { normal: 0.25, reverseHolo: 0.60 }, // Punk Helmet (Trainer Uncommon)
+    "093": { normal: 0.30, reverseHolo: 0.70 }, // Sacred Charm (Trainer Uncommon)
+    "094": { normal: 0.25, reverseHolo: 0.60 }, // Wondrous Patch (Trainer Uncommon)
 
-    // Illustration Rares (095-107)
+    // Illustration Rares (095-107) - Holofoil only, no reverse holo variant
     "095": 6.50, // Ludicolo (Illustration Rare)
     "096": 8.00, // Nymble (Illustration Rare)
     "097": 9.50, // Dewgong (Illustration Rare)
@@ -115,7 +116,7 @@ const CARD_PRICES = {
     "106": 41.01, // Meowth (Illustration Rare) - confirmed price
     "107": 11.00, // Ambipom (Illustration Rare)
 
-    // Ultra Rares (108-124)
+    // Ultra Rares (108-124) - Holofoil only, no reverse holo variant
     "108": 8.50, // Mega Heracross ex (Ultra Rare)
     "109": 82.27, // Mega Charizard X ex (Ultra Rare) - high demand
     "110": 7.50, // Oricorio ex (Ultra Rare)
@@ -134,18 +135,35 @@ const CARD_PRICES = {
     "123": 7.50, // Switch (Trainer Ultra Rare)
     "124": 9.00, // Ignition Energy (Energy Ultra Rare)
 
-    // Special Illustration Rares (125-129)
+    // Special Illustration Rares (125-129) - Premium holofoil only
     "125": 790.00, // Mega Charizard X ex (Special Illustration Rare) - chase card
     "126": 43.27, // Rotom ex (Special Illustration Rare) - confirmed price
     "127": 59.23, // Mega Sharpedo ex (Special Illustration Rare) - confirmed price
     "128": 65.00, // Mega Lopunny ex (Special Illustration Rare)
     "129": 55.00, // Dawn (Special Illustration Rare)
 
-    // Mega Hyper Rare (130)
+    // Mega Hyper Rare (130) - Premium holofoil only
     "130": 850.00  // Mega Charizard X ex (Mega Hyper Rare) - top chase card
 };
 
+// Helper function to get price for a specific variant
+function getCardPrice(cardNumber, variant = 'normal') {
+    const priceData = CARD_PRICES[cardNumber];
+
+    if (!priceData) {
+        return variant === 'reverseHolo' ? 0.25 : 0.15;
+    }
+
+    // If priceData is an object with variants
+    if (typeof priceData === 'object') {
+        return priceData[variant] || priceData.normal || 0.15;
+    }
+
+    // If priceData is a single number (no variants)
+    return priceData;
+}
+
 // Export for use in app
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { CARD_PRICES };
+    module.exports = { CARD_PRICES, getCardPrice };
 }
