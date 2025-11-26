@@ -622,17 +622,18 @@ class CardTracker {
 
         const modalContent = document.getElementById('modal-card-detail');
         modalContent.innerHTML = `
-            <div class="card-image-container" style="max-width: 400px; margin: 0 auto;">
+            <div class="card-image-container" style="max-width: 400px; margin: 0 auto; padding-top: 0; height: auto;">
                 <img src="${card.imageUrl}"
                      alt="${card.name}"
                      class="modal-card-image"
+                     style="position: static; width: 100%; height: auto; border-radius: 8px;"
                      onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                 <div class="card-placeholder" style="display: none;">
                     <div class="card-number">#${card.number}</div>
                     <div>${card.type}</div>
                 </div>
             </div>
-            <h2>${card.name}</h2>
+            <h2 style="margin-top: 1rem;">${card.name}</h2>
             <p><strong>Card Number:</strong> #${card.number}</p>
             <p><strong>Type:</strong> <span style="color: ${typeColor}; font-weight: bold;">${card.type}</span></p>
             <p><strong>Rarity:</strong> ${card.rarity}</p>
