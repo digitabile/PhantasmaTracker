@@ -1,6 +1,24 @@
 // Pokemon Card Tracker Application
 // Main application logic supporting multiple Pokemon TCG sets
 
+// Type color mapping for visual elements
+const TYPE_COLORS = {
+    'Grass': '#7AC74C',
+    'Fire': '#EE8130',
+    'Water': '#6390F0',
+    'Electric': '#F7D02C',
+    'Psychic': '#F95587',
+    'Fighting': '#C22E28',
+    'Fairy': '#D685AD',
+    'Colorless': '#A8A77A',
+    'Trainer': '#7EC850',
+    'Energy': '#FFD700',
+    'Darkness': '#705746',
+    'Metal': '#B7B7CE',
+    'Dragon': '#6F35FC',
+    'Lightning': '#F7D02C'
+};
+
 class CardTracker {
     constructor() {
         // Load saved set or default to Phantasmal Flames
