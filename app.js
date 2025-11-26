@@ -513,14 +513,27 @@ class CardTracker {
         // Load real market prices from TCGPlayer and other reputable sources
         // Prices are based on current market values and updated regularly
 
-        // Check if we have cached prices less than 24 hours old
+        const PRICE_VERSION = 'v2.0'; // Updated when pricing system changes
         const lastUpdate = localStorage.getItem('priceLastUpdate');
+        const priceVersion = localStorage.getItem('priceVersion');
         const now = Date.now();
 
-        if (lastUpdate && (now - parseInt(lastUpdate)) < 24 * 60 * 60 * 1000 && this.cardPrices.size > 0) {
+        // Force reload if version changed or prices are old
+        const needsUpdate = !lastUpdate ||
+                          priceVersion !== PRICE_VERSION ||
+                          (now - parseInt(lastUpdate)) >= 24 * 60 * 60 * 1000 ||
+                          this.cardPrices.size === 0;
+
+        if (!needsUpdate) {
             // Use cached prices
             this.renderCards();
             return;
+        }
+
+        // Clear old cached prices if version changed
+        if (priceVersion !== PRICE_VERSION) {
+            console.log('Updating to new pricing system...');
+            this.cardPrices.clear();
         }
 
         // Simulate API delay for UX
@@ -535,6 +548,7 @@ class CardTracker {
         });
 
         localStorage.setItem('priceLastUpdate', now.toString());
+        localStorage.setItem('priceVersion', PRICE_VERSION);
         this.saveToLocalStorage();
         this.renderCards();
         this.updateStats();
