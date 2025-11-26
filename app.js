@@ -557,7 +557,7 @@ class CardTracker {
             container.innerHTML = `
                 <div style="text-align: center; padding: 2rem; grid-column: 1/-1;">
                     <h3>🎉 Congratulations!</h3>
-                    <p>You've collected all cards in the Phantasmal Flames set!</p>
+                    <p>You've collected all cards in the ${CARD_SETS[this.currentSet].name} set!</p>
                 </div>
             `;
             return;
@@ -584,6 +584,12 @@ class CardTracker {
 
     // Gallery View
     renderGallery(category) {
+        // Update gallery subtitle with current set name
+        const subtitle = document.querySelector('.gallery-subtitle');
+        if (subtitle) {
+            subtitle.textContent = `Browse all cards in the ${CARD_SETS[this.currentSet].name} set`;
+        }
+
         const container = document.getElementById('gallery-grid');
         let filteredCards = this.cards;
 
@@ -677,16 +683,36 @@ class CardTracker {
 
         const typeColor = TYPE_COLORS[card.type] || '#999';
 
-        // Generate pricing links
+        // Generate pricing links based on current set
         const cardNameEncoded = encodeURIComponent(card.name);
-        const setNameEncoded = encodeURIComponent('Phantasmal Flames');
+        const currentSetInfo = CARD_SETS[this.currentSet];
+        const setNameEncoded = encodeURIComponent(currentSetInfo.name);
+        const setCode = currentSetInfo.code.toLowerCase();
 
-        const pricingLinks = {
-            tcgplayer: `https://www.tcgplayer.com/search/pokemon/me02-phantasmal-flames?productLineName=pokemon&q=${cardNameEncoded}&view=grid`,
-            pricecharting: `https://www.pricecharting.com/search-products?type=prices&q=phantasmal+flames+${cardNameEncoded}`,
-            tcgcollector: `https://www.tcgcollector.com/cards?cardName=${cardNameEncoded}&setName=${setNameEncoded}`,
-            ebay: `https://www.ebay.com/sch/i.html?_nkw=pokemon+phantasmal+flames+${cardNameEncoded}`
-        };
+        let pricingLinks;
+        if (this.currentSet === 'phantasmal-flames') {
+            pricingLinks = {
+                tcgplayer: `https://www.tcgplayer.com/search/pokemon/me02-phantasmal-flames?productLineName=pokemon&q=${cardNameEncoded}&view=grid`,
+                pricecharting: `https://www.pricecharting.com/search-products?type=prices&q=phantasmal+flames+${cardNameEncoded}`,
+                tcgcollector: `https://www.tcgcollector.com/cards?cardName=${cardNameEncoded}&setName=${setNameEncoded}`,
+                ebay: `https://www.ebay.com/sch/i.html?_nkw=pokemon+phantasmal+flames+${cardNameEncoded}`
+            };
+        } else if (this.currentSet === 'scarlet-violet') {
+            pricingLinks = {
+                tcgplayer: `https://www.tcgplayer.com/search/pokemon/scarlet-violet-base-set?productLineName=pokemon&q=${cardNameEncoded}&view=grid`,
+                pricecharting: `https://www.pricecharting.com/search-products?type=prices&q=scarlet+violet+${cardNameEncoded}`,
+                tcgcollector: `https://www.tcgcollector.com/cards?cardName=${cardNameEncoded}&setName=${setNameEncoded}`,
+                ebay: `https://www.ebay.com/sch/i.html?_nkw=pokemon+scarlet+violet+${cardNameEncoded}`
+            };
+        } else {
+            // Generic pricing links for any future sets
+            pricingLinks = {
+                tcgplayer: `https://www.tcgplayer.com/search/pokemon/product?productLineName=pokemon&q=${cardNameEncoded}`,
+                pricecharting: `https://www.pricecharting.com/search-products?type=prices&q=${setNameEncoded}+${cardNameEncoded}`,
+                tcgcollector: `https://www.tcgcollector.com/cards?cardName=${cardNameEncoded}&setName=${setNameEncoded}`,
+                ebay: `https://www.ebay.com/sch/i.html?_nkw=pokemon+${setNameEncoded}+${cardNameEncoded}`
+            };
+        }
 
         const modalContent = document.getElementById('modal-card-detail');
         modalContent.innerHTML = `
@@ -844,7 +870,8 @@ class CardTracker {
     // Export/Import functionality (bonus feature)
     exportCollection() {
         const data = {
-            setName: 'Phantasmal Flames',
+            setName: CARD_SETS[this.currentSet].name,
+            setCode: this.currentSet,
             exportDate: new Date().toISOString(),
             ownedCards: Array.from(this.ownedCards),
             totalCards: this.cards.length,
@@ -884,5 +911,5 @@ class CardTracker {
 let app;
 document.addEventListener('DOMContentLoaded', () => {
     app = new CardTracker();
-    console.log('Phantasmal Flames Card Tracker initialized');
+    console.log('Pokemon Card Collection Tracker initialized');
 });
