@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phantasmal Flames Card Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <h1>🔥 Phantasmal Flames Collection Tracker</h1>
+                <p class="subtitle">Track your Pokemon TCG Mega Evolution Series collection</p>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="app-nav">
+            <button class="nav-btn active" data-view="collection">
+                <span class="icon">📋</span> Collection
+            </button>
+            <button class="nav-btn" data-view="statistics">
+                <span class="icon">📊</span> Statistics
+            </button>
+            <button class="nav-btn" data-view="gallery">
+                <span class="icon">🖼️</span> Gallery
+            </button>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="app-main">
+            <!-- Collection View -->
+            <div id="collection-view" class="view active">
+                <!-- Filters and Search -->
+                <div class="controls-panel">
+                    <div class="search-box">
+                        <input type="text" id="search-input" placeholder="Search cards by name or number...">
+                    </div>
+
+                    <div class="filters">
+                        <select id="filter-type" class="filter-select">
+                            <option value="">All Types</option>
+                            <option value="Fire">Fire</option>
+                            <option value="Water">Water</option>
+                            <option value="Grass">Grass</option>
+                            <option value="Electric">Electric</option>
+                            <option value="Psychic">Psychic</option>
+                            <option value="Fighting">Fighting</option>
+                            <option value="Fairy">Fairy</option>
+                            <option value="Colorless">Colorless</option>
+                            <option value="Trainer">Trainer</option>
+                            <option value="Energy">Energy</option>
+                        </select>
+
+                        <select id="filter-rarity" class="filter-select">
+                            <option value="">All Rarities</option>
+                            <option value="Common">Common</option>
+                            <option value="Uncommon">Uncommon</option>
+                            <option value="Rare">Rare</option>
+                            <option value="Rare Holo">Rare Holo</option>
+                            <option value="Rare Holo EX">Rare Holo EX</option>
+                            <option value="Ultra Rare">Ultra Rare</option>
+                            <option value="Special Illustrated Rare">Special Illustrated Rare</option>
+                        </select>
+
+                        <select id="filter-owned" class="filter-select">
+                            <option value="">All Cards</option>
+                            <option value="owned">Owned</option>
+                            <option value="needed">Needed</option>
+                        </select>
+
+                        <button id="clear-filters" class="btn-secondary">Clear Filters</button>
+                    </div>
+                </div>
+
+                <!-- Collection Summary -->
+                <div class="collection-summary">
+                    <div class="summary-card">
+                        <h3>Total Collected</h3>
+                        <p class="summary-value"><span id="owned-count">0</span> / <span id="total-count">130</span></p>
+                        <div class="progress-bar">
+                            <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <p class="summary-percentage"><span id="completion-percentage">0</span>% Complete</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <h3>Estimated Value</h3>
+                        <p class="summary-value" id="total-value">$0.00</p>
+                        <p class="summary-note">Based on current market prices</p>
+                    </div>
+                </div>
+
+                <!-- Card Grid -->
+                <div id="card-grid" class="card-grid">
+                    <!-- Cards will be dynamically inserted here -->
+                </div>
+            </div>
+
+            <!-- Statistics View -->
+            <div id="statistics-view" class="view">
+                <div class="stats-container">
+                    <h2>Collection Statistics</h2>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3>By Type</h3>
+                            <div id="stats-by-type" class="stat-list"></div>
+                        </div>
+
+                        <div class="stat-card">
+                            <h3>By Rarity</h3>
+                            <div id="stats-by-rarity" class="stat-list"></div>
+                        </div>
+
+                        <div class="stat-card">
+                            <h3>By Category</h3>
+                            <div id="stats-by-category" class="stat-list"></div>
+                        </div>
+                    </div>
+
+                    <div class="stats-visual">
+                        <h3>Collection Progress Visualization</h3>
+                        <div id="visual-stats" class="visual-stats-grid">
+                            <!-- Visual representation of all cards -->
+                        </div>
+                    </div>
+
+                    <div class="missing-cards">
+                        <h3>Cards You Still Need</h3>
+                        <div id="missing-cards-list" class="missing-cards-grid">
+                            <!-- Missing cards will be displayed here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery View -->
+            <div id="gallery-view" class="view">
+                <div class="gallery-container">
+                    <h2>Card Gallery</h2>
+                    <p class="gallery-subtitle">Browse all cards in the Phantasmal Flames set</p>
+
+                    <div class="gallery-filters">
+                        <button class="gallery-filter-btn active" data-category="all">All Cards</button>
+                        <button class="gallery-filter-btn" data-category="Pokemon">Pokemon</button>
+                        <button class="gallery-filter-btn" data-category="Trainer">Trainers</button>
+                        <button class="gallery-filter-btn" data-category="Energy">Energy</button>
+                    </div>
+
+                    <div id="gallery-grid" class="gallery-grid">
+                        <!-- Gallery cards will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>&copy; 2025 Phantasmal Flames Card Tracker | Pokemon TCG Mega Evolution Series</p>
+            <p class="footer-note">Card prices updated from TCGPlayer and other reputable sources</p>
+        </footer>
+    </div>
+
+    <!-- Card Detail Modal -->
+    <div id="card-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div id="modal-card-detail" class="modal-card-detail">
+                <!-- Card details will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="cards-data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

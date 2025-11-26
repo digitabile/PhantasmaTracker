@@ -1,0 +1,8 @@
+# Card Images Directory
+
+Place Pokemon card images here with filenames matching the card numbers:
+- 001.png (Mega Charizard X ex)
+- 002.png (Mega Gengar ex)
+- etc.
+
+Images should be in PNG or JPG format with a recommended aspect ratio of 0.7 (width:height).
