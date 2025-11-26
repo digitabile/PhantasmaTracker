@@ -480,6 +480,17 @@ class CardTracker {
         const typeColor = TYPE_COLORS[card.type] || '#999';
         const price = this.cardPrices.get(cardNumber);
 
+        // Generate pricing links
+        const cardNameEncoded = encodeURIComponent(card.name);
+        const setNameEncoded = encodeURIComponent('Phantasmal Flames');
+
+        const pricingLinks = {
+            tcgplayer: `https://www.tcgplayer.com/search/pokemon/me02-phantasmal-flames?productLineName=pokemon&q=${cardNameEncoded}&view=grid`,
+            pricecharting: `https://www.pricecharting.com/search-products?type=prices&q=phantasmal+flames+${cardNameEncoded}`,
+            tcgcollector: `https://www.tcgcollector.com/cards?cardName=${cardNameEncoded}&setName=${setNameEncoded}`,
+            ebay: `https://www.ebay.com/sch/i.html?_nkw=pokemon+phantasmal+flames+${cardNameEncoded}`
+        };
+
         const modalContent = document.getElementById('modal-card-detail');
         modalContent.innerHTML = `
             <div class="card-image-container" style="max-width: 400px; margin: 0 auto;">
@@ -497,11 +508,41 @@ class CardTracker {
             <p><strong>Type:</strong> <span style="color: ${typeColor}; font-weight: bold;">${card.type}</span></p>
             <p><strong>Rarity:</strong> ${card.rarity}</p>
             <p><strong>Category:</strong> ${card.category}</p>
-            <p><strong>Price:</strong> ${price ? `$${price.toFixed(2)}` : 'Loading...'}</p>
+            <p><strong>Estimated Price:</strong> ${price ? `$${price.toFixed(2)}` : 'Loading...'}</p>
             <p><strong>Status:</strong> ${isOwned ? '✅ Owned' : '❌ Not owned'}</p>
+
+            <div style="margin-top: 1.5rem; padding: 1rem; background: #f3f4f6; border-radius: 8px;">
+                <p style="font-weight: 600; margin-bottom: 0.75rem; font-size: 0.95rem;">💰 Check Current Market Prices:</p>
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <a href="${pricingLinks.tcgplayer}" target="_blank" rel="noopener noreferrer"
+                       style="padding: 0.5rem 1rem; background: #5E9ED6; color: white; text-decoration: none;
+                              border-radius: 6px; font-weight: 600; text-align: center; font-size: 0.9rem;">
+                        🎴 TCGPlayer
+                    </a>
+                    <a href="${pricingLinks.pricecharting}" target="_blank" rel="noopener noreferrer"
+                       style="padding: 0.5rem 1rem; background: #FF6B35; color: white; text-decoration: none;
+                              border-radius: 6px; font-weight: 600; text-align: center; font-size: 0.9rem;">
+                        📈 PriceCharting
+                    </a>
+                    <a href="${pricingLinks.tcgcollector}" target="_blank" rel="noopener noreferrer"
+                       style="padding: 0.5rem 1rem; background: #7EC850; color: white; text-decoration: none;
+                              border-radius: 6px; font-weight: 600; text-align: center; font-size: 0.9rem;">
+                        📊 TCG Collector
+                    </a>
+                    <a href="${pricingLinks.ebay}" target="_blank" rel="noopener noreferrer"
+                       style="padding: 0.5rem 1rem; background: #E53238; color: white; text-decoration: none;
+                              border-radius: 6px; font-weight: 600; text-align: center; font-size: 0.9rem;">
+                        🛒 eBay Listings
+                    </a>
+                </div>
+                <p style="font-size: 0.75rem; color: #6B7280; margin-top: 0.75rem; margin-bottom: 0;">
+                    Links open in new tab. Prices may vary by condition and seller.
+                </p>
+            </div>
+
             <button onclick="app.toggleCardOwnership('${cardNumber}'); app.showCardDetail('${cardNumber}'); app.renderCards();"
-                    style="margin-top: 1rem; padding: 0.75rem 1.5rem; background: ${isOwned ? '#EF4444' : '#7EC850'};
-                           color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                    style="margin-top: 1.5rem; padding: 0.75rem 1.5rem; background: ${isOwned ? '#EF4444' : '#7EC850'};
+                           color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%;">
                 ${isOwned ? 'Remove from Collection' : 'Add to Collection'}
             </button>
         `;
