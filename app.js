@@ -244,7 +244,12 @@ class CardTracker {
         const priceReverseHolo = this.cardPrices.get(`${card.number}-reverseHolo`);
 
         if (hasVariants) {
-            // Render card with two checkboxes for normal and reverse holo
+            // Determine the correct label for the first variant based on rarity
+            // Rare cards have Holofoil + Reverse Holo
+            // Common/Uncommon cards have Non-foil + Reverse Holo
+            const firstVariantLabel = card.rarity === 'Rare' ? 'Holofoil' : 'Non-foil';
+
+            // Render card with two checkboxes
             return `
                 <div class="card-item ${isOwnedAny ? 'owned' : ''}" data-card-number="${card.number}">
                     <div class="card-variants">
@@ -255,7 +260,7 @@ class CardTracker {
                                    data-variant="normal"
                                    id="card-${card.number}-normal"
                                    ${isOwnedNormal ? 'checked' : ''}>
-                            <label for="card-${card.number}-normal" class="variant-label">Non-foil</label>
+                            <label for="card-${card.number}-normal" class="variant-label">${firstVariantLabel}</label>
                         </div>
                         <div class="variant-item">
                             <input type="checkbox"
@@ -573,13 +578,16 @@ class CardTracker {
 
             isOwned = isOwnedNormal || isOwnedReverseHolo;
 
+            // Determine the correct label for the first variant
+            const firstVariantLabel = card.rarity === 'Rare' ? 'Holofoil' : 'Non-foil';
+
             // Show ownership status for both variants
             if (isOwnedNormal && isOwnedReverseHolo) {
                 ownershipStatus = '✅ Both variants owned';
             } else if (isOwnedNormal) {
-                ownershipStatus = '✅ Non-foil owned | ❌ Reverse Holo needed';
+                ownershipStatus = `✅ ${firstVariantLabel} owned | ❌ Reverse Holo needed`;
             } else if (isOwnedReverseHolo) {
-                ownershipStatus = '❌ Non-foil needed | ✅ Reverse Holo owned';
+                ownershipStatus = `❌ ${firstVariantLabel} needed | ✅ Reverse Holo owned`;
             } else {
                 ownershipStatus = '❌ Neither variant owned';
             }
@@ -588,7 +596,7 @@ class CardTracker {
             priceDisplay = `
                 <p><strong>Estimated Prices:</strong></p>
                 <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
-                    <li><strong>Non-foil:</strong> ${priceNormal ? `$${priceNormal.toFixed(2)}` : 'Loading...'}</li>
+                    <li><strong>${firstVariantLabel}:</strong> ${priceNormal ? `$${priceNormal.toFixed(2)}` : 'Loading...'}</li>
                     <li><strong>Reverse Holo:</strong> ${priceReverseHolo ? `$${priceReverseHolo.toFixed(2)}` : 'Loading...'}</li>
                 </ul>
             `;
