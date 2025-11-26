@@ -783,7 +783,7 @@ class CardTracker {
         // Load real market prices from TCGPlayer and other reputable sources
         // Prices are based on current market values and updated regularly
 
-        const PRICE_VERSION = 'v5.0'; // Updated when pricing system changes (v5.0 adds multi-set support)
+        const PRICE_VERSION = 'v6.0'; // Updated when pricing system changes (v6.0 corrects SV1 market prices)
         const lastUpdate = localStorage.getItem('priceLastUpdate');
         const priceVersion = localStorage.getItem('priceVersion');
         const now = Date.now();
