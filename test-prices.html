@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price Test - Phantasmal Flames</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-box {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .pass { color: green; font-weight: bold; }
+        .fail { color: red; font-weight: bold; }
+        pre {
+            background: #f0f0f0;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Price Loading Diagnostic Test</h1>
+
+    <div class="test-box">
+        <h2>Test Results:</h2>
+        <div id="test-results"></div>
+    </div>
+
+    <div class="test-box">
+        <h2>Sample Prices:</h2>
+        <div id="sample-prices"></div>
+    </div>
+
+    <div class="test-box">
+        <h2>Console Output:</h2>
+        <pre id="console-output"></pre>
+    </div>
+
+    <!-- Load scripts in same order as main app -->
+    <script src="cards-data.js"></script>
+    <script src="card-prices.js"></script>
+
+    <script>
+        const results = [];
+        const consoleLog = [];
+
+        function test(name, condition) {
+            const passed = condition;
+            results.push({
+                name: name,
+                passed: passed,
+                status: passed ? '✅ PASS' : '❌ FAIL'
+            });
+            consoleLog.push(`${name}: ${passed ? 'PASS' : 'FAIL'}`);
+            return passed;
+        }
+
+        // Run tests
+        console.log('Running diagnostic tests...');
+
+        test('cards-data.js loaded', typeof PHANTASMAL_FLAMES_CARDS !== 'undefined');
+        test('card-prices.js loaded', typeof CARD_PRICES !== 'undefined');
+        test('Cards array has 130 items', PHANTASMAL_FLAMES_CARDS && PHANTASMAL_FLAMES_CARDS.length === 130);
+        test('Prices object exists', CARD_PRICES && typeof CARD_PRICES === 'object');
+        test('Prices has 130 entries', CARD_PRICES && Object.keys(CARD_PRICES).length === 130);
+        test('Can access price for card 001', CARD_PRICES && CARD_PRICES['001'] !== undefined);
+        test('Can access price for card 130', CARD_PRICES && CARD_PRICES['130'] !== undefined);
+
+        // Display results
+        const resultsDiv = document.getElementById('test-results');
+        resultsDiv.innerHTML = results.map(r =>
+            `<div class="${r.passed ? 'pass' : 'fail'}">${r.status} - ${r.name}</div>`
+        ).join('');
+
+        // Display sample prices
+        if (typeof CARD_PRICES !== 'undefined') {
+            const samples = [
+                { num: '001', name: 'Oddish (Common)' },
+                { num: '013', name: 'Mega Charizard X ex (Double Rare)' },
+                { num: '106', name: 'Meowth (Illustration Rare)' },
+                { num: '130', name: 'Mega Charizard X ex (Mega Hyper Rare)' }
+            ];
+
+            const samplesDiv = document.getElementById('sample-prices');
+            samplesDiv.innerHTML = samples.map(s =>
+                `<div><strong>${s.name}:</strong> $${CARD_PRICES[s.num] || 'NOT FOUND'}</div>`
+            ).join('');
+
+            consoleLog.push('\nSample Prices:');
+            samples.forEach(s => {
+                consoleLog.push(`  Card ${s.num} (${s.name}): $${CARD_PRICES[s.num]}`);
+            });
+        } else {
+            document.getElementById('sample-prices').innerHTML =
+                '<div class="fail">❌ CARD_PRICES not available</div>';
+            consoleLog.push('ERROR: CARD_PRICES is not defined!');
+        }
+
+        // Display console output
+        document.getElementById('console-output').textContent = consoleLog.join('\n');
+
+        console.log('Diagnostic test complete. Check the page for results.');
+    </script>
+</body>
+</html>

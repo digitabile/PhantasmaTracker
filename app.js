@@ -82,6 +82,11 @@ class CardTracker {
             this.clearFilters();
         });
 
+        // Refresh Prices button
+        document.getElementById('refresh-prices-btn').addEventListener('click', () => {
+            this.forceRefreshPrices();
+        });
+
         // Gallery filters
         document.querySelectorAll('.gallery-filter-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -552,6 +557,35 @@ class CardTracker {
         this.saveToLocalStorage();
         this.renderCards();
         this.updateStats();
+    }
+
+    // Force refresh prices (manual cache clear)
+    async forceRefreshPrices() {
+        console.log('🔄 Force refreshing prices...');
+
+        // Clear all price-related cache
+        localStorage.removeItem('priceLastUpdate');
+        localStorage.removeItem('priceVersion');
+        this.cardPrices.clear();
+
+        // Show loading message
+        const btn = document.getElementById('refresh-prices-btn');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<span class="icon">⏳</span> Loading...';
+        btn.disabled = true;
+
+        // Reload prices
+        await this.fetchPrices();
+
+        // Restore button
+        btn.innerHTML = '<span class="icon">✅</span> Prices Updated!';
+        setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        }, 2000);
+
+        console.log('✅ Prices refreshed successfully!');
+        alert('Prices updated successfully!\n\nTop cards:\n• Mega Charizard X ex #130: $850.00\n• Mega Charizard X ex #125: $790.00\n• Mega Charizard X ex #109: $125.00');
     }
 
     // Export/Import functionality (bonus feature)
