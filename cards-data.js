@@ -3835,6 +3835,8 @@ const CARD_SETS = {
 
 ]
     }
+};
+
 // Legacy export for backward compatibility
 const PHANTASMAL_FLAMES_CARDS = CARD_SETS["phantasmal-flames"].cards;
 
