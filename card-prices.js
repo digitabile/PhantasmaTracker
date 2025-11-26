@@ -220,7 +220,7 @@ const CARD_PRICING = {
         "normal": 0.1,
         "reverseHolo": 0.25
     },
-    "19": 5,
+    "19": 1.25, // Spidops ex (Double Rare)
     "20": {
         "normal": 0.1,
         "reverseHolo": 0.25
@@ -269,7 +269,7 @@ const CARD_PRICING = {
         "normal": 0.1,
         "reverseHolo": 0.25
     },
-    "32": 5,
+    "32": 2.50, // Arcanine ex (Double Rare)
     "33": {
         "normal": 0.1,
         "reverseHolo": 0.25
@@ -318,7 +318,7 @@ const CARD_PRICING = {
         "normal": 0.1,
         "reverseHolo": 0.25
     },
-    "45": 5,
+    "45": 2.75, // Gyarados ex (Double Rare)
     "46": {
         "normal": 0.1,
         "reverseHolo": 0.25
@@ -395,7 +395,7 @@ const CARD_PRICING = {
         "normal": 0.1,
         "reverseHolo": 0.25
     },
-    "65": 5,
+    "65": 2.25, // Magnezone ex (Double Rare)
     "66": {
         "normal": 0.1,
         "reverseHolo": 0.25
@@ -456,7 +456,7 @@ const CARD_PRICING = {
         "normal": 0.75,
         "reverseHolo": 1.75
     },
-    "81": 5,
+    "81": 1.75, // Miraidon ex (Double Rare - box promo)
     "82": {
         "normal": 0.1,
         "reverseHolo": 0.25
@@ -473,12 +473,12 @@ const CARD_PRICING = {
         "normal": 0.1,
         "reverseHolo": 0.25
     },
-    "86": 5,
+    "86": 4.50, // Gardevoir ex (Double Rare - popular/playable)
     "87": {
         "normal": 0.1,
         "reverseHolo": 0.25
     },
-    "88": 5,
+    "88": 1.25, // Banette ex (Double Rare)
     "89": {
         "normal": 0.1,
         "reverseHolo": 0.25
@@ -615,12 +615,12 @@ const CARD_PRICING = {
         "normal": 0.75,
         "reverseHolo": 1.75
     },
-    "123": 5,
+    "123": 3.50, // Great Tusk ex (Double Rare - playable)
     "124": {
         "normal": 0.75,
         "reverseHolo": 1.75
     },
-    "125": 5,
+    "125": 1.50, // Koraidon ex (Double Rare - box promo)
     "126": {
         "normal": 0.1,
         "reverseHolo": 0.25
@@ -641,7 +641,7 @@ const CARD_PRICING = {
         "normal": 0.1,
         "reverseHolo": 0.25
     },
-    "131": 5,
+    "131": 1.25, // Toxicroak ex (Double Rare)
     "132": {
         "normal": 0.1,
         "reverseHolo": 0.25
@@ -686,7 +686,7 @@ const CARD_PRICING = {
         "normal": 0.75,
         "reverseHolo": 1.75
     },
-    "143": 5,
+    "143": 2.50, // Iron Treads ex (Double Rare - paradox)
     "144": {
         "normal": 0.1,
         "reverseHolo": 0.25
@@ -743,7 +743,7 @@ const CARD_PRICING = {
         "normal": 0.25,
         "reverseHolo": 0.6
     },
-    "158": 5,
+    "158": 1.25, // Oinkologne ex (Double Rare)
     "159": {
         "normal": 0.1,
         "reverseHolo": 0.25
@@ -872,9 +872,9 @@ const CARD_PRICING = {
         "normal": 0.75,
         "reverseHolo": 1.75
     },
-    "191": {
-        "normal": 0.1,
-        "reverseHolo": 0.25
+    "191": { // Rare Candy - playable staple
+        "normal": 0.50,
+        "reverseHolo": 2.50
     },
     "192": {
         "normal": 0.25,
@@ -892,9 +892,9 @@ const CARD_PRICING = {
         "normal": 0.25,
         "reverseHolo": 0.6
     },
-    "196": {
-        "normal": 0.25,
-        "reverseHolo": 0.6
+    "196": { // Ultra Ball - staple trainer
+        "normal": 1.50,
+        "reverseHolo": 5.70
     },
     "197": {
         "normal": 0.25,
@@ -904,66 +904,70 @@ const CARD_PRICING = {
         "normal": 0.25,
         "reverseHolo": 0.6
     },
-    "199": 8,
-    "200": 8,
-    "201": 8,
-    "202": 8,
-    "203": 8,
-    "204": 8,
-    "205": 8,
-    "206": 8,
-    "207": 8,
-    "208": 8,
-    "209": 8,
-    "210": 8,
-    "211": 8,
-    "212": 8,
-    "213": 8,
-    "214": 8,
-    "215": 8,
-    "216": 8,
-    "217": 8,
-    "218": 8,
-    "219": 8,
-    "220": 8,
-    "221": 8,
-    "222": 8,
-    "223": 12,
-    "224": 12,
-    "225": 12,
-    "226": 12,
-    "227": 12,
-    "228": 12,
-    "229": 12,
-    "230": 12,
-    "231": 12,
-    "232": 12,
-    "233": 12,
-    "234": 12,
-    "235": 12,
-    "236": 12,
-    "237": 12,
-    "238": 12,
-    "239": 12,
-    "240": 12,
-    "241": 12,
-    "242": 12,
-    "243": 25,
-    "244": 25,
-    "245": 25,
-    "246": 25,
-    "247": 25,
-    "248": 25,
-    "249": 25,
-    "250": 25,
-    "251": 25,
-    "252": 25,
-    "253": 45,
-    "254": 45,
-    "255": 45,
-    "256": 45,
-    "257": 45,
-    "258": 45
+    // Illustration Rares (#199-222) - varied pricing based on popularity
+    "199": 1.75, // Dolliv
+    "200": 1.50, // Toedscool
+    "201": 2.25, // Scovillain
+    "202": 3.50, // Armarouge - popular Gen 9
+    "203": 5.50, // Slowpoke - very popular Pokemon
+    "204": 2.00, // Clauncher
+    "205": 2.50, // Wiglett - new Gen 9
+    "206": 3.00, // Dondozo - popular Gen 9
+    "207": 3.50, // Pachirisu - cute/popular
+    "208": 3.25, // Pawmot - popular Gen 9
+    "209": 2.25, // Drowzee
+    "210": 6.00, // Ralts - very popular Pokemon line
+    "211": 5.50, // Kirlia - popular Pokemon line
+    "212": 4.50, // Fidough - cute/popular Gen 9
+    "213": 3.75, // Greavard - popular Gen 9
+    "214": 5.00, // Riolu - very popular Pokemon
+    "215": 2.00, // Sandile
+    "216": 2.75, // Klawf - Gen 9
+    "217": 3.50, // Mabosstiff - popular Gen 9
+    "218": 2.50, // Bombirdier - Gen 9
+    "219": 4.00, // Kingambit - competitive/popular
+    "220": 2.00, // Starly
+    "221": 1.75, // Skwovet
+    "222": 3.00, // Energy search
+    // Ultra Rares / Full Arts (#223-242) - based on playability & popularity
+    "223": 2.50, // Spidops ex (Full Art)
+    "224": 4.50, // Arcanine ex (Full Art) - popular
+    "225": 5.00, // Gyarados ex (Full Art) - popular
+    "226": 3.50, // Magnezone ex (Full Art)
+    "227": 3.25, // Miraidon ex (Full Art) - box promo
+    "228": 9.50, // Gardevoir ex (Full Art) - very popular/playable
+    "229": 2.75, // Banette ex (Full Art)
+    "230": 5.50, // Great Tusk ex (Full Art) - playable
+    "231": 2.75, // Koraidon ex (Full Art) - box promo
+    "232": 2.50, // Toxicroak ex (Full Art)
+    "233": 4.00, // Iron Treads ex (Full Art) - paradox
+    "234": 2.25, // Oinkologne ex (Full Art)
+    "235": 6.50, // Arven (Full Art) - popular/playable
+    "236": 2.50, // Jacq (Full Art)
+    "237": 2.75, // Katy (Full Art)
+    "238": 3.50, // Miriam (Full Art)
+    "239": 5.00, // Penny (Full Art) - popular character
+    "240": 7.50, // Professor's Research Sada (Full Art) - staple
+    "241": 7.00, // Professor's Research Turo (Full Art) - staple
+    "242": 2.50, // Team Star Grunt (Full Art)
+    // Special Illustration Rares (#243-252) - premium artwork variants
+    "243": 7.50, // Spidops ex (SIR)
+    "244": 20.00, // Miraidon ex (SIR) - legendary, nice art
+    "245": 40.00, // Gardevoir ex (SIR) - very popular, beautiful art
+    "246": 14.00, // Great Tusk ex (SIR) - playable paradox
+    "247": 17.00, // Koraidon ex (SIR) - legendary, good art
+    "248": 11.00, // Iron Treads ex (SIR) - paradox
+    "249": 18.00, // Arven (SIR) - popular character, good art
+    "250": 9.00, // Jacq (SIR)
+    "251": 12.00, // Miriam (SIR)
+    "252": 23.00, // Penny (SIR) - very popular character
+    // Hyper Rares (#253-258) - gold cards
+    "253": 9.00, // Miraidon ex (Hyper/Gold) - widely available
+    "254": 7.00, // Koraidon ex (Hyper/Gold) - widely available
+    "255": 3.50, // Nest Ball (Hyper/Gold)
+    "256": 9.50, // Rare Candy (Hyper/Gold) - playable staple
+    "257": 2.50, // Basic Lightning Energy (Hyper/Gold)
+    "258": 2.25  // Basic Fighting Energy (Hyper/Gold)
 }
 };
 
