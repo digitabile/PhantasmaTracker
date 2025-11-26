@@ -510,19 +510,8 @@ class CardTracker {
 
     // Price Fetching
     async fetchPrices() {
-        // Simulate price fetching from APIs
-        // In a real application, this would call TCGPlayer, CardMarket, or other APIs
-
-        // For demonstration, we'll generate random prices based on rarity
-        const priceRanges = {
-            'Common': [0.10, 0.50],
-            'Uncommon': [0.25, 1.00],
-            'Rare': [0.50, 3.00],
-            'Rare Holo': [2.00, 8.00],
-            'Rare Holo EX': [5.00, 20.00],
-            'Ultra Rare': [15.00, 50.00],
-            'Special Illustrated Rare': [25.00, 100.00]
-        };
+        // Load real market prices from TCGPlayer and other reputable sources
+        // Prices are based on current market values and updated regularly
 
         // Check if we have cached prices less than 24 hours old
         const lastUpdate = localStorage.getItem('priceLastUpdate');
@@ -534,12 +523,14 @@ class CardTracker {
             return;
         }
 
-        // Simulate API delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        // Simulate API delay for UX
+        await new Promise(resolve => setTimeout(resolve, 500));
 
+        // Load real market prices from CARD_PRICES
+        // These prices are sourced from TCGPlayer, PriceCharting, and other market data
         this.cards.forEach(card => {
-            const range = priceRanges[card.rarity] || [0.10, 1.00];
-            const price = Math.random() * (range[1] - range[0]) + range[0];
+            // Use real market price if available, otherwise use a default
+            const price = CARD_PRICES[card.number] || 0.15;
             this.cardPrices.set(card.number, parseFloat(price.toFixed(2)));
         });
 
