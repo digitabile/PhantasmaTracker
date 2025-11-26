@@ -219,9 +219,15 @@ class CardTracker {
         this.updateStats();
     }
 
+    // Helper function to check if a card has variants
+    cardHasVariants(card) {
+        // Only Common, Uncommon, and regular Rare cards have reverse holo variants
+        // EX cards (Double Rare) and other special rarities have only one variant
+        return card.rarity === 'Common' || card.rarity === 'Uncommon' || card.rarity === 'Rare';
+    }
+
     createCardHTML(card) {
-        const cardNum = parseInt(card.number);
-        const hasVariants = cardNum >= 1 && cardNum <= 94; // Main set has reverse holo variants
+        const hasVariants = this.cardHasVariants(card);
 
         const typeColor = TYPE_COLORS[card.type] || '#999';
 
@@ -242,22 +248,24 @@ class CardTracker {
             return `
                 <div class="card-item ${isOwnedAny ? 'owned' : ''}" data-card-number="${card.number}">
                     <div class="card-variants">
-                        <label class="variant-checkbox" title="Non-foil">
+                        <div class="variant-item">
                             <input type="checkbox"
-                                   class="card-checkbox"
+                                   class="card-checkbox variant-checkbox-input"
                                    data-card-number="${card.number}"
                                    data-variant="normal"
+                                   id="card-${card.number}-normal"
                                    ${isOwnedNormal ? 'checked' : ''}>
-                            <span class="variant-label">Non-foil</span>
-                        </label>
-                        <label class="variant-checkbox" title="Reverse Holo">
+                            <label for="card-${card.number}-normal" class="variant-label">Non-foil</label>
+                        </div>
+                        <div class="variant-item">
                             <input type="checkbox"
-                                   class="card-checkbox"
+                                   class="card-checkbox variant-checkbox-input"
                                    data-card-number="${card.number}"
                                    data-variant="reverseHolo"
+                                   id="card-${card.number}-holo"
                                    ${isOwnedReverseHolo ? 'checked' : ''}>
-                            <span class="variant-label">Rev Holo</span>
-                        </label>
+                            <label for="card-${card.number}-holo" class="variant-label">Rev Holo</label>
+                        </div>
                     </div>
 
                     <div class="card-image-container">
@@ -343,11 +351,11 @@ class CardTracker {
     // Statistics
     updateStats() {
         // Calculate total possible cards including variants
-        // Main set cards (001-094) have 2 variants each (normal + reverse holo)
-        // Other cards (095-130) have 1 variant each
-        const mainSetCards = this.cards.filter(c => parseInt(c.number) >= 1 && parseInt(c.number) <= 94);
-        const otherCards = this.cards.filter(c => parseInt(c.number) > 94);
-        const totalCards = (mainSetCards.length * 2) + otherCards.length;
+        // Only Common, Uncommon, and Rare cards have 2 variants (normal + reverse holo)
+        // Double Rare, Ultra Rare, and other special cards have 1 variant
+        const cardsWithVariants = this.cards.filter(card => this.cardHasVariants(card));
+        const cardsWithoutVariants = this.cards.filter(card => !this.cardHasVariants(card));
+        const totalCards = (cardsWithVariants.length * 2) + cardsWithoutVariants.length;
 
         const ownedCount = this.ownedCards.size;
         const percentage = totalCards > 0 ? Math.round((ownedCount / totalCards) * 100) : 0;
@@ -553,8 +561,7 @@ class CardTracker {
         const card = this.cards.find(c => c.number === cardNumber);
         if (!card) return;
 
-        const cardNum = parseInt(card.number);
-        const hasVariants = cardNum >= 1 && cardNum <= 94;
+        const hasVariants = this.cardHasVariants(card);
 
         // Check ownership for variants
         let isOwned, ownershipStatus, priceDisplay;
@@ -673,7 +680,7 @@ class CardTracker {
         // Load real market prices from TCGPlayer and other reputable sources
         // Prices are based on current market values and updated regularly
 
-        const PRICE_VERSION = 'v4.0'; // Updated when pricing system changes (v4.0 adds variants)
+        const PRICE_VERSION = 'v4.1'; // Updated when pricing system changes (v4.1 fixes variant detection by rarity)
         const lastUpdate = localStorage.getItem('priceLastUpdate');
         const priceVersion = localStorage.getItem('priceVersion');
         const now = Date.now();
@@ -702,19 +709,19 @@ class CardTracker {
         // Load real market prices from CARD_PRICES
         // These prices are sourced from TCGPlayer, PriceCharting, and other market data
         this.cards.forEach(card => {
-            const cardNum = parseInt(card.number);
             const priceData = CARD_PRICES[card.number];
+            const hasVariants = this.cardHasVariants(card);
 
-            // Check if card has variants (main set cards 001-094)
-            if (cardNum >= 1 && cardNum <= 94 && typeof priceData === 'object') {
+            // Check if card has variants (Common, Uncommon, or Rare)
+            if (hasVariants && typeof priceData === 'object') {
                 // Store prices for both variants
                 const normalPrice = priceData.normal || 0.15;
                 const reverseHoloPrice = priceData.reverseHolo || 0.25;
                 this.cardPrices.set(`${card.number}-normal`, parseFloat(normalPrice.toFixed(2)));
                 this.cardPrices.set(`${card.number}-reverseHolo`, parseFloat(reverseHoloPrice.toFixed(2)));
             } else {
-                // Single variant cards (holofoil only)
-                const price = typeof priceData === 'number' ? priceData : 0.15;
+                // Single variant cards (Double Rare, Ultra Rare, etc.)
+                const price = typeof priceData === 'number' ? priceData : (priceData?.normal || 0.15);
                 this.cardPrices.set(card.number, parseFloat(price.toFixed(2)));
             }
         });
