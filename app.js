@@ -1,9 +1,11 @@
 // Pokemon Card Tracker Application
-// Main application logic for Phantasmal Flames collection tracker
+// Main application logic supporting multiple Pokemon TCG sets
 
 class CardTracker {
     constructor() {
-        this.cards = PHANTASMAL_FLAMES_CARDS;
+        // Load saved set or default to Phantasmal Flames
+        this.currentSet = localStorage.getItem('selectedSet') || 'phantasmal-flames';
+        this.cards = CARD_SETS[this.currentSet].cards;
         this.ownedCards = new Set();
         this.cardPrices = new Map();
         this.currentView = 'collection';
@@ -20,14 +22,53 @@ class CardTracker {
     init() {
         this.loadFromLocalStorage();
         this.setupEventListeners();
+        this.loadSetSelector();
         this.renderCards();
         this.updateStats();
         this.fetchPrices();
     }
 
+    // Set Selection Management
+    loadSetSelector() {
+        const selector = document.getElementById('set-selector');
+        if (selector) {
+            selector.value = this.currentSet;
+        }
+    }
+
+    switchSet(newSet) {
+        if (newSet === this.currentSet) return;
+
+        // Save current set's data
+        this.saveToLocalStorage();
+
+        // Switch to new set
+        this.currentSet = newSet;
+        localStorage.setItem('selectedSet', newSet);
+
+        // Load new set's data
+        this.cards = CARD_SETS[this.currentSet].cards;
+        this.ownedCards = new Set();
+        this.cardPrices = new Map();
+
+        // Reload from localStorage for new set
+        this.loadFromLocalStorage();
+
+        // Clear filters
+        this.clearFilters();
+
+        // Re-render everything
+        this.renderCards();
+        this.updateStats();
+        this.fetchPrices();
+
+        console.log(`Switched to ${CARD_SETS[newSet].name} (${CARD_SETS[newSet].totalCards} cards)`);
+    }
+
     // Local Storage Management
     loadFromLocalStorage() {
-        const stored = localStorage.getItem('phantasmalFlamesCollection');
+        const storageKey = `cardCollection_${this.currentSet}`;
+        const stored = localStorage.getItem(storageKey);
         if (stored) {
             try {
                 const data = JSON.parse(stored);
@@ -40,16 +81,25 @@ class CardTracker {
     }
 
     saveToLocalStorage() {
+        const storageKey = `cardCollection_${this.currentSet}`;
         const data = {
             ownedCards: Array.from(this.ownedCards),
             cardPrices: Array.from(this.cardPrices.entries()),
             lastUpdated: new Date().toISOString()
         };
-        localStorage.setItem('phantasmalFlamesCollection', JSON.stringify(data));
+        localStorage.setItem(storageKey, JSON.stringify(data));
     }
 
     // Event Listeners
     setupEventListeners() {
+        // Set Selector
+        const setSelector = document.getElementById('set-selector');
+        if (setSelector) {
+            setSelector.addEventListener('change', (e) => {
+                this.switchSet(e.target.value);
+            });
+        }
+
         // Navigation
         document.querySelectorAll('.nav-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -689,7 +739,7 @@ class CardTracker {
         // Load real market prices from TCGPlayer and other reputable sources
         // Prices are based on current market values and updated regularly
 
-        const PRICE_VERSION = 'v4.1'; // Updated when pricing system changes (v4.1 fixes variant detection by rarity)
+        const PRICE_VERSION = 'v5.0'; // Updated when pricing system changes (v5.0 adds multi-set support)
         const lastUpdate = localStorage.getItem('priceLastUpdate');
         const priceVersion = localStorage.getItem('priceVersion');
         const now = Date.now();
@@ -715,10 +765,12 @@ class CardTracker {
         // Simulate API delay for UX
         await new Promise(resolve => setTimeout(resolve, 500));
 
-        // Load real market prices from CARD_PRICES
+        // Load real market prices from CARD_PRICING for current set
         // These prices are sourced from TCGPlayer, PriceCharting, and other market data
+        const currentSetPricing = CARD_PRICING[this.currentSet] || {};
+
         this.cards.forEach(card => {
-            const priceData = CARD_PRICES[card.number];
+            const priceData = currentSetPricing[card.number];
             const hasVariants = this.cardHasVariants(card);
 
             // Check if card has variants (Common, Uncommon, or Rare)

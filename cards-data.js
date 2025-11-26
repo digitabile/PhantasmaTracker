@@ -1,8 +1,13 @@
-// Phantasmal Flames Set Card Database
-// Complete card data fetched from Pokemon TCG API
-// Set Information: 130 cards total, released November 14, 2025
+// Pokemon Card Collection - Multi-Set Data
+// Supports multiple Pokemon TCG sets
 
-const PHANTASMAL_FLAMES_CARDS = [
+const CARD_SETS = {
+    "phantasmal-flames": {
+        name: "Phantasmal Flames",
+        code: "ME2",
+        totalCards: 130,
+        releaseDate: "November 14, 2025",
+        cards: [
     {
         "number": "001",
         "name": "Oddish",
@@ -1043,36 +1048,2086 @@ const PHANTASMAL_FLAMES_CARDS = [
         "category": "Pokémon",
         "imageUrl": "https://images.pokemontcg.io/me2/130.png"
     }
-];
-
-// Card type colors for UI
-const TYPE_COLORS = {
-    "Fire": "#FF6B35",
-    "Water": "#4A90E2",
-    "Grass": "#7EC850",
-    "Lightning": "#FFD93D",
-    "Psychic": "#A855F7",
-    "Fighting": "#D97706",
-    "Darkness": "#1F2937",
-    "Metal": "#9CA3AF",
-    "Colorless": "#E5E7EB",
-    "Dragon": "#6366F1",
-    "N/A": "#3B82F6"
+]
+    },
+    "scarlet-violet": {
+        name: "Scarlet & Violet Base",
+        code: "SV1",
+        totalCards: 258,
+        releaseDate: "March 31, 2023",
+        cards: [
+    {
+        "number": "1",
+        "name": "Pineco",
+        "type": "Grass",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/1.png"
+    },
+    {
+        "number": "2",
+        "name": "Heracross",
+        "type": "Grass",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/2.png"
+    },
+    {
+        "number": "3",
+        "name": "Shroomish",
+        "type": "Grass",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/3.png"
+    },
+    {
+        "number": "4",
+        "name": "Breloom",
+        "type": "Grass",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/4.png"
+    },
+    {
+        "number": "5",
+        "name": "Cacnea",
+        "type": "Grass",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/5.png"
+    },
+    {
+        "number": "6",
+        "name": "Cacturne",
+        "type": "Grass",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/6.png"
+    },
+    {
+        "number": "7",
+        "name": "Tropius",
+        "type": "Grass",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/7.png"
+    },
+    {
+        "number": "8",
+        "name": "Scatterbug",
+        "type": "Grass",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/8.png"
+    },
+    {
+        "number": "9",
+        "name": "Spewpa",
+        "type": "Grass",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/9.png"
+    },
+    {
+        "number": "10",
+        "name": "Vivillon",
+        "type": "Grass",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/10.png"
+    },
+    {
+        "number": "11",
+        "name": "Skiddo",
+        "type": "Grass",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/11.png"
+    },
+    {
+        "number": "12",
+        "name": "Gogoat",
+        "type": "Grass",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/12.png"
+    },
+    {
+        "number": "13",
+        "name": "Sprigatito",
+        "type": "Grass",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/13.png"
+    },
+    {
+        "number": "14",
+        "name": "Floragato",
+        "type": "Grass",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/14.png"
+    },
+    {
+        "number": "15",
+        "name": "Meowscarada",
+        "type": "Grass",
+        "rarity": "Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/15.png"
+    },
+    {
+        "number": "16",
+        "name": "Tarountula",
+        "type": "Grass",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/16.png"
+    },
+    {
+        "number": "17",
+        "name": "Tarountula",
+        "type": "Grass",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/17.png"
+    },
+    {
+        "number": "18",
+        "name": "Tarountula",
+        "type": "Grass",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/18.png"
+    },
+    {
+        "number": "19",
+        "name": "Spidops ex",
+        "type": "Grass",
+        "rarity": "Double Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/19.png"
+    },
+    {
+        "number": "20",
+        "name": "Smoliv",
+        "type": "Grass",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/20.png"
+    },
+    {
+        "number": "21",
+        "name": "Smoliv",
+        "type": "Grass",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/21.png"
+    },
+    {
+        "number": "22",
+        "name": "Dolliv",
+        "type": "Grass",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/22.png"
+    },
+    {
+        "number": "23",
+        "name": "Arboliva",
+        "type": "Grass",
+        "rarity": "Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/23.png"
+    },
+    {
+        "number": "24",
+        "name": "Toedscool",
+        "type": "Grass",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/24.png"
+    },
+    {
+        "number": "25",
+        "name": "Toedscool",
+        "type": "Grass",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/25.png"
+    },
+    {
+        "number": "26",
+        "name": "Toedscruel",
+        "type": "Grass",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/26.png"
+    },
+    {
+        "number": "27",
+        "name": "Capsakid",
+        "type": "Grass",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/27.png"
+    },
+    {
+        "number": "28",
+        "name": "Capsakid",
+        "type": "Grass",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/28.png"
+    },
+    {
+        "number": "29",
+        "name": "Scovillain",
+        "type": "Grass",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/29.png"
+    },
+    {
+        "number": "30",
+        "name": "Growlithe",
+        "type": "Fire",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/30.png"
+    },
+    {
+        "number": "31",
+        "name": "Growlithe",
+        "type": "Fire",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/31.png"
+    },
+    {
+        "number": "32",
+        "name": "Arcanine ex",
+        "type": "Fire",
+        "rarity": "Double Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/32.png"
+    },
+    {
+        "number": "33",
+        "name": "Houndour",
+        "type": "Fire",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/33.png"
+    },
+    {
+        "number": "34",
+        "name": "Houndoom",
+        "type": "Fire",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/34.png"
+    },
+    {
+        "number": "35",
+        "name": "Torkoal",
+        "type": "Fire",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/35.png"
+    },
+    {
+        "number": "36",
+        "name": "Fuecoco",
+        "type": "Fire",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/36.png"
+    },
+    {
+        "number": "37",
+        "name": "Crocalor",
+        "type": "Fire",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/37.png"
+    },
+    {
+        "number": "38",
+        "name": "Skeledirge",
+        "type": "Fire",
+        "rarity": "Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/38.png"
+    },
+    {
+        "number": "39",
+        "name": "Charcadet",
+        "type": "Fire",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/39.png"
+    },
+    {
+        "number": "40",
+        "name": "Charcadet",
+        "type": "Fire",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/40.png"
+    },
+    {
+        "number": "41",
+        "name": "Armarouge",
+        "type": "Fire",
+        "rarity": "Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/41.png"
+    },
+    {
+        "number": "42",
+        "name": "Slowpoke",
+        "type": "Water",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/42.png"
+    },
+    {
+        "number": "43",
+        "name": "Slowbro",
+        "type": "Water",
+        "rarity": "Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/43.png"
+    },
+    {
+        "number": "44",
+        "name": "Magikarp",
+        "type": "Water",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/44.png"
+    },
+    {
+        "number": "45",
+        "name": "Gyarados ex",
+        "type": "Water",
+        "rarity": "Double Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/45.png"
+    },
+    {
+        "number": "46",
+        "name": "Buizel",
+        "type": "Water",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/46.png"
+    },
+    {
+        "number": "47",
+        "name": "Floatzel",
+        "type": "Water",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/47.png"
+    },
+    {
+        "number": "48",
+        "name": "Alomomola",
+        "type": "Water",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/48.png"
+    },
+    {
+        "number": "49",
+        "name": "Clauncher",
+        "type": "Water",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/49.png"
+    },
+    {
+        "number": "50",
+        "name": "Clawitzer",
+        "type": "Water",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/50.png"
+    },
+    {
+        "number": "51",
+        "name": "Bruxish",
+        "type": "Water",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/51.png"
+    },
+    {
+        "number": "52",
+        "name": "Quaxly",
+        "type": "Water",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/52.png"
+    },
+    {
+        "number": "53",
+        "name": "Quaxwell",
+        "type": "Water",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/53.png"
+    },
+    {
+        "number": "54",
+        "name": "Quaquaval",
+        "type": "Water",
+        "rarity": "Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/54.png"
+    },
+    {
+        "number": "55",
+        "name": "Wiglett",
+        "type": "Water",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/55.png"
+    },
+    {
+        "number": "56",
+        "name": "Wiglett",
+        "type": "Water",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/56.png"
+    },
+    {
+        "number": "57",
+        "name": "Wugtrio",
+        "type": "Water",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/57.png"
+    },
+    {
+        "number": "58",
+        "name": "Cetoddle",
+        "type": "Water",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/58.png"
+    },
+    {
+        "number": "59",
+        "name": "Cetoddle",
+        "type": "Water",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/59.png"
+    },
+    {
+        "number": "60",
+        "name": "Cetitan",
+        "type": "Water",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/60.png"
+    },
+    {
+        "number": "61",
+        "name": "Dondozo",
+        "type": "Water",
+        "rarity": "Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/61.png"
+    },
+    {
+        "number": "62",
+        "name": "Tatsugiri",
+        "type": "Water",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/62.png"
+    },
+    {
+        "number": "63",
+        "name": "Magnemite",
+        "type": "Lightning",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/63.png"
+    },
+    {
+        "number": "64",
+        "name": "Magneton",
+        "type": "Lightning",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/64.png"
+    },
+    {
+        "number": "65",
+        "name": "Magnezone ex",
+        "type": "Lightning",
+        "rarity": "Double Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/65.png"
+    },
+    {
+        "number": "66",
+        "name": "Mareep",
+        "type": "Lightning",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/66.png"
+    },
+    {
+        "number": "67",
+        "name": "Flaaffy",
+        "type": "Lightning",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/67.png"
+    },
+    {
+        "number": "68",
+        "name": "Pachirisu",
+        "type": "Lightning",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/68.png"
+    },
+    {
+        "number": "69",
+        "name": "Rotom",
+        "type": "Lightning",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/69.png"
+    },
+    {
+        "number": "70",
+        "name": "Rotom",
+        "type": "Lightning",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/70.png"
+    },
+    {
+        "number": "71",
+        "name": "Toxel",
+        "type": "Lightning",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/71.png"
+    },
+    {
+        "number": "72",
+        "name": "Toxtricity",
+        "type": "Lightning",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/72.png"
+    },
+    {
+        "number": "73",
+        "name": "Pawmi",
+        "type": "Lightning",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/73.png"
+    },
+    {
+        "number": "74",
+        "name": "Pawmi",
+        "type": "Lightning",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/74.png"
+    },
+    {
+        "number": "75",
+        "name": "Pawmo",
+        "type": "Lightning",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/75.png"
+    },
+    {
+        "number": "76",
+        "name": "Pawmot",
+        "type": "Lightning",
+        "rarity": "Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/76.png"
+    },
+    {
+        "number": "77",
+        "name": "Wattrel",
+        "type": "Lightning",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/77.png"
+    },
+    {
+        "number": "78",
+        "name": "Wattrel",
+        "type": "Lightning",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/78.png"
+    },
+    {
+        "number": "79",
+        "name": "Kilowattrel",
+        "type": "Lightning",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/79.png"
+    },
+    {
+        "number": "80",
+        "name": "Miraidon",
+        "type": "Lightning",
+        "rarity": "Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/80.png"
+    },
+    {
+        "number": "81",
+        "name": "Miraidon ex",
+        "type": "Lightning",
+        "rarity": "Double Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/81.png"
+    },
+    {
+        "number": "82",
+        "name": "Drowzee",
+        "type": "Psychic",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/82.png"
+    },
+    {
+        "number": "83",
+        "name": "Hypno",
+        "type": "Psychic",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/83.png"
+    },
+    {
+        "number": "84",
+        "name": "Ralts",
+        "type": "Psychic",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/84.png"
+    },
+    {
+        "number": "85",
+        "name": "Kirlia",
+        "type": "Psychic",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/85.png"
+    },
+    {
+        "number": "86",
+        "name": "Gardevoir ex",
+        "type": "Psychic",
+        "rarity": "Double Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/86.png"
+    },
+    {
+        "number": "87",
+        "name": "Shuppet",
+        "type": "Psychic",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/87.png"
+    },
+    {
+        "number": "88",
+        "name": "Banette ex",
+        "type": "Psychic",
+        "rarity": "Double Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/88.png"
+    },
+    {
+        "number": "89",
+        "name": "Drifloon",
+        "type": "Psychic",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/89.png"
+    },
+    {
+        "number": "90",
+        "name": "Drifblim",
+        "type": "Psychic",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/90.png"
+    },
+    {
+        "number": "91",
+        "name": "Flabébé",
+        "type": "Psychic",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/91.png"
+    },
+    {
+        "number": "92",
+        "name": "Floette",
+        "type": "Psychic",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/92.png"
+    },
+    {
+        "number": "93",
+        "name": "Florges",
+        "type": "Psychic",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/93.png"
+    },
+    {
+        "number": "94",
+        "name": "Dedenne",
+        "type": "Psychic",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/94.png"
+    },
+    {
+        "number": "95",
+        "name": "Dedenne",
+        "type": "Psychic",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/95.png"
+    },
+    {
+        "number": "96",
+        "name": "Klefki",
+        "type": "Psychic",
+        "rarity": "Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/96.png"
+    },
+    {
+        "number": "97",
+        "name": "Fidough",
+        "type": "Psychic",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/97.png"
+    },
+    {
+        "number": "98",
+        "name": "Fidough",
+        "type": "Psychic",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/98.png"
+    },
+    {
+        "number": "99",
+        "name": "Dachsbun",
+        "type": "Psychic",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/99.png"
+    },
+    {
+        "number": "100",
+        "name": "Flittle",
+        "type": "Psychic",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/100.png"
+    },
+    {
+        "number": "101",
+        "name": "Flittle",
+        "type": "Psychic",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/101.png"
+    },
+    {
+        "number": "102",
+        "name": "Flittle",
+        "type": "Psychic",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/102.png"
+    },
+    {
+        "number": "103",
+        "name": "Espathra",
+        "type": "Psychic",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/103.png"
+    },
+    {
+        "number": "104",
+        "name": "Greavard",
+        "type": "Psychic",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/104.png"
+    },
+    {
+        "number": "105",
+        "name": "Greavard",
+        "type": "Psychic",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/105.png"
+    },
+    {
+        "number": "106",
+        "name": "Houndstone",
+        "type": "Psychic",
+        "rarity": "Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/106.png"
+    },
+    {
+        "number": "107",
+        "name": "Mankey",
+        "type": "Fighting",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/107.png"
+    },
+    {
+        "number": "108",
+        "name": "Primeape",
+        "type": "Fighting",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/108.png"
+    },
+    {
+        "number": "109",
+        "name": "Annihilape",
+        "type": "Fighting",
+        "rarity": "Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/109.png"
+    },
+    {
+        "number": "110",
+        "name": "Meditite",
+        "type": "Fighting",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/110.png"
+    },
+    {
+        "number": "111",
+        "name": "Medicham",
+        "type": "Fighting",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/111.png"
+    },
+    {
+        "number": "112",
+        "name": "Riolu",
+        "type": "Fighting",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/112.png"
+    },
+    {
+        "number": "113",
+        "name": "Riolu",
+        "type": "Fighting",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/113.png"
+    },
+    {
+        "number": "114",
+        "name": "Lucario",
+        "type": "Fighting",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/114.png"
+    },
+    {
+        "number": "115",
+        "name": "Sandile",
+        "type": "Fighting",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/115.png"
+    },
+    {
+        "number": "116",
+        "name": "Krokorok",
+        "type": "Fighting",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/116.png"
+    },
+    {
+        "number": "117",
+        "name": "Krookodile",
+        "type": "Fighting",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/117.png"
+    },
+    {
+        "number": "118",
+        "name": "Hawlucha",
+        "type": "Fighting",
+        "rarity": "Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/118.png"
+    },
+    {
+        "number": "119",
+        "name": "Silicobra",
+        "type": "Fighting",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/119.png"
+    },
+    {
+        "number": "120",
+        "name": "Sandaconda",
+        "type": "Fighting",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/120.png"
+    },
+    {
+        "number": "121",
+        "name": "Stonjourner",
+        "type": "Fighting",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/121.png"
+    },
+    {
+        "number": "122",
+        "name": "Klawf",
+        "type": "Fighting",
+        "rarity": "Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/122.png"
+    },
+    {
+        "number": "123",
+        "name": "Great Tusk ex",
+        "type": "Fighting",
+        "rarity": "Double Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/123.png"
+    },
+    {
+        "number": "124",
+        "name": "Koraidon",
+        "type": "Fighting",
+        "rarity": "Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/124.png"
+    },
+    {
+        "number": "125",
+        "name": "Koraidon ex",
+        "type": "Fighting",
+        "rarity": "Double Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/125.png"
+    },
+    {
+        "number": "126",
+        "name": "Grimer",
+        "type": "Darkness",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/126.png"
+    },
+    {
+        "number": "127",
+        "name": "Muk",
+        "type": "Darkness",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/127.png"
+    },
+    {
+        "number": "128",
+        "name": "Seviper",
+        "type": "Darkness",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/128.png"
+    },
+    {
+        "number": "129",
+        "name": "Spiritomb",
+        "type": "Darkness",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/129.png"
+    },
+    {
+        "number": "130",
+        "name": "Croagunk",
+        "type": "Darkness",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/130.png"
+    },
+    {
+        "number": "131",
+        "name": "Toxicroak ex",
+        "type": "Darkness",
+        "rarity": "Double Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/131.png"
+    },
+    {
+        "number": "132",
+        "name": "Pawniard",
+        "type": "Darkness",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/132.png"
+    },
+    {
+        "number": "133",
+        "name": "Bisharp",
+        "type": "Darkness",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/133.png"
+    },
+    {
+        "number": "134",
+        "name": "Kingambit",
+        "type": "Darkness",
+        "rarity": "Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/134.png"
+    },
+    {
+        "number": "135",
+        "name": "Maschiff",
+        "type": "Darkness",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/135.png"
+    },
+    {
+        "number": "136",
+        "name": "Maschiff",
+        "type": "Darkness",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/136.png"
+    },
+    {
+        "number": "137",
+        "name": "Mabosstiff",
+        "type": "Darkness",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/137.png"
+    },
+    {
+        "number": "138",
+        "name": "Bombirdier",
+        "type": "Darkness",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/138.png"
+    },
+    {
+        "number": "139",
+        "name": "Forretress",
+        "type": "Metal",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/139.png"
+    },
+    {
+        "number": "140",
+        "name": "Varoom",
+        "type": "Metal",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/140.png"
+    },
+    {
+        "number": "141",
+        "name": "Varoom",
+        "type": "Metal",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/141.png"
+    },
+    {
+        "number": "142",
+        "name": "Revavroom",
+        "type": "Metal",
+        "rarity": "Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/142.png"
+    },
+    {
+        "number": "143",
+        "name": "Iron Treads ex",
+        "type": "Metal",
+        "rarity": "Double Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/143.png"
+    },
+    {
+        "number": "144",
+        "name": "Chansey",
+        "type": "Colorless",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/144.png"
+    },
+    {
+        "number": "145",
+        "name": "Blissey",
+        "type": "Colorless",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/145.png"
+    },
+    {
+        "number": "146",
+        "name": "Zangoose",
+        "type": "Colorless",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/146.png"
+    },
+    {
+        "number": "147",
+        "name": "Zangoose",
+        "type": "Colorless",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/147.png"
+    },
+    {
+        "number": "148",
+        "name": "Starly",
+        "type": "Colorless",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/148.png"
+    },
+    {
+        "number": "149",
+        "name": "Staravia",
+        "type": "Colorless",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/149.png"
+    },
+    {
+        "number": "150",
+        "name": "Staraptor",
+        "type": "Colorless",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/150.png"
+    },
+    {
+        "number": "151",
+        "name": "Skwovet",
+        "type": "Colorless",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/151.png"
+    },
+    {
+        "number": "152",
+        "name": "Greedent",
+        "type": "Colorless",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/152.png"
+    },
+    {
+        "number": "153",
+        "name": "Indeedee",
+        "type": "Colorless",
+        "rarity": "Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/153.png"
+    },
+    {
+        "number": "154",
+        "name": "Lechonk",
+        "type": "Colorless",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/154.png"
+    },
+    {
+        "number": "155",
+        "name": "Lechonk",
+        "type": "Colorless",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/155.png"
+    },
+    {
+        "number": "156",
+        "name": "Lechonk",
+        "type": "Colorless",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/156.png"
+    },
+    {
+        "number": "157",
+        "name": "Oinkologne",
+        "type": "Colorless",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/157.png"
+    },
+    {
+        "number": "158",
+        "name": "Oinkologne ex",
+        "type": "Colorless",
+        "rarity": "Double Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/158.png"
+    },
+    {
+        "number": "159",
+        "name": "Tandemaus",
+        "type": "Colorless",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/159.png"
+    },
+    {
+        "number": "160",
+        "name": "Tandemaus",
+        "type": "Colorless",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/160.png"
+    },
+    {
+        "number": "161",
+        "name": "Maushold",
+        "type": "Colorless",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/161.png"
+    },
+    {
+        "number": "162",
+        "name": "Squawkabilly",
+        "type": "Colorless",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/162.png"
+    },
+    {
+        "number": "163",
+        "name": "Cyclizar",
+        "type": "Colorless",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/163.png"
+    },
+    {
+        "number": "164",
+        "name": "Cyclizar",
+        "type": "Colorless",
+        "rarity": "Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/164.png"
+    },
+    {
+        "number": "165",
+        "name": "Flamigo",
+        "type": "Colorless",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/165.png"
+    },
+    {
+        "number": "166",
+        "name": "Arven",
+        "type": "Trainer",
+        "rarity": "Uncommon",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/166.png"
+    },
+    {
+        "number": "167",
+        "name": "Beach Court",
+        "type": "Trainer",
+        "rarity": "Uncommon",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/167.png"
+    },
+    {
+        "number": "168",
+        "name": "Crushing Hammer",
+        "type": "Trainer",
+        "rarity": "Common",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/168.png"
+    },
+    {
+        "number": "169",
+        "name": "Defiance Band",
+        "type": "Trainer",
+        "rarity": "Uncommon",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/169.png"
+    },
+    {
+        "number": "170",
+        "name": "Electric Generator",
+        "type": "Trainer",
+        "rarity": "Uncommon",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/170.png"
+    },
+    {
+        "number": "171",
+        "name": "Energy Retrieval",
+        "type": "Trainer",
+        "rarity": "Common",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/171.png"
+    },
+    {
+        "number": "172",
+        "name": "Energy Search",
+        "type": "Trainer",
+        "rarity": "Common",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/172.png"
+    },
+    {
+        "number": "173",
+        "name": "Energy Switch",
+        "type": "Trainer",
+        "rarity": "Common",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/173.png"
+    },
+    {
+        "number": "174",
+        "name": "Exp. Share",
+        "type": "Trainer",
+        "rarity": "Uncommon",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/174.png"
+    },
+    {
+        "number": "175",
+        "name": "Jacq",
+        "type": "Trainer",
+        "rarity": "Uncommon",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/175.png"
+    },
+    {
+        "number": "176",
+        "name": "Judge",
+        "type": "Trainer",
+        "rarity": "Uncommon",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/176.png"
+    },
+    {
+        "number": "177",
+        "name": "Katy",
+        "type": "Trainer",
+        "rarity": "Uncommon",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/177.png"
+    },
+    {
+        "number": "178",
+        "name": "Mesagoza",
+        "type": "Trainer",
+        "rarity": "Uncommon",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/178.png"
+    },
+    {
+        "number": "179",
+        "name": "Miriam",
+        "type": "Trainer",
+        "rarity": "Uncommon",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/179.png"
+    },
+    {
+        "number": "180",
+        "name": "Nemona",
+        "type": "Trainer",
+        "rarity": "Common",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/180.png"
+    },
+    {
+        "number": "181",
+        "name": "Nest Ball",
+        "type": "Trainer",
+        "rarity": "Uncommon",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/181.png"
+    },
+    {
+        "number": "182",
+        "name": "Pal Pad",
+        "type": "Trainer",
+        "rarity": "Common",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/182.png"
+    },
+    {
+        "number": "183",
+        "name": "Penny",
+        "type": "Trainer",
+        "rarity": "Uncommon",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/183.png"
+    },
+    {
+        "number": "184",
+        "name": "Picnic Basket",
+        "type": "Trainer",
+        "rarity": "Uncommon",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/184.png"
+    },
+    {
+        "number": "185",
+        "name": "Poké Ball",
+        "type": "Trainer",
+        "rarity": "Common",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/185.png"
+    },
+    {
+        "number": "186",
+        "name": "Pokégear 3.0",
+        "type": "Trainer",
+        "rarity": "Common",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/186.png"
+    },
+    {
+        "number": "187",
+        "name": "Pokémon Catcher",
+        "type": "Trainer",
+        "rarity": "Common",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/187.png"
+    },
+    {
+        "number": "188",
+        "name": "Potion",
+        "type": "Trainer",
+        "rarity": "Common",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/188.png"
+    },
+    {
+        "number": "189",
+        "name": "Professor's Research (Professor Sada)",
+        "type": "Trainer",
+        "rarity": "Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/189.png"
+    },
+    {
+        "number": "190",
+        "name": "Professor's Research (Professor Turo)",
+        "type": "Trainer",
+        "rarity": "Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/190.png"
+    },
+    {
+        "number": "191",
+        "name": "Rare Candy",
+        "type": "Trainer",
+        "rarity": "Common",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/191.png"
+    },
+    {
+        "number": "192",
+        "name": "Rock Chestplate",
+        "type": "Trainer",
+        "rarity": "Uncommon",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/192.png"
+    },
+    {
+        "number": "193",
+        "name": "Rocky Helmet",
+        "type": "Trainer",
+        "rarity": "Uncommon",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/193.png"
+    },
+    {
+        "number": "194",
+        "name": "Switch",
+        "type": "Trainer",
+        "rarity": "Common",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/194.png"
+    },
+    {
+        "number": "195",
+        "name": "Team Star Grunt",
+        "type": "Trainer",
+        "rarity": "Uncommon",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/195.png"
+    },
+    {
+        "number": "196",
+        "name": "Ultra Ball",
+        "type": "Trainer",
+        "rarity": "Uncommon",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/196.png"
+    },
+    {
+        "number": "197",
+        "name": "Vitality Band",
+        "type": "Trainer",
+        "rarity": "Uncommon",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/197.png"
+    },
+    {
+        "number": "198",
+        "name": "Youngster",
+        "type": "Trainer",
+        "rarity": "Uncommon",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/198.png"
+    },
+    {
+        "number": "199",
+        "name": "Tarountula",
+        "type": "Grass",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/199.png"
+    },
+    {
+        "number": "200",
+        "name": "Dolliv",
+        "type": "Grass",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/200.png"
+    },
+    {
+        "number": "201",
+        "name": "Toedscool",
+        "type": "Grass",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/201.png"
+    },
+    {
+        "number": "202",
+        "name": "Scovillain",
+        "type": "Grass",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/202.png"
+    },
+    {
+        "number": "203",
+        "name": "Armarouge",
+        "type": "Fire",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/203.png"
+    },
+    {
+        "number": "204",
+        "name": "Slowpoke",
+        "type": "Water",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/204.png"
+    },
+    {
+        "number": "205",
+        "name": "Clauncher",
+        "type": "Water",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/205.png"
+    },
+    {
+        "number": "206",
+        "name": "Wiglett",
+        "type": "Water",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/206.png"
+    },
+    {
+        "number": "207",
+        "name": "Dondozo",
+        "type": "Water",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/207.png"
+    },
+    {
+        "number": "208",
+        "name": "Pachirisu",
+        "type": "Lightning",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/208.png"
+    },
+    {
+        "number": "209",
+        "name": "Pawmot",
+        "type": "Lightning",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/209.png"
+    },
+    {
+        "number": "210",
+        "name": "Drowzee",
+        "type": "Psychic",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/210.png"
+    },
+    {
+        "number": "211",
+        "name": "Ralts",
+        "type": "Psychic",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/211.png"
+    },
+    {
+        "number": "212",
+        "name": "Kirlia",
+        "type": "Psychic",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/212.png"
+    },
+    {
+        "number": "213",
+        "name": "Fidough",
+        "type": "Psychic",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/213.png"
+    },
+    {
+        "number": "214",
+        "name": "Greavard",
+        "type": "Psychic",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/214.png"
+    },
+    {
+        "number": "215",
+        "name": "Riolu",
+        "type": "Fighting",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/215.png"
+    },
+    {
+        "number": "216",
+        "name": "Sandile",
+        "type": "Fighting",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/216.png"
+    },
+    {
+        "number": "217",
+        "name": "Klawf",
+        "type": "Fighting",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/217.png"
+    },
+    {
+        "number": "218",
+        "name": "Mabosstiff",
+        "type": "Darkness",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/218.png"
+    },
+    {
+        "number": "219",
+        "name": "Bombirdier",
+        "type": "Darkness",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/219.png"
+    },
+    {
+        "number": "220",
+        "name": "Kingambit",
+        "type": "Darkness",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/220.png"
+    },
+    {
+        "number": "221",
+        "name": "Starly",
+        "type": "Colorless",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/221.png"
+    },
+    {
+        "number": "222",
+        "name": "Skwovet",
+        "type": "Colorless",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/222.png"
+    },
+    {
+        "number": "223",
+        "name": "Spidops ex",
+        "type": "Grass",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/223.png"
+    },
+    {
+        "number": "224",
+        "name": "Arcanine ex",
+        "type": "Fire",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/224.png"
+    },
+    {
+        "number": "225",
+        "name": "Gyarados ex",
+        "type": "Water",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/225.png"
+    },
+    {
+        "number": "226",
+        "name": "Magnezone ex",
+        "type": "Lightning",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/226.png"
+    },
+    {
+        "number": "227",
+        "name": "Miraidon ex",
+        "type": "Lightning",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/227.png"
+    },
+    {
+        "number": "228",
+        "name": "Gardevoir ex",
+        "type": "Psychic",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/228.png"
+    },
+    {
+        "number": "229",
+        "name": "Banette ex",
+        "type": "Psychic",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/229.png"
+    },
+    {
+        "number": "230",
+        "name": "Great Tusk ex",
+        "type": "Fighting",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/230.png"
+    },
+    {
+        "number": "231",
+        "name": "Koraidon ex",
+        "type": "Fighting",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/231.png"
+    },
+    {
+        "number": "232",
+        "name": "Toxicroak ex",
+        "type": "Darkness",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/232.png"
+    },
+    {
+        "number": "233",
+        "name": "Iron Treads ex",
+        "type": "Metal",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/233.png"
+    },
+    {
+        "number": "234",
+        "name": "Oinkologne ex",
+        "type": "Colorless",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/234.png"
+    },
+    {
+        "number": "235",
+        "name": "Arven",
+        "type": "Trainer",
+        "rarity": "Ultra Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/235.png"
+    },
+    {
+        "number": "236",
+        "name": "Jacq",
+        "type": "Trainer",
+        "rarity": "Ultra Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/236.png"
+    },
+    {
+        "number": "237",
+        "name": "Katy",
+        "type": "Trainer",
+        "rarity": "Ultra Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/237.png"
+    },
+    {
+        "number": "238",
+        "name": "Miriam",
+        "type": "Trainer",
+        "rarity": "Ultra Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/238.png"
+    },
+    {
+        "number": "239",
+        "name": "Penny",
+        "type": "Trainer",
+        "rarity": "Ultra Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/239.png"
+    },
+    {
+        "number": "240",
+        "name": "Professor's Research (Professor Sada)",
+        "type": "Trainer",
+        "rarity": "Ultra Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/240.png"
+    },
+    {
+        "number": "241",
+        "name": "Professor's Research (Professor Turo)",
+        "type": "Trainer",
+        "rarity": "Ultra Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/241.png"
+    },
+    {
+        "number": "242",
+        "name": "Team Star Grunt",
+        "type": "Trainer",
+        "rarity": "Ultra Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/242.png"
+    },
+    {
+        "number": "243",
+        "name": "Spidops ex",
+        "type": "Grass",
+        "rarity": "Special Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/243.png"
+    },
+    {
+        "number": "244",
+        "name": "Miraidon ex",
+        "type": "Lightning",
+        "rarity": "Special Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/244.png"
+    },
+    {
+        "number": "245",
+        "name": "Gardevoir ex",
+        "type": "Psychic",
+        "rarity": "Special Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/245.png"
+    },
+    {
+        "number": "246",
+        "name": "Great Tusk ex",
+        "type": "Fighting",
+        "rarity": "Special Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/246.png"
+    },
+    {
+        "number": "247",
+        "name": "Koraidon ex",
+        "type": "Fighting",
+        "rarity": "Special Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/247.png"
+    },
+    {
+        "number": "248",
+        "name": "Iron Treads ex",
+        "type": "Metal",
+        "rarity": "Special Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/248.png"
+    },
+    {
+        "number": "249",
+        "name": "Arven",
+        "type": "Trainer",
+        "rarity": "Special Illustration Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/249.png"
+    },
+    {
+        "number": "250",
+        "name": "Jacq",
+        "type": "Trainer",
+        "rarity": "Special Illustration Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/250.png"
+    },
+    {
+        "number": "251",
+        "name": "Miriam",
+        "type": "Trainer",
+        "rarity": "Special Illustration Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/251.png"
+    },
+    {
+        "number": "252",
+        "name": "Penny",
+        "type": "Trainer",
+        "rarity": "Special Illustration Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/252.png"
+    },
+    {
+        "number": "253",
+        "name": "Miraidon ex",
+        "type": "Lightning",
+        "rarity": "Hyper Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/253.png"
+    },
+    {
+        "number": "254",
+        "name": "Koraidon ex",
+        "type": "Fighting",
+        "rarity": "Hyper Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/sv1/254.png"
+    },
+    {
+        "number": "255",
+        "name": "Nest Ball",
+        "type": "Trainer",
+        "rarity": "Hyper Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/255.png"
+    },
+    {
+        "number": "256",
+        "name": "Rare Candy",
+        "type": "Trainer",
+        "rarity": "Hyper Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/sv1/256.png"
+    },
+    {
+        "number": "257",
+        "name": "Basic Lightning Energy",
+        "type": "Trainer",
+        "rarity": "Hyper Rare",
+        "category": "Energy",
+        "imageUrl": "https://images.pokemontcg.io/sv1/257.png"
+    },
+    {
+        "number": "258",
+        "name": "Basic Fighting Energy",
+        "type": "Trainer",
+        "rarity": "Hyper Rare",
+        "category": "Energy",
+        "imageUrl": "https://images.pokemontcg.io/sv1/258.png"
+    }
+]
+    }
 };
 
-// Rarity order for sorting
-const RARITY_ORDER = {
-    "Common": 1,
-    "Uncommon": 2,
-    "Rare": 3,
-    "Illustration Rare": 4,
-    "Double Rare": 5,
-    "Ultra Rare": 6,
-    "Special Illustration Rare": 7,
-    "Mega Hyper Rare": 8
-};
+// Legacy export for backward compatibility
+const PHANTASMAL_FLAMES_CARDS = CARD_SETS["phantasmal-flames"].cards;
 
-// Export for use in other modules
+// Export for use in app
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { PHANTASMAL_FLAMES_CARDS, TYPE_COLORS, RARITY_ORDER };
+    module.exports = { CARD_SETS, PHANTASMAL_FLAMES_CARDS };
 }

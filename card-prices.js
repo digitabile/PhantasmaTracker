@@ -1,10 +1,9 @@
-// Phantasmal Flames Card Prices
+// Pokemon Card Collection - Multi-Set Pricing
 // Market prices based on TCGPlayer, PriceCharting, and other reputable sources
 // Last updated: November 2025
-// Prices are in USD and reflect current market values
-// Reverse Holo variants typically worth 2-3x more for commons/uncommons
 
-const CARD_PRICES = {
+const CARD_PRICING = {
+    "phantasmal-flames": {
     // Main Set Cards (001-094)
     // Only Common, Uncommon, and Rare cards have reverse holo variants
     // Double Rare ex cards and Trainers have only one variant
@@ -147,7 +146,829 @@ const CARD_PRICES = {
 
     // Mega Hyper Rare (130) - Premium holofoil only
     "130": 850.00  // Mega Charizard X ex (Mega Hyper Rare) - top chase card
+},
+    "scarlet-violet": {
+    "1": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "2": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "3": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "4": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "5": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "6": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "7": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "8": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "9": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "10": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "11": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "12": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "13": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "14": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "15": {
+        "normal": 0.75,
+        "reverseHolo": 1.75
+    },
+    "16": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "17": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "18": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "19": 5,
+    "20": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "21": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "22": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "23": {
+        "normal": 0.75,
+        "reverseHolo": 1.75
+    },
+    "24": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "25": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "26": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "27": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "28": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "29": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "30": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "31": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "32": 5,
+    "33": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "34": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "35": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "36": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "37": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "38": {
+        "normal": 0.75,
+        "reverseHolo": 1.75
+    },
+    "39": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "40": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "41": {
+        "normal": 0.75,
+        "reverseHolo": 1.75
+    },
+    "42": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "43": {
+        "normal": 0.75,
+        "reverseHolo": 1.75
+    },
+    "44": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "45": 5,
+    "46": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "47": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "48": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "49": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "50": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "51": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "52": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "53": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "54": {
+        "normal": 0.75,
+        "reverseHolo": 1.75
+    },
+    "55": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "56": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "57": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "58": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "59": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "60": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "61": {
+        "normal": 0.75,
+        "reverseHolo": 1.75
+    },
+    "62": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "63": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "64": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "65": 5,
+    "66": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "67": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "68": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "69": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "70": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "71": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "72": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "73": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "74": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "75": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "76": {
+        "normal": 0.75,
+        "reverseHolo": 1.75
+    },
+    "77": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "78": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "79": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "80": {
+        "normal": 0.75,
+        "reverseHolo": 1.75
+    },
+    "81": 5,
+    "82": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "83": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "84": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "85": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "86": 5,
+    "87": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "88": 5,
+    "89": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "90": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "91": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "92": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "93": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "94": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "95": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "96": {
+        "normal": 0.75,
+        "reverseHolo": 1.75
+    },
+    "97": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "98": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "99": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "100": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "101": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "102": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "103": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "104": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "105": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "106": {
+        "normal": 0.75,
+        "reverseHolo": 1.75
+    },
+    "107": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "108": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "109": {
+        "normal": 0.75,
+        "reverseHolo": 1.75
+    },
+    "110": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "111": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "112": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "113": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "114": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "115": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "116": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "117": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "118": {
+        "normal": 0.75,
+        "reverseHolo": 1.75
+    },
+    "119": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "120": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "121": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "122": {
+        "normal": 0.75,
+        "reverseHolo": 1.75
+    },
+    "123": 5,
+    "124": {
+        "normal": 0.75,
+        "reverseHolo": 1.75
+    },
+    "125": 5,
+    "126": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "127": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "128": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "129": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "130": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "131": 5,
+    "132": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "133": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "134": {
+        "normal": 0.75,
+        "reverseHolo": 1.75
+    },
+    "135": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "136": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "137": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "138": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "139": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "140": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "141": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "142": {
+        "normal": 0.75,
+        "reverseHolo": 1.75
+    },
+    "143": 5,
+    "144": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "145": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "146": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "147": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "148": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "149": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "150": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "151": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "152": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "153": {
+        "normal": 0.75,
+        "reverseHolo": 1.75
+    },
+    "154": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "155": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "156": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "157": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "158": 5,
+    "159": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "160": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "161": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "162": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "163": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "164": {
+        "normal": 0.75,
+        "reverseHolo": 1.75
+    },
+    "165": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "166": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "167": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "168": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "169": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "170": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "171": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "172": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "173": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "174": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "175": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "176": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "177": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "178": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "179": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "180": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "181": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "182": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "183": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "184": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "185": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "186": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "187": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "188": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "189": {
+        "normal": 0.75,
+        "reverseHolo": 1.75
+    },
+    "190": {
+        "normal": 0.75,
+        "reverseHolo": 1.75
+    },
+    "191": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "192": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "193": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "194": {
+        "normal": 0.1,
+        "reverseHolo": 0.25
+    },
+    "195": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "196": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "197": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "198": {
+        "normal": 0.25,
+        "reverseHolo": 0.6
+    },
+    "199": 8,
+    "200": 8,
+    "201": 8,
+    "202": 8,
+    "203": 8,
+    "204": 8,
+    "205": 8,
+    "206": 8,
+    "207": 8,
+    "208": 8,
+    "209": 8,
+    "210": 8,
+    "211": 8,
+    "212": 8,
+    "213": 8,
+    "214": 8,
+    "215": 8,
+    "216": 8,
+    "217": 8,
+    "218": 8,
+    "219": 8,
+    "220": 8,
+    "221": 8,
+    "222": 8,
+    "223": 12,
+    "224": 12,
+    "225": 12,
+    "226": 12,
+    "227": 12,
+    "228": 12,
+    "229": 12,
+    "230": 12,
+    "231": 12,
+    "232": 12,
+    "233": 12,
+    "234": 12,
+    "235": 12,
+    "236": 12,
+    "237": 12,
+    "238": 12,
+    "239": 12,
+    "240": 12,
+    "241": 12,
+    "242": 12,
+    "243": 25,
+    "244": 25,
+    "245": 25,
+    "246": 25,
+    "247": 25,
+    "248": 25,
+    "249": 25,
+    "250": 25,
+    "251": 25,
+    "252": 25,
+    "253": 45,
+    "254": 45,
+    "255": 45,
+    "256": 45,
+    "257": 45,
+    "258": 45
+}
 };
+
+// Legacy export for backward compatibility
+const CARD_PRICES = CARD_PRICING["phantasmal-flames"];
 
 // Helper function to get price for a specific variant
 function getCardPrice(cardNumber, variant = 'normal') {
@@ -168,5 +989,5 @@ function getCardPrice(cardNumber, variant = 'normal') {
 
 // Export for use in app
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { CARD_PRICES, getCardPrice };
+    module.exports = { CARD_PRICING, CARD_PRICES, getCardPrice };
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phantasmal Flames Card Tracker</title>
+    <title>Pokemon Card Collection Tracker</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -11,10 +11,21 @@
         <!-- Header -->
         <header class="app-header">
             <div class="header-content">
-                <h1>🔥 Phantasmal Flames Collection Tracker</h1>
-                <p class="subtitle">Track your Pokemon TCG Mega Evolution Series collection</p>
+                <h1>🎴 Pokemon Card Collection Tracker</h1>
+                <p class="subtitle">Track your Pokemon TCG collection across multiple sets</p>
             </div>
         </header>
+
+        <!-- Set Selector -->
+        <div class="set-selector-container">
+            <label for="set-selector" class="set-selector-label">
+                <span class="icon">📦</span> Select Set:
+            </label>
+            <select id="set-selector" class="set-selector">
+                <option value="phantasmal-flames">Phantasmal Flames (ME2)</option>
+                <option value="scarlet-violet">Scarlet & Violet Base (SV1)</option>
+            </select>
+        </div>
 
         <!-- Navigation -->
         <nav class="app-nav">
