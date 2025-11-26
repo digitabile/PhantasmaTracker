@@ -3121,6 +3121,718 @@ const CARD_SETS = {
         "imageUrl": "https://images.pokemontcg.io/sv1/258.png"
     }
 ]
+    },
+    "pokemon-go": {
+        name: "Pokemon GO",
+        code: "PGO",
+        totalCards: 88,
+        releaseDate: "July 1, 2022",
+        cards: [
+    {
+        "number": "1",
+        "name": "Bulbasaur",
+        "type": "Grass",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/1.png"
+    },
+    {
+        "number": "2",
+        "name": "Ivysaur",
+        "type": "Grass",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/2.png"
+    },
+    {
+        "number": "3",
+        "name": "Venusaur",
+        "type": "Grass",
+        "rarity": "Rare Holo",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/3.png"
+    },
+    {
+        "number": "4",
+        "name": "Radiant Venusaur",
+        "type": "Grass",
+        "rarity": "Radiant Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/4.png"
+    },
+    {
+        "number": "5",
+        "name": "Alolan Exeggutor V",
+        "type": "Grass",
+        "rarity": "Rare Holo V",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/5.png"
+    },
+    {
+        "number": "6",
+        "name": "Spinarak",
+        "type": "Grass",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/6.png"
+    },
+    {
+        "number": "7",
+        "name": "Ariados",
+        "type": "Grass",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/7.png"
+    },
+    {
+        "number": "8",
+        "name": "Charmander",
+        "type": "Fire",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/8.png"
+    },
+    {
+        "number": "9",
+        "name": "Charmeleon",
+        "type": "Fire",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/9.png"
+    },
+    {
+        "number": "10",
+        "name": "Charizard",
+        "type": "Fire",
+        "rarity": "Rare Holo",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/10.png"
+    },
+    {
+        "number": "11",
+        "name": "Radiant Charizard",
+        "type": "Fire",
+        "rarity": "Radiant Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/11.png"
+    },
+    {
+        "number": "12",
+        "name": "Moltres",
+        "type": "Fire",
+        "rarity": "Rare Holo",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/12.png"
+    },
+    {
+        "number": "13",
+        "name": "Squirtle",
+        "type": "Water",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/13.png"
+    },
+    {
+        "number": "14",
+        "name": "Wartortle",
+        "type": "Water",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/14.png"
+    },
+    {
+        "number": "15",
+        "name": "Blastoise",
+        "type": "Water",
+        "rarity": "Rare Holo",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/15.png"
+    },
+    {
+        "number": "16",
+        "name": "Radiant Blastoise",
+        "type": "Water",
+        "rarity": "Radiant Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/16.png"
+    },
+    {
+        "number": "17",
+        "name": "Slowpoke",
+        "type": "Water",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/17.png"
+    },
+    {
+        "number": "18",
+        "name": "Slowbro",
+        "type": "Water",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/18.png"
+    },
+    {
+        "number": "19",
+        "name": "Lapras",
+        "type": "Water",
+        "rarity": "Rare Holo",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/19.png"
+    },
+    {
+        "number": "20",
+        "name": "Articuno",
+        "type": "Water",
+        "rarity": "Rare Holo",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/20.png"
+    },
+    {
+        "number": "21",
+        "name": "Snorlax",
+        "type": "Colorless",
+        "rarity": "Rare Holo",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/21.png"
+    },
+    {
+        "number": "22",
+        "name": "Ditto",
+        "type": "Colorless",
+        "rarity": "Rare Holo",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/22.png"
+    },
+    {
+        "number": "23",
+        "name": "Dragonite V",
+        "type": "Dragon",
+        "rarity": "Rare Holo V",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/23.png"
+    },
+    {
+        "number": "24",
+        "name": "Dragonite VSTAR",
+        "type": "Dragon",
+        "rarity": "Rare Holo VSTAR",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/24.png"
+    },
+    {
+        "number": "25",
+        "name": "Pikachu",
+        "type": "Lightning",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/25.png"
+    },
+    {
+        "number": "26",
+        "name": "Raichu",
+        "type": "Lightning",
+        "rarity": "Rare Holo",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/26.png"
+    },
+    {
+        "number": "27",
+        "name": "Magnemite",
+        "type": "Lightning",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/27.png"
+    },
+    {
+        "number": "28",
+        "name": "Magneton",
+        "type": "Lightning",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/28.png"
+    },
+    {
+        "number": "29",
+        "name": "Electabuzz",
+        "type": "Lightning",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/29.png"
+    },
+    {
+        "number": "30",
+        "name": "Zapdos",
+        "type": "Lightning",
+        "rarity": "Rare Holo",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/30.png"
+    },
+    {
+        "number": "31",
+        "name": "Mewtwo V",
+        "type": "Psychic",
+        "rarity": "Rare Holo V",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/31.png"
+    },
+    {
+        "number": "32",
+        "name": "Mewtwo VSTAR",
+        "type": "Psychic",
+        "rarity": "Rare Holo VSTAR",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/32.png"
+    },
+    {
+        "number": "33",
+        "name": "Mew",
+        "type": "Psychic",
+        "rarity": "Rare Holo",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/33.png"
+    },
+    {
+        "number": "34",
+        "name": "Radiant Eevee",
+        "type": "Colorless",
+        "rarity": "Radiant Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/34.png"
+    },
+    {
+        "number": "35",
+        "name": "Machop",
+        "type": "Fighting",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/35.png"
+    },
+    {
+        "number": "36",
+        "name": "Machoke",
+        "type": "Fighting",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/36.png"
+    },
+    {
+        "number": "37",
+        "name": "Machamp",
+        "type": "Fighting",
+        "rarity": "Rare Holo",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/37.png"
+    },
+    {
+        "number": "38",
+        "name": "Onix",
+        "type": "Fighting",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/38.png"
+    },
+    {
+        "number": "39",
+        "name": "Conkeldurr V",
+        "type": "Fighting",
+        "rarity": "Rare Holo V",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/39.png"
+    },
+    {
+        "number": "40",
+        "name": "Meltan",
+        "type": "Metal",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/40.png"
+    },
+    {
+        "number": "41",
+        "name": "Melmetal V",
+        "type": "Metal",
+        "rarity": "Rare Holo V",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/41.png"
+    },
+    {
+        "number": "42",
+        "name": "Melmetal VMAX",
+        "type": "Metal",
+        "rarity": "Rare Holo VMAX",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/42.png"
+    },
+    {
+        "number": "43",
+        "name": "Wimpod",
+        "type": "Darkness",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/43.png"
+    },
+    {
+        "number": "44",
+        "name": "Golisopod",
+        "type": "Darkness",
+        "rarity": "Rare Holo",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/44.png"
+    },
+    {
+        "number": "45",
+        "name": "Pidgey",
+        "type": "Colorless",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/45.png"
+    },
+    {
+        "number": "46",
+        "name": "Pidgeotto",
+        "type": "Colorless",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/46.png"
+    },
+    {
+        "number": "47",
+        "name": "Pidgeot",
+        "type": "Colorless",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/47.png"
+    },
+    {
+        "number": "48",
+        "name": "Rattata",
+        "type": "Colorless",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/48.png"
+    },
+    {
+        "number": "49",
+        "name": "Raticate",
+        "type": "Colorless",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/49.png"
+    },
+    {
+        "number": "50",
+        "name": "Meowth",
+        "type": "Colorless",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/50.png"
+    },
+    {
+        "number": "51",
+        "name": "Persian",
+        "type": "Colorless",
+        "rarity": "Uncommon",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/51.png"
+    },
+    {
+        "number": "52",
+        "name": "Eevee",
+        "type": "Colorless",
+        "rarity": "Common",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/52.png"
+    },
+    {
+        "number": "53",
+        "name": "Candela",
+        "type": "Trainer",
+        "rarity": "Uncommon",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/pgo/53.png"
+    },
+    {
+        "number": "54",
+        "name": "Blanche",
+        "type": "Trainer",
+        "rarity": "Uncommon",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/pgo/54.png"
+    },
+    {
+        "number": "55",
+        "name": "Spark",
+        "type": "Trainer",
+        "rarity": "Uncommon",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/pgo/55.png"
+    },
+    {
+        "number": "56",
+        "name": "Professor's Research (Professor Willow)",
+        "type": "Trainer",
+        "rarity": "Uncommon",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/pgo/56.png"
+    },
+    {
+        "number": "57",
+        "name": "Pokémon GO Path",
+        "type": "Trainer",
+        "rarity": "Uncommon",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/pgo/57.png"
+    },
+    {
+        "number": "58",
+        "name": "Alolan Exeggutor V",
+        "type": "Grass",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/58.png"
+    },
+    {
+        "number": "59",
+        "name": "Dragonite V",
+        "type": "Dragon",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/59.png"
+    },
+    {
+        "number": "60",
+        "name": "Dragonite VSTAR",
+        "type": "Dragon",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/60.png"
+    },
+    {
+        "number": "61",
+        "name": "Mewtwo V",
+        "type": "Psychic",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/61.png"
+    },
+    {
+        "number": "62",
+        "name": "Mewtwo VSTAR",
+        "type": "Psychic",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/62.png"
+    },
+    {
+        "number": "63",
+        "name": "Conkeldurr V",
+        "type": "Fighting",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/63.png"
+    },
+    {
+        "number": "64",
+        "name": "Melmetal V",
+        "type": "Metal",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/64.png"
+    },
+    {
+        "number": "65",
+        "name": "Melmetal VMAX",
+        "type": "Metal",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/65.png"
+    },
+    {
+        "number": "66",
+        "name": "Candela",
+        "type": "Trainer",
+        "rarity": "Ultra Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/pgo/66.png"
+    },
+    {
+        "number": "67",
+        "name": "Blanche",
+        "type": "Trainer",
+        "rarity": "Ultra Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/pgo/67.png"
+    },
+    {
+        "number": "68",
+        "name": "Spark",
+        "type": "Trainer",
+        "rarity": "Ultra Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/pgo/68.png"
+    },
+    {
+        "number": "69",
+        "name": "Professor's Research (Professor Willow)",
+        "type": "Trainer",
+        "rarity": "Ultra Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/pgo/69.png"
+    },
+    {
+        "number": "70",
+        "name": "Mewtwo V",
+        "type": "Psychic",
+        "rarity": "Rare Secret",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/70.png"
+    },
+    {
+        "number": "71",
+        "name": "Melmetal VMAX",
+        "type": "Metal",
+        "rarity": "Rare Rainbow",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/71.png"
+    },
+    {
+        "number": "72",
+        "name": "Candela",
+        "type": "Trainer",
+        "rarity": "Rare Rainbow",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/pgo/72.png"
+    },
+    {
+        "number": "73",
+        "name": "Blanche",
+        "type": "Trainer",
+        "rarity": "Rare Rainbow",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/pgo/73.png"
+    },
+    {
+        "number": "74",
+        "name": "Spark",
+        "type": "Trainer",
+        "rarity": "Rare Rainbow",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/pgo/74.png"
+    },
+    {
+        "number": "75",
+        "name": "Professor's Research (Professor Willow)",
+        "type": "Trainer",
+        "rarity": "Rare Rainbow",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/pgo/75.png"
+    },
+    {
+        "number": "76",
+        "name": "Conkeldurr V",
+        "type": "Fighting",
+        "rarity": "Rare Secret",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/76.png"
+    },
+    {
+        "number": "77",
+        "name": "Machamp",
+        "type": "Fighting",
+        "rarity": "Rare Secret",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/77.png"
+    },
+    {
+        "number": "78",
+        "name": "Slaking",
+        "type": "Colorless",
+        "rarity": "Rare Secret",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/78.png"
+    },
+    {
+        "number": "79",
+        "name": "Mewtwo VSTAR",
+        "type": "Psychic",
+        "rarity": "Rare Secret",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/79.png"
+    },
+    {
+        "number": "80",
+        "name": "Dragonite VSTAR",
+        "type": "Dragon",
+        "rarity": "Rare Secret",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/80.png"
+    },
+    {
+        "number": "81",
+        "name": "Dragonite V",
+        "type": "Dragon",
+        "rarity": "Rare Secret",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/81.png"
+    },
+    {
+        "number": "82",
+        "name": "Alolan Exeggutor V",
+        "type": "Grass",
+        "rarity": "Rare Secret",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/82.png"
+    },
+    {
+        "number": "83",
+        "name": "Melmetal V",
+        "type": "Metal",
+        "rarity": "Rare Secret",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/83.png"
+    },
+    {
+        "number": "84",
+        "name": "Pidgeot",
+        "type": "Colorless",
+        "rarity": "Rare Secret",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/pgo/84.png"
+    },
+    {
+        "number": "85",
+        "name": "Pokémon GO Path",
+        "type": "Trainer",
+        "rarity": "Rare Secret",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/pgo/85.png"
+    },
+    {
+        "number": "86",
+        "name": "PokéStop",
+        "type": "Trainer",
+        "rarity": "Rare Secret",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/pgo/86.png"
+    },
+    {
+        "number": "87",
+        "name": "Egg Incubator",
+        "type": "Trainer",
+        "rarity": "Rare Secret",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/pgo/87.png"
+    },
+    {
+        "number": "88",
+        "name": "Lure Module",
+        "type": "Trainer",
+        "rarity": "Rare Secret",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/pgo/88.png"
+    }
+]
     }
 };
 
