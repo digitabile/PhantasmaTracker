@@ -969,101 +969,97 @@ const CARD_PRICING = {
     "257": 2.50, // Basic Lightning Energy (Hyper/Gold)
     "258": 2.25  // Basic Fighting Energy (Hyper/Gold)
 },
-    "pokemon-go": {
-        // Main Set (#1-57)
-        "1": { normal: 0.10, reverseHolo: 0.25 }, // Bulbasaur (Common)
-        "2": { normal: 0.25, reverseHolo: 0.60 }, // Ivysaur (Uncommon)
-        "3": { normal: 3.50, reverseHolo: 5.50 }, // Venusaur (Rare Holo) - popular starter
-        "4": 18.00, // Radiant Venusaur (Radiant Rare) - chase card
-        "5": 2.00, // Alolan Exeggutor V (Rare Holo V)
-        "6": { normal: 0.10, reverseHolo: 0.25 }, // Spinarak (Common)
-        "7": { normal: 0.25, reverseHolo: 0.60 }, // Ariados (Uncommon)
-        "8": { normal: 0.15, reverseHolo: 0.35 }, // Charmander (Common - popular)
-        "9": { normal: 0.30, reverseHolo: 0.75 }, // Charmeleon (Uncommon - popular)
-        "10": { normal: 12.00, reverseHolo: 18.00 }, // Charizard (Rare Holo) - very popular
-        "11": 45.00, // Radiant Charizard (Radiant Rare) - TOP chase card
-        "12": { normal: 1.50, reverseHolo: 2.50 }, // Moltres (Rare Holo)
-        "13": { normal: 0.15, reverseHolo: 0.35 }, // Squirtle (Common - popular)
-        "14": { normal: 0.30, reverseHolo: 0.75 }, // Wartortle (Uncommon - popular)
-        "15": { normal: 4.50, reverseHolo: 7.00 }, // Blastoise (Rare Holo) - popular starter
-        "16": 22.00, // Radiant Blastoise (Radiant Rare) - chase card
-        "17": { normal: 0.10, reverseHolo: 0.25 }, // Slowpoke (Common)
-        "18": { normal: 0.25, reverseHolo: 0.60 }, // Slowbro (Uncommon)
-        "19": { normal: 1.00, reverseHolo: 2.00 }, // Lapras (Rare Holo)
-        "20": { normal: 1.50, reverseHolo: 2.50 }, // Articuno (Rare Holo - legendary)
-        "21": { normal: 2.00, reverseHolo: 3.50 }, // Snorlax (Rare Holo - popular)
-        "22": { normal: 2.50, reverseHolo: 4.00 }, // Ditto (Rare Holo - popular/unique)
-        "23": 3.00, // Dragonite V (Rare Holo V)
-        "24": 4.00, // Dragonite VSTAR (Rare Holo VSTAR)
-        "25": { normal: 0.25, reverseHolo: 0.60 }, // Pikachu (Common - iconic)
-        "26": { normal: 1.00, reverseHolo: 2.00 }, // Raichu (Rare Holo)
-        "27": { normal: 0.10, reverseHolo: 0.25 }, // Magnemite (Common)
-        "28": { normal: 0.25, reverseHolo: 0.60 }, // Magneton (Uncommon)
-        "29": { normal: 0.25, reverseHolo: 0.60 }, // Electabuzz (Uncommon)
-        "30": { normal: 1.50, reverseHolo: 2.50 }, // Zapdos (Rare Holo - legendary)
-        "31": 3.50, // Mewtwo V (Rare Holo V) - iconic legendary
-        "32": 5.00, // Mewtwo VSTAR (Rare Holo VSTAR) - iconic
-        "33": { normal: 3.00, reverseHolo: 5.00 }, // Mew (Rare Holo - iconic)
-        "34": 25.00, // Radiant Eevee (Radiant Rare) - very popular chase card
-        "35": { normal: 0.10, reverseHolo: 0.25 }, // Machop (Common)
-        "36": { normal: 0.25, reverseHolo: 0.60 }, // Machoke (Uncommon)
-        "37": { normal: 1.50, reverseHolo: 2.50 }, // Machamp (Rare Holo)
-        "38": { normal: 0.10, reverseHolo: 0.25 }, // Onix (Common)
-        "39": 2.00, // Conkeldurr V (Rare Holo V)
-        "40": { normal: 0.10, reverseHolo: 0.25 }, // Meltan (Common)
-        "41": 2.50, // Melmetal V (Rare Holo V)
-        "42": 3.50, // Melmetal VMAX (Rare Holo VMAX)
-        "43": { normal: 0.10, reverseHolo: 0.25 }, // Wimpod (Common)
-        "44": { normal: 1.00, reverseHolo: 2.00 }, // Golisopod (Rare Holo)
-        "45": { normal: 0.10, reverseHolo: 0.25 }, // Pidgey (Common)
-        "46": { normal: 0.25, reverseHolo: 0.60 }, // Pidgeotto (Uncommon)
-        "47": { normal: 0.25, reverseHolo: 0.60 }, // Pidgeot (Uncommon)
-        "48": { normal: 0.10, reverseHolo: 0.25 }, // Rattata (Common)
-        "49": { normal: 0.25, reverseHolo: 0.60 }, // Raticate (Uncommon)
-        "50": { normal: 0.15, reverseHolo: 0.35 }, // Meowth (Common - popular)
-        "51": { normal: 0.25, reverseHolo: 0.60 }, // Persian (Uncommon)
-        "52": { normal: 0.20, reverseHolo: 0.50 }, // Eevee (Common - very popular)
-        "53": { normal: 0.25, reverseHolo: 0.60 }, // Candela (Trainer Uncommon)
-        "54": { normal: 0.25, reverseHolo: 0.60 }, // Blanche (Trainer Uncommon)
-        "55": { normal: 0.25, reverseHolo: 0.60 }, // Spark (Trainer Uncommon)
-        "56": { normal: 0.40, reverseHolo: 1.00 }, // Professor's Research (Trainer Uncommon - staple)
-        "57": { normal: 0.30, reverseHolo: 0.75 }, // Pokemon GO Path (Trainer Uncommon)
+"pokemon-go": {
+    "1": { normal: 0.1, reverseHolo: 0.5 },
+    "2": { normal: 0.15, reverseHolo: 0.5 },
+    "3": { normal: 2, reverseHolo: 3.5 },
+    "4": 6.15,
+    "5": 0.75,
+    "6": { normal: 0.1, reverseHolo: 0.5 },
+    "7": { normal: 0.15, reverseHolo: 0.5 },
+    "8": { normal: 0.1, reverseHolo: 0.5 },
+    "9": { normal: 0.15, reverseHolo: 0.5 },
+    "10": { normal: 2, reverseHolo: 3.5 },
+    "11": 16.11,
+    "12": { normal: 0.75, reverseHolo: 1.5 },
+    "13": { normal: 0.1, reverseHolo: 0.5 },
+    "14": { normal: 0.15, reverseHolo: 0.5 },
+    "15": { normal: 0.1, reverseHolo: 0.5 },
+    "16": { normal: 0.15, reverseHolo: 0.5 },
+    "17": { normal: 2, reverseHolo: 3.5 },
+    "18": 6.08,
+    "19": { normal: 0.1, reverseHolo: 0.5 },
+    "20": { normal: 0.15, reverseHolo: 0.5 },
+    "21": { normal: 0.1, reverseHolo: 0.5 },
+    "22": { normal: 2, reverseHolo: 3.5 },
+    "23": { normal: 0.75, reverseHolo: 1.5 },
+    "24": { normal: 0.75, reverseHolo: 1.5 },
+    "25": { normal: 0.1, reverseHolo: 0.5 },
+    "26": { normal: 0.75, reverseHolo: 1.5 },
+    "27": { normal: 0.1, reverseHolo: 0.5 },
+    "28": { normal: 2, reverseHolo: 3.5 },
+    "29": { normal: 0.75, reverseHolo: 1.5 },
+    "30": 1.5,
+    "31": 7,
+    "32": { normal: 0.1, reverseHolo: 0.5 },
+    "33": { normal: 0.15, reverseHolo: 0.5 },
+    "34": { normal: 0.15, reverseHolo: 0.5 },
+    "35": { normal: 2, reverseHolo: 3.5 },
+    "36": { normal: 0.1, reverseHolo: 0.5 },
+    "37": { normal: 0.1, reverseHolo: 0.5 },
+    "38": { normal: 0.15, reverseHolo: 0.5 },
+    "39": { normal: 0.15, reverseHolo: 0.5 },
+    "40": 0.75,
+    "41": { normal: 0.1, reverseHolo: 0.5 },
+    "42": { normal: 0.1, reverseHolo: 0.5 },
+    "43": { normal: 2, reverseHolo: 3.5 },
+    "44": { normal: 0.15, reverseHolo: 0.5 },
+    "45": { normal: 0.1, reverseHolo: 0.5 },
+    "46": { normal: 0.75, reverseHolo: 1.5 },
+    "47": 0.75,
+    "48": 3.5,
+    "49": 1.5,
+    "50": 3.5,
+    "51": { normal: 0.15, reverseHolo: 0.5 },
+    "52": { normal: 0.75, reverseHolo: 1.5 },
+    "53": { normal: 2, reverseHolo: 3.5 },
+    "54": { normal: 0.1, reverseHolo: 0.5 },
+    "55": { normal: 2, reverseHolo: 3.5 },
+    "56": { normal: 0.1, reverseHolo: 0.5 },
+    "57": { normal: 0.1, reverseHolo: 0.5 },
+    "58": 0.75,
+    "59": { normal: 0.1, reverseHolo: 0.5 },
+    "60": { normal: 0.1, reverseHolo: 0.5 },
+    "61": { normal: 0.1, reverseHolo: 0.5 },
+    "62": { normal: 0.1, reverseHolo: 0.5 },
+    "63": { normal: 0.15, reverseHolo: 0.5 },
+    "64": { normal: 0.15, reverseHolo: 0.5 },
+    "65": { normal: 0.15, reverseHolo: 0.5 },
+    "66": { normal: 0.15, reverseHolo: 0.5 },
+    "67": { normal: 0.15, reverseHolo: 0.5 },
+    "68": { normal: 0.15, reverseHolo: 0.5 },
+    "69": { normal: 0.15, reverseHolo: 0.5 },
+    "70": { normal: 0.15, reverseHolo: 0.5 },
+    "71": 2.25,
+    "72": 4.5,
+    "73": 2.5,
+    "74": 2.5,
+    "75": 2.25,
+    "76": 3.5,
+    "77": 2.25,
+    "78": 3.5,
+    "79": 42,
+    "80": 9.99,
+    "81": 24.99,
+    "82": 10,
+    "83": 10,
+    "84": 12,
+    "85": 10,
+    "86": 16.99,
+    "87": 8,
+    "88": 8
+}
 
-        // Full Arts / Ultra Rares (#58-69)
-        "58": 5.00, // Alolan Exeggutor V (Ultra Rare)
-        "59": 7.00, // Dragonite V (Ultra Rare)
-        "60": 9.00, // Dragonite VSTAR (Ultra Rare)
-        "61": 8.00, // Mewtwo V (Ultra Rare) - iconic
-        "62": 10.00, // Mewtwo VSTAR (Ultra Rare) - iconic
-        "63": 5.00, // Conkeldurr V (Ultra Rare)
-        "64": 6.00, // Melmetal V (Ultra Rare)
-        "65": 8.50, // Melmetal VMAX (Ultra Rare)
-        "66": 5.50, // Candela (Ultra Rare)
-        "67": 5.50, // Blanche (Ultra Rare)
-        "68": 5.50, // Spark (Ultra Rare)
-        "69": 4.00, // Professor's Research (Ultra Rare)
-
-        // Secret Rares (#70-88)
-        "70": 35.00, // Mewtwo V (Rare Secret - Alt Art)
-        "71": 15.00, // Melmetal VMAX (Rare Rainbow)
-        "72": 12.00, // Candela (Rare Rainbow)
-        "73": 12.00, // Blanche (Rare Rainbow)
-        "74": 12.00, // Spark (Rare Rainbow)
-        "75": 14.00, // Professor's Research (Rare Rainbow)
-        "76": 12.00, // Conkeldurr V (Rare Secret)
-        "77": 20.00, // Machamp (Rare Secret - Alt Art)
-        "78": 15.00, // Slaking (Rare Secret)
-        "79": 45.00, // Mewtwo VSTAR (Rare Secret - Gold)
-        "80": 30.00, // Dragonite VSTAR (Rare Secret - Gold)
-        "81": 25.00, // Dragonite V (Rare Secret - Alt Art)
-        "82": 18.00, // Alolan Exeggutor V (Rare Secret)
-        "83": 16.00, // Melmetal V (Rare Secret)
-        "84": 10.00, // Pidgeot (Rare Secret)
-        "85": 18.00, // Pokemon GO Path (Rare Secret - Gold)
-        "86": 20.00, // PokeStop (Rare Secret - Gold)
-        "87": 12.00, // Egg Incubator (Rare Secret)
-        "88": 14.00  // Lure Module (Rare Secret)
-    }
 };
 
 // Legacy export for backward compatibility

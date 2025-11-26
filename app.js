@@ -783,7 +783,7 @@ class CardTracker {
         // Load real market prices from TCGPlayer and other reputable sources
         // Prices are based on current market values and updated regularly
 
-        const PRICE_VERSION = 'v6.0'; // Updated when pricing system changes (v6.0 corrects SV1 market prices)
+        const PRICE_VERSION = 'v7.0'; // Updated when pricing system changes (v7.0 corrects Pokemon GO cards and prices)
         const lastUpdate = localStorage.getItem('priceLastUpdate');
         const priceVersion = localStorage.getItem('priceVersion');
         const now = Date.now();
