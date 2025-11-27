@@ -3838,10 +3838,9 @@ const CARD_SETS = {
     "mega-evolution": {
         name: "Mega Evolution",
         code: "MEG",
-        totalCards: 132,
+        totalCards: 188,
         releaseDate: "September 26, 2025",
         cards: [
-
     {
         "number": "1",
         "name": "Bulbasaur",
@@ -4897,7 +4896,456 @@ const CARD_SETS = {
         "rarity": "Uncommon",
         "category": "Trainer",
         "imageUrl": "https://images.pokemontcg.io/meg/132.png"
+    },
+    {
+        "number": "133",
+        "name": "Bulbasaur",
+        "type": "Grass",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/133.png"
+    },
+    {
+        "number": "134",
+        "name": "Ivysaur",
+        "type": "Grass",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/134.png"
+    },
+    {
+        "number": "135",
+        "name": "Exeggutor",
+        "type": "Grass",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/135.png"
+    },
+    {
+        "number": "136",
+        "name": "Shuckle",
+        "type": "Grass",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/136.png"
+    },
+    {
+        "number": "137",
+        "name": "Ninjask",
+        "type": "Grass",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/137.png"
+    },
+    {
+        "number": "138",
+        "name": "Vulpix",
+        "type": "Fire",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/138.png"
+    },
+    {
+        "number": "139",
+        "name": "Litleo",
+        "type": "Fire",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/139.png"
+    },
+    {
+        "number": "140",
+        "name": "Snover",
+        "type": "Water",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/140.png"
+    },
+    {
+        "number": "141",
+        "name": "Clawitzer",
+        "type": "Water",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/141.png"
+    },
+    {
+        "number": "142",
+        "name": "Inteleon",
+        "type": "Water",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/142.png"
+    },
+    {
+        "number": "143",
+        "name": "Helioptile",
+        "type": "Lightning",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/143.png"
+    },
+    {
+        "number": "144",
+        "name": "Shedinja",
+        "type": "Psychic",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/144.png"
+    },
+    {
+        "number": "145",
+        "name": "Houndstone",
+        "type": "Psychic",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/145.png"
+    },
+    {
+        "number": "146",
+        "name": "Marshadow",
+        "type": "Fighting",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/146.png"
+    },
+    {
+        "number": "147",
+        "name": "Garganacl",
+        "type": "Fighting",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/147.png"
+    },
+    {
+        "number": "148",
+        "name": "Spiritomb",
+        "type": "Darkness",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/148.png"
+    },
+    {
+        "number": "149",
+        "name": "Shroodle",
+        "type": "Darkness",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/149.png"
+    },
+    {
+        "number": "150",
+        "name": "Steelix",
+        "type": "Metal",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/150.png"
+    },
+    {
+        "number": "151",
+        "name": "Spearow",
+        "type": "Colorless",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/151.png"
+    },
+    {
+        "number": "152",
+        "name": "Delibird",
+        "type": "Colorless",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/152.png"
+    },
+    {
+        "number": "153",
+        "name": "Gumshoos",
+        "type": "Colorless",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/153.png"
+    },
+    {
+        "number": "154",
+        "name": "Stufful",
+        "type": "Colorless",
+        "rarity": "Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/154.png"
+    },
+    {
+        "number": "155",
+        "name": "Mega Venusaur ex",
+        "type": "Grass",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/155.png"
+    },
+    {
+        "number": "156",
+        "name": "Mega Camerupt ex",
+        "type": "Fire",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/156.png"
+    },
+    {
+        "number": "157",
+        "name": "Mega Abomasnow ex",
+        "type": "Water",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/157.png"
+    },
+    {
+        "number": "158",
+        "name": "Mega Manectric ex",
+        "type": "Lightning",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/158.png"
+    },
+    {
+        "number": "159",
+        "name": "Mega Gardevoir ex",
+        "type": "Psychic",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/159.png"
+    },
+    {
+        "number": "160",
+        "name": "Mega Lucario ex",
+        "type": "Fighting",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/160.png"
+    },
+    {
+        "number": "161",
+        "name": "Mega Absol ex",
+        "type": "Darkness",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/161.png"
+    },
+    {
+        "number": "162",
+        "name": "Mega Mawile ex",
+        "type": "Metal",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/162.png"
+    },
+    {
+        "number": "163",
+        "name": "Mega Latias ex",
+        "type": "Dragon",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/163.png"
+    },
+    {
+        "number": "164",
+        "name": "Mega Kangaskhan ex",
+        "type": "Colorless",
+        "rarity": "Ultra Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/164.png"
+    },
+    {
+        "number": "165",
+        "name": "Acerola's Mischief",
+        "type": "Trainer",
+        "rarity": "Ultra Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/meg/165.png"
+    },
+    {
+        "number": "166",
+        "name": "Air Balloon",
+        "type": "Trainer",
+        "rarity": "Ultra Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/meg/166.png"
+    },
+    {
+        "number": "167",
+        "name": "Buddy-Buddy Poffin",
+        "type": "Trainer",
+        "rarity": "Ultra Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/meg/167.png"
+    },
+    {
+        "number": "168",
+        "name": "Fighting Gong",
+        "type": "Trainer",
+        "rarity": "Ultra Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/meg/168.png"
+    },
+    {
+        "number": "169",
+        "name": "Lillie's Determination",
+        "type": "Trainer",
+        "rarity": "Ultra Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/meg/169.png"
+    },
+    {
+        "number": "170",
+        "name": "Lt. Surge's Bargain",
+        "type": "Trainer",
+        "rarity": "Ultra Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/meg/170.png"
+    },
+    {
+        "number": "171",
+        "name": "Mega Signal",
+        "type": "Trainer",
+        "rarity": "Ultra Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/meg/171.png"
+    },
+    {
+        "number": "172",
+        "name": "Mystery Garden",
+        "type": "Trainer",
+        "rarity": "Ultra Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/meg/172.png"
+    },
+    {
+        "number": "173",
+        "name": "Night Stretcher",
+        "type": "Trainer",
+        "rarity": "Ultra Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/meg/173.png"
+    },
+    {
+        "number": "174",
+        "name": "Premium Power Pro",
+        "type": "Trainer",
+        "rarity": "Ultra Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/meg/174.png"
+    },
+    {
+        "number": "175",
+        "name": "Rare Candy",
+        "type": "Trainer",
+        "rarity": "Ultra Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/meg/175.png"
+    },
+    {
+        "number": "176",
+        "name": "Wally's Compassion",
+        "type": "Trainer",
+        "rarity": "Ultra Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/meg/176.png"
+    },
+    {
+        "number": "177",
+        "name": "Mega Venusaur ex",
+        "type": "Grass",
+        "rarity": "Special Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/177.png"
+    },
+    {
+        "number": "178",
+        "name": "Mega Gardevoir ex",
+        "type": "Psychic",
+        "rarity": "Special Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/178.png"
+    },
+    {
+        "number": "179",
+        "name": "Mega Lucario ex",
+        "type": "Fighting",
+        "rarity": "Special Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/179.png"
+    },
+    {
+        "number": "180",
+        "name": "Mega Absol ex",
+        "type": "Darkness",
+        "rarity": "Special Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/180.png"
+    },
+    {
+        "number": "181",
+        "name": "Mega Latias ex",
+        "type": "Dragon",
+        "rarity": "Special Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/181.png"
+    },
+    {
+        "number": "182",
+        "name": "Mega Kangaskhan ex",
+        "type": "Colorless",
+        "rarity": "Special Illustration Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/182.png"
+    },
+    {
+        "number": "183",
+        "name": "Acerola's Mischief",
+        "type": "Trainer",
+        "rarity": "Special Illustration Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/meg/183.png"
+    },
+    {
+        "number": "184",
+        "name": "Lillie's Determination",
+        "type": "Trainer",
+        "rarity": "Special Illustration Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/meg/184.png"
+    },
+    {
+        "number": "185",
+        "name": "Lt. Surge's Bargain",
+        "type": "Trainer",
+        "rarity": "Special Illustration Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/meg/185.png"
+    },
+    {
+        "number": "186",
+        "name": "Wally's Compassion",
+        "type": "Trainer",
+        "rarity": "Special Illustration Rare",
+        "category": "Trainer",
+        "imageUrl": "https://images.pokemontcg.io/meg/186.png"
+    },
+    {
+        "number": "187",
+        "name": "Mega Gardevoir ex",
+        "type": "Psychic",
+        "rarity": "Mega Hyper Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/187.png"
+    },
+    {
+        "number": "188",
+        "name": "Mega Lucario ex",
+        "type": "Fighting",
+        "rarity": "Mega Hyper Rare",
+        "category": "Pokémon",
+        "imageUrl": "https://images.pokemontcg.io/meg/188.png"
     }
+
 ]
     }
 };
