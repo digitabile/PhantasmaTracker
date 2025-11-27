@@ -1,15 +1,17 @@
-# 🔥 Phantasmal Flames Card Tracker
+# 🎴 Pokemon Card Collection Tracker
 
-A comprehensive web application for tracking your Pokemon TCG Phantasmal Flames collection. This app helps you manage your card collection, view statistics, and track the value of your cards.
+A comprehensive web application for tracking your Pokemon TCG collection across multiple sets. This app helps you manage your card collection, view statistics, and track the value of your cards with **real-time pricing powered by the JustTCG API**.
 
 ## Features
 
 ### 📋 Collection Tracker
-- **Visual Card Grid**: Browse all 130 cards in the Phantasmal Flames set
-- **Checkbox System**: Mark cards as owned with a simple checkbox (similar to players booklet)
+- **Multi-Set Support**: Track 17 different Pokemon TCG sets (Mega Evolution, Scarlet & Violet series, and more)
+- **Visual Card Grid**: Browse all cards in your selected set
+- **Checkbox System**: Mark cards as owned with a simple checkbox
 - **Smart Filtering**: Filter by type, rarity, and ownership status
 - **Search Functionality**: Quickly find cards by name or number
-- **Live Pricing**: Automatic price fetching from reputable sources (simulated for demo)
+- **Real-Time Pricing**: Live market prices via JustTCG API integration
+- **Variant Support**: Track normal, reverse holo, and foil variants
 
 ### 📊 Statistics Dashboard
 - **Collection Progress**: Visual progress bars and percentage completion
@@ -25,10 +27,17 @@ A comprehensive web application for tracking your Pokemon TCG Phantasmal Flames 
 - **Card Details**: Click any card to see detailed information
 - **Quick Add**: Add cards to your collection directly from the gallery
 
-### 💾 Data Persistence
+### 💾 Data Persistence & Backup
 - All collection data is saved locally in your browser
 - No account required - everything stays on your device
-- Export/Import functionality (built-in for future use)
+- **Export/Import**: Full backup and restore for all sets
+- **API Key Storage**: Securely store your JustTCG API key locally
+
+### ⚙️ Settings & Configuration
+- **JustTCG API Integration**: Configure your API key for real-time pricing
+- **Flexible Pricing Options**: Choose between live API pricing or static data
+- **Price Caching**: Optional 24-hour cache to reduce API calls
+- **API Status Display**: See real-time status of your API connection
 
 ## Getting Started
 
@@ -99,31 +108,45 @@ To get complete card data for Phantasmal Flames, visit:
 - **PokeBeach**: https://www.pokebeach.com (search for Phantasmal Flames)
 - **TCG Collector**: https://www.tcgcollector.com/sets/11669/phantasmal-flames
 
-### Price Integration
+### 🌐 JustTCG API Integration
 
-The app includes a price fetching system that can be integrated with real APIs:
+This app now includes **full integration with the JustTCG API** for real-time Pokemon card pricing!
 
-**Supported Price APIs:**
-- **TCGPlayer API**: https://docs.tcgplayer.com/
-- **Pokemon TCG API**: https://pokemontcg.io/
-- **CardMarket API**: https://api.cardmarket.com/
+**Setting up JustTCG API:**
 
-To integrate real pricing:
-1. Sign up for an API key from one of the above services
-2. Modify the `fetchPrices()` method in `app.js`
-3. Replace the simulated prices with actual API calls
+1. **Get Your API Key**
+   - Visit [JustTCG.com](https://justtcg.com) and sign up for an account
+   - Generate your API key from the dashboard
+   - Free tier available for developers
 
-Example API integration:
-```javascript
-async fetchPrices() {
-    const apiKey = 'YOUR_API_KEY';
-    const response = await fetch(`https://api.pokemontcg.io/v2/cards?q=set.id:phantasmal-flames`, {
-        headers: { 'X-Api-Key': apiKey }
-    });
-    const data = await response.json();
-    // Process and store prices
-}
-```
+2. **Configure in the App**
+   - Click the **⚙️ Settings** button in the navigation bar
+   - Enter your JustTCG API key in the API Configuration section
+   - Click **Save API Key**
+   - Enable "Use JustTCG API for real-time pricing"
+
+3. **Refresh Prices**
+   - Click **💰 Refresh Prices** to load real-time market data
+   - Prices are cached for 24 hours by default (configurable)
+   - The app automatically falls back to static pricing if API is unavailable
+
+**JustTCG API Features:**
+- ✅ Real-time pricing updated every 6 hours
+- ✅ Multiple market sources for accurate pricing
+- ✅ Average response time: 50ms
+- ✅ Condition-specific pricing (NM, LP, MP, HP)
+- ✅ Foil variant pricing support
+- ✅ Support for 17 different Pokemon TCG sets
+
+**Supported Sets:**
+- Mega Evolution Series (Mega Evolution, Phantasmal Flames)
+- Special Sets (Pokemon GO)
+- Scarlet & Violet Series (14 sets including 151, Paradox Rift, Prismatic Evolutions, and more)
+
+**API Documentation:**
+- Official Docs: [https://justtcg.com/docs](https://justtcg.com/docs)
+- Pricing API: `https://api.justtcg.com/v1/cards`
+- Authentication: x-api-key header
 
 ## Technical Details
 
@@ -144,8 +167,10 @@ async fetchPrices() {
 PhantasmaTracker/
 ├── index.html          # Main application HTML
 ├── styles.css          # All application styles
-├── app.js             # Main application logic
-├── cards-data.js      # Card database
+├── app.js             # Main application logic with JustTCG integration
+├── cards-data.js      # Complete card database (17 sets, 3000+ cards)
+├── card-prices.js     # Static fallback pricing data
+├── test-prices.html   # Price diagnostic tool
 ├── assets/
 │   └── cards/         # Card images directory
 │       └── .gitkeep
@@ -174,12 +199,17 @@ PhantasmaTracker/
 - [x] Card gallery view
 - [x] Local storage persistence
 - [x] Search and filtering
-- [ ] Price API integration
-- [ ] Complete card database (130 cards)
-- [ ] Export/Import collections
+- [x] **JustTCG API integration** ✨ NEW!
+- [x] Complete card database (17 sets, 3000+ cards)
+- [x] Export/Import collections
+- [x] Multi-set support
+- [x] Variant tracking (normal/reverse holo)
+- [x] Real-time pricing
 - [ ] Print checklist view
 - [ ] Duplicate card tracking
 - [ ] Trade list generator
+- [ ] Price history tracking
+- [ ] Set comparison tools
 
 ## Contributing
 
@@ -193,9 +223,10 @@ To add features or improve the app:
 
 ## Data Sources & Credits
 
-- **Card Information**: Official Pokemon TCG
-- **Set Details**: Bulbapedia, PokeBeach
-- **Price Data**: TCGPlayer, CardMarket (when integrated)
+- **Card Information**: Official Pokemon TCG, Pokemon TCG API
+- **Set Details**: Bulbapedia, PokeBeach, TCG Collector
+- **Real-Time Pricing**: [JustTCG API](https://justtcg.com) - The Simple, Reliable TCG Pricing API
+- **Static Pricing Fallback**: TCGPlayer, PriceCharting market data
 
 ## License
 
@@ -211,11 +242,15 @@ For issues, questions, or suggestions:
 ## Quick Tips
 
 💡 **Pro Tips:**
-- Use the search bar to quickly find cards by name
+- **Configure JustTCG API** in Settings for real-time pricing across all sets
+- Use the search bar to quickly find cards by name or number
 - Filter by "Needed" to see which cards to hunt for
-- Click any card for detailed information and pricing
+- Click any card for detailed information and current market pricing
 - The visual grid in Statistics shows your overall progress at a glance
 - Your data is saved automatically - no need to click save!
+- Use **Export Backup** regularly to protect your collection data
+- Switch between sets using the dropdown to track multiple collections
+- Enable price caching to reduce API calls and stay within rate limits
 
 ---
 

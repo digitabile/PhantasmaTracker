@@ -73,6 +73,9 @@
             <button class="nav-btn" id="refresh-prices-btn" style="background: #7EC850;">
                 <span class="icon">💰</span> Refresh Prices
             </button>
+            <button class="nav-btn" id="settings-btn" style="background: #95A5A6;">
+                <span class="icon">⚙️</span> Settings
+            </button>
         </nav>
 
         <!-- Hidden file input for import -->
@@ -201,6 +204,76 @@
 
                     <div id="gallery-grid" class="gallery-grid">
                         <!-- Gallery cards will be inserted here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings View -->
+            <div id="settings-view" class="view">
+                <div class="settings-container">
+                    <h2>⚙️ Settings</h2>
+
+                    <div class="settings-section">
+                        <h3>🔑 JustTCG API Configuration</h3>
+                        <p class="settings-description">
+                            Configure your JustTCG API key for real-time pricing data.
+                            Get your API key at <a href="https://justtcg.com" target="_blank" rel="noopener">justtcg.com</a>
+                        </p>
+
+                        <div class="api-key-container">
+                            <label for="justtcg-api-key">API Key:</label>
+                            <div class="api-key-input-group">
+                                <input
+                                    type="password"
+                                    id="justtcg-api-key"
+                                    placeholder="Enter your JustTCG API key"
+                                    class="api-key-input"
+                                >
+                                <button id="toggle-api-key-visibility" class="btn-icon" title="Show/Hide API Key">
+                                    👁️
+                                </button>
+                            </div>
+                            <button id="save-api-key-btn" class="btn-primary" style="margin-top: 10px;">
+                                💾 Save API Key
+                            </button>
+                            <button id="remove-api-key-btn" class="btn-secondary" style="margin-top: 10px; margin-left: 10px;">
+                                🗑️ Remove API Key
+                            </button>
+                        </div>
+
+                        <div class="api-status" id="api-status">
+                            <strong>Status:</strong> <span id="api-status-text">No API key configured</span>
+                        </div>
+
+                        <div class="settings-note">
+                            <strong>Note:</strong> If no API key is provided, the app will use static pricing data as fallback.
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>💰 Pricing Options</h3>
+                        <div class="setting-item">
+                            <label>
+                                <input type="checkbox" id="use-live-pricing" checked>
+                                Use JustTCG API for real-time pricing (when API key is configured)
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label>
+                                <input type="checkbox" id="cache-prices" checked>
+                                Cache API prices for 24 hours to reduce API calls
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>ℹ️ About JustTCG API</h3>
+                        <ul class="info-list">
+                            <li>Provides real-time Pokemon TCG card pricing</li>
+                            <li>Updated every 6 hours from multiple market sources</li>
+                            <li>Average response time: 50ms</li>
+                            <li>Supports condition-specific pricing and foil variants</li>
+                        </ul>
                     </div>
                 </div>
             </div>

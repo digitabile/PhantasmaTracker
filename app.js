@@ -44,6 +44,7 @@ class CardTracker {
         this.renderCards();
         this.updateStats();
         this.fetchPrices();
+        this.updateFooterApiStatus();
     }
 
     // Set Selection Management
@@ -186,6 +187,25 @@ class CardTracker {
 
         document.querySelector('.modal-close').addEventListener('click', () => {
             this.closeModal();
+        });
+
+        // Settings button
+        document.getElementById('settings-btn').addEventListener('click', () => {
+            this.switchView('settings');
+            this.loadSettingsUI();
+        });
+
+        // Settings UI controls
+        document.getElementById('save-api-key-btn').addEventListener('click', () => {
+            this.saveApiKey();
+        });
+
+        document.getElementById('remove-api-key-btn').addEventListener('click', () => {
+            this.removeApiKey();
+        });
+
+        document.getElementById('toggle-api-key-visibility').addEventListener('click', () => {
+            this.toggleApiKeyVisibility();
         });
     }
 
@@ -791,23 +811,174 @@ class CardTracker {
         document.getElementById('card-modal').classList.remove('active');
     }
 
+    // Settings Management
+    loadSettingsUI() {
+        const apiKey = localStorage.getItem('justtcg_api_key') || '';
+        const apiKeyInput = document.getElementById('justtcg-api-key');
+        const useLivePricing = localStorage.getItem('use_live_pricing') !== 'false';
+        const cachePrices = localStorage.getItem('cache_prices') !== 'false';
+
+        apiKeyInput.value = apiKey;
+        document.getElementById('use-live-pricing').checked = useLivePricing;
+        document.getElementById('cache-prices').checked = cachePrices;
+
+        this.updateApiStatus();
+    }
+
+    saveApiKey() {
+        const apiKeyInput = document.getElementById('justtcg-api-key');
+        const apiKey = apiKeyInput.value.trim();
+
+        if (!apiKey) {
+            alert('Please enter an API key');
+            return;
+        }
+
+        localStorage.setItem('justtcg_api_key', apiKey);
+        localStorage.setItem('use_live_pricing', document.getElementById('use-live-pricing').checked);
+        localStorage.setItem('cache_prices', document.getElementById('cache-prices').checked);
+
+        this.updateApiStatus(true);
+        alert('API key saved successfully! Prices will be refreshed on next load.');
+    }
+
+    removeApiKey() {
+        if (confirm('Are you sure you want to remove the API key? The app will fall back to static pricing data.')) {
+            localStorage.removeItem('justtcg_api_key');
+            document.getElementById('justtcg-api-key').value = '';
+            this.updateApiStatus();
+            alert('API key removed. The app will use static pricing data.');
+        }
+    }
+
+    toggleApiKeyVisibility() {
+        const apiKeyInput = document.getElementById('justtcg-api-key');
+        const button = document.getElementById('toggle-api-key-visibility');
+
+        if (apiKeyInput.type === 'password') {
+            apiKeyInput.type = 'text';
+            button.textContent = '🙈';
+        } else {
+            apiKeyInput.type = 'password';
+            button.textContent = '👁️';
+        }
+    }
+
+    updateApiStatus(success = null) {
+        const statusElement = document.getElementById('api-status');
+        const statusText = document.getElementById('api-status-text');
+        const apiKey = localStorage.getItem('justtcg_api_key');
+
+        statusElement.classList.remove('success', 'error');
+
+        if (success === true) {
+            statusElement.classList.add('success');
+            statusText.textContent = '✅ API key configured and saved';
+        } else if (success === false) {
+            statusElement.classList.add('error');
+            statusText.textContent = '❌ API key is invalid or request failed';
+        } else if (apiKey) {
+            statusElement.classList.add('success');
+            statusText.textContent = '✅ API key configured';
+        } else {
+            statusText.textContent = '⚠️ No API key configured - using static pricing';
+        }
+    }
+
+    // JustTCG API Integration
+    async fetchFromJustTCG(setName, cardName) {
+        const apiKey = localStorage.getItem('justtcg_api_key');
+        if (!apiKey) {
+            return null;
+        }
+
+        try {
+            const setNameFormatted = this.formatSetNameForAPI(setName);
+            const url = `https://api.justtcg.com/v1/cards?game=pokemon&q=${encodeURIComponent(cardName)}&set=${encodeURIComponent(setNameFormatted)}&limit=5`;
+
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    'x-api-key': apiKey,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                console.error(`JustTCG API error: ${response.status} ${response.statusText}`);
+                return null;
+            }
+
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error fetching from JustTCG API:', error);
+            return null;
+        }
+    }
+
+    formatSetNameForAPI(setKey) {
+        // Map internal set keys to JustTCG API set names
+        const setMapping = {
+            'phantasmal-flames': 'Phantasmal Flames',
+            'mega-evolution': 'Mega Evolution',
+            'pokemon-go': 'Pokemon GO',
+            'scarlet-violet-alt': 'Scarlet & Violet',
+            'paldea-evolved': 'Paldea Evolved',
+            'obsidian-flames': 'Obsidian Flames',
+            'sv-151': '151',
+            'paradox-rift': 'Paradox Rift',
+            'paldean-fates': 'Paldean Fates',
+            'temporal-forces': 'Temporal Forces',
+            'twilight-masquerade': 'Twilight Masquerade',
+            'shrouded-fable': 'Shrouded Fable',
+            'stellar-crown': 'Stellar Crown',
+            'surging-sparks': 'Surging Sparks',
+            'prismatic-evolutions': 'Prismatic Evolutions',
+            'journey-together': 'Journey Together',
+            'destined-rivals': 'Destined Rivals'
+        };
+        return setMapping[setKey] || setKey;
+    }
+
+    extractPriceFromJustTCG(apiData, condition = 'NM') {
+        if (!apiData || !apiData.data || apiData.data.length === 0) {
+            return null;
+        }
+
+        // Get the first card match
+        const card = apiData.data[0];
+
+        // Try to get the market price for the specified condition
+        if (card.prices && card.prices.market) {
+            if (card.prices.market[condition]) {
+                return parseFloat(card.prices.market[condition]);
+            }
+            // Fallback to any available price
+            const prices = Object.values(card.prices.market);
+            if (prices.length > 0 && prices[0]) {
+                return parseFloat(prices[0]);
+            }
+        }
+
+        return null;
+    }
+
     // Price Fetching
     async fetchPrices() {
-        // Load real market prices from TCGPlayer and other reputable sources
-        // Prices are based on current market values and updated regularly
-
-        const PRICE_VERSION = 'v11.0'; // Updated when pricing system changes (v11.0 fix duplicate SV prices with unique individual pricing)
+        const PRICE_VERSION = 'v12.0'; // Updated to v12.0 for JustTCG API integration
         const lastUpdate = localStorage.getItem('priceLastUpdate');
         const priceVersion = localStorage.getItem('priceVersion');
         const now = Date.now();
+        const cachePrices = localStorage.getItem('cache_prices') !== 'false';
 
-        // Force reload if version changed or prices are old
-        const needsUpdate = !lastUpdate ||
-                          priceVersion !== PRICE_VERSION ||
-                          (now - parseInt(lastUpdate)) >= 24 * 60 * 60 * 1000 ||
-                          this.cardPrices.size === 0;
+        // Check if we should use cached prices
+        const cacheValid = cachePrices &&
+                          lastUpdate &&
+                          priceVersion === PRICE_VERSION &&
+                          (now - parseInt(lastUpdate)) < 24 * 60 * 60 * 1000;
 
-        if (!needsUpdate) {
+        if (cacheValid && this.cardPrices.size > 0) {
             // Use cached prices
             this.renderCards();
             return;
@@ -815,40 +986,116 @@ class CardTracker {
 
         // Clear old cached prices if version changed
         if (priceVersion !== PRICE_VERSION) {
-            console.log('Updating to new pricing system with variants...');
+            console.log('Updating to new pricing system v12.0 with JustTCG API...');
             this.cardPrices.clear();
         }
 
-        // Simulate API delay for UX
-        await new Promise(resolve => setTimeout(resolve, 500));
+        const apiKey = localStorage.getItem('justtcg_api_key');
+        const useLivePricing = localStorage.getItem('use_live_pricing') !== 'false';
+        const useJustTCG = apiKey && useLivePricing;
 
-        // Load real market prices from CARD_PRICING for current set
-        // These prices are sourced from TCGPlayer, PriceCharting, and other market data
-        const currentSetPricing = CARD_PRICING[this.currentSet] || {};
+        console.log(`Fetching prices... ${useJustTCG ? 'Using JustTCG API' : 'Using static pricing'}`);
 
-        this.cards.forEach(card => {
-            const priceData = currentSetPricing[card.number];
-            const hasVariants = this.cardHasVariants(card);
-
-            // Check if card has variants (Common, Uncommon, or Rare)
-            if (hasVariants && typeof priceData === 'object') {
-                // Store prices for both variants
-                const normalPrice = priceData.normal || 0.15;
-                const reverseHoloPrice = priceData.reverseHolo || 0.25;
-                this.cardPrices.set(`${card.number}-normal`, parseFloat(normalPrice.toFixed(2)));
-                this.cardPrices.set(`${card.number}-reverseHolo`, parseFloat(reverseHoloPrice.toFixed(2)));
-            } else {
-                // Single variant cards (Double Rare, Ultra Rare, etc.)
-                const price = typeof priceData === 'number' ? priceData : (priceData?.normal || 0.15);
-                this.cardPrices.set(card.number, parseFloat(price.toFixed(2)));
-            }
-        });
+        if (useJustTCG) {
+            // Try to fetch prices from JustTCG API
+            await this.fetchPricesFromJustTCG();
+        } else {
+            // Fall back to static pricing
+            await this.fetchPricesStatic();
+        }
 
         localStorage.setItem('priceLastUpdate', now.toString());
         localStorage.setItem('priceVersion', PRICE_VERSION);
         this.saveToLocalStorage();
         this.renderCards();
         this.updateStats();
+    }
+
+    async fetchPricesFromJustTCG() {
+        console.log('🌐 Fetching real-time prices from JustTCG API...');
+
+        const currentSetPricing = CARD_PRICING[this.currentSet] || {};
+        let successCount = 0;
+        let failCount = 0;
+
+        // Process cards in batches to avoid rate limiting
+        const batchSize = 5;
+        for (let i = 0; i < this.cards.length; i += batchSize) {
+            const batch = this.cards.slice(i, i + batchSize);
+
+            await Promise.all(batch.map(async (card) => {
+                try {
+                    // Try to fetch from JustTCG API
+                    const apiData = await this.fetchFromJustTCG(this.currentSet, card.name);
+                    const hasVariants = this.cardHasVariants(card);
+
+                    if (apiData && apiData.data && apiData.data.length > 0) {
+                        // Successfully got API data
+                        const apiPrice = this.extractPriceFromJustTCG(apiData);
+
+                        if (apiPrice !== null && apiPrice > 0) {
+                            // Use API price
+                            if (hasVariants) {
+                                // For variant cards, use API price for normal, estimate reverse holo
+                                this.cardPrices.set(`${card.number}-normal`, parseFloat(apiPrice.toFixed(2)));
+                                this.cardPrices.set(`${card.number}-reverseHolo`, parseFloat((apiPrice * 1.5).toFixed(2)));
+                            } else {
+                                this.cardPrices.set(card.number, parseFloat(apiPrice.toFixed(2)));
+                            }
+                            successCount++;
+                            return;
+                        }
+                    }
+
+                    // Fallback to static price for this card
+                    this.setStaticPriceForCard(card, currentSetPricing);
+                    failCount++;
+                } catch (error) {
+                    console.error(`Error fetching price for ${card.name}:`, error);
+                    this.setStaticPriceForCard(card, currentSetPricing);
+                    failCount++;
+                }
+            }));
+
+            // Small delay between batches to be nice to the API
+            if (i + batchSize < this.cards.length) {
+                await new Promise(resolve => setTimeout(resolve, 100));
+            }
+        }
+
+        console.log(`✅ JustTCG API: ${successCount} cards from API, ${failCount} from static data`);
+    }
+
+    async fetchPricesStatic() {
+        console.log('📦 Loading static pricing data...');
+
+        // Simulate API delay for UX
+        await new Promise(resolve => setTimeout(resolve, 300));
+
+        const currentSetPricing = CARD_PRICING[this.currentSet] || {};
+
+        this.cards.forEach(card => {
+            this.setStaticPriceForCard(card, currentSetPricing);
+        });
+
+        console.log('✅ Static prices loaded');
+    }
+
+    setStaticPriceForCard(card, pricingData) {
+        const priceData = pricingData[card.number];
+        const hasVariants = this.cardHasVariants(card);
+
+        if (hasVariants && typeof priceData === 'object') {
+            // Store prices for both variants
+            const normalPrice = priceData.normal || 0.15;
+            const reverseHoloPrice = priceData.reverseHolo || 0.25;
+            this.cardPrices.set(`${card.number}-normal`, parseFloat(normalPrice.toFixed(2)));
+            this.cardPrices.set(`${card.number}-reverseHolo`, parseFloat(reverseHoloPrice.toFixed(2)));
+        } else {
+            // Single variant cards (Double Rare, Ultra Rare, etc.)
+            const price = typeof priceData === 'number' ? priceData : (priceData?.normal || 0.15);
+            this.cardPrices.set(card.number, parseFloat(price.toFixed(2)));
+        }
     }
 
     // Force refresh prices (manual cache clear)
@@ -876,8 +1123,16 @@ class CardTracker {
             btn.disabled = false;
         }, 2000);
 
+        const apiKey = localStorage.getItem('justtcg_api_key');
+        const useLivePricing = localStorage.getItem('use_live_pricing') !== 'false';
+
         console.log('✅ Prices refreshed successfully!');
-        alert('Prices updated successfully!\n\nTop cards:\n• Mega Charizard X ex #130: $850.00\n• Mega Charizard X ex #125: $790.00\n• Mega Charizard X ex #109: $125.00');
+
+        if (apiKey && useLivePricing) {
+            alert('Prices updated successfully from JustTCG API!\n\nReal-time pricing is now active.');
+        } else {
+            alert('Prices updated successfully from static pricing data!\n\nTip: Configure a JustTCG API key in Settings for real-time pricing.');
+        }
     }
 
     // Export/Import functionality - backs up ALL sets
@@ -994,6 +1249,21 @@ class CardTracker {
             }
         };
         reader.readAsText(file);
+    }
+
+    // Update footer to show API status
+    updateFooterApiStatus() {
+        const footerNote = document.querySelector('.footer-note');
+        if (!footerNote) return;
+
+        const apiKey = localStorage.getItem('justtcg_api_key');
+        const useLivePricing = localStorage.getItem('use_live_pricing') !== 'false';
+
+        if (apiKey && useLivePricing) {
+            footerNote.innerHTML = '🌐 Real-time pricing powered by <a href="https://justtcg.com" target="_blank" rel="noopener" style="color: #7EC850; text-decoration: none;">JustTCG API</a>';
+        } else {
+            footerNote.textContent = '📦 Card prices from static pricing data';
+        }
     }
 }
 
