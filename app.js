@@ -783,7 +783,7 @@ class CardTracker {
         // Load real market prices from TCGPlayer and other reputable sources
         // Prices are based on current market values and updated regularly
 
-        const PRICE_VERSION = 'v7.1'; // Updated when pricing system changes (v7.1 corrects Mewtwo V Alt Art pricing)
+        const PRICE_VERSION = 'v8.0'; // Updated when pricing system changes (v8.0 adds Mega Evolution set)
         const lastUpdate = localStorage.getItem('priceLastUpdate');
         const priceVersion = localStorage.getItem('priceVersion');
         const now = Date.now();
