@@ -974,7 +974,7 @@ class CardTracker {
 
     // Price Fetching
     async fetchPrices() {
-        const PRICE_VERSION = 'v12.0'; // Updated to v12.0 for JustTCG API integration
+        const PRICE_VERSION = 'v13.0'; // Updated to v13.0 - fixed generic duplicate pricing for all sets
         const lastUpdate = localStorage.getItem('priceLastUpdate');
         const priceVersion = localStorage.getItem('priceVersion');
         const now = Date.now();
