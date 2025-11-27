@@ -1041,7 +1041,7 @@ const CARD_PRICING = {
     "69": { normal: 0.15, reverseHolo: 0.5 },
     "70": { normal: 0.15, reverseHolo: 0.5 },
     "71": 2.25,
-    "72": 4.5,
+    "72": 57.00, // Mewtwo V (Alternate Full Art) - premium chase card
     "73": 2.5,
     "74": 2.5,
     "75": 2.25,
