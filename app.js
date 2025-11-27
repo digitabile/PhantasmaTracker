@@ -155,6 +155,19 @@ class CardTracker {
             this.forceRefreshPrices();
         });
 
+        // Export/Import buttons
+        document.getElementById('export-btn').addEventListener('click', () => {
+            this.exportCollection();
+        });
+
+        document.getElementById('import-btn').addEventListener('click', () => {
+            document.getElementById('import-file-input').click();
+        });
+
+        document.getElementById('import-file-input').addEventListener('change', (e) => {
+            this.importCollection(e.target.files[0]);
+        });
+
         // Gallery filters
         document.querySelectorAll('.gallery-filter-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -867,40 +880,111 @@ class CardTracker {
         alert('Prices updated successfully!\n\nTop cards:\n• Mega Charizard X ex #130: $850.00\n• Mega Charizard X ex #125: $790.00\n• Mega Charizard X ex #109: $125.00');
     }
 
-    // Export/Import functionality (bonus feature)
+    // Export/Import functionality - backs up ALL sets
     exportCollection() {
-        const data = {
-            setName: CARD_SETS[this.currentSet].name,
-            setCode: this.currentSet,
+        // Collect data from all sets
+        const allSetsData = {};
+        const setNames = ['mega-evolution', 'phantasmal-flames', 'pokemon-go', 'scarlet-violet'];
+
+        setNames.forEach(setCode => {
+            const storageKey = `cardCollection_${setCode}`;
+            const savedData = localStorage.getItem(storageKey);
+            if (savedData) {
+                try {
+                    const parsed = JSON.parse(savedData);
+                    allSetsData[setCode] = {
+                        setName: CARD_SETS[setCode].name,
+                        ownedCards: parsed.ownedCards || [],
+                        lastUpdated: parsed.lastUpdated
+                    };
+                } catch (e) {
+                    console.error(`Error parsing ${setCode}:`, e);
+                }
+            }
+        });
+
+        const backup = {
             exportDate: new Date().toISOString(),
-            ownedCards: Array.from(this.ownedCards),
-            totalCards: this.cards.length,
-            completionPercentage: Math.round((this.ownedCards.size / this.cards.length) * 100)
+            version: '1.0',
+            appVersion: 'v9.0',
+            totalSets: Object.keys(allSetsData).length,
+            sets: allSetsData
         };
 
-        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `phantasmal-flames-collection-${new Date().toISOString().split('T')[0]}.json`;
+        const dateStr = new Date().toISOString().split('T')[0];
+        a.download = `pokemon-collection-backup-${dateStr}.json`;
         a.click();
         URL.revokeObjectURL(url);
+
+        // Show success message
+        const totalCards = Object.values(allSetsData).reduce((sum, set) => sum + set.ownedCards.length, 0);
+        alert(`✅ Backup exported successfully!\n\nSets included: ${Object.keys(allSetsData).length}\nTotal cards: ${totalCards}\n\nFile: pokemon-collection-backup-${dateStr}.json`);
     }
 
     importCollection(file) {
+        if (!file) return;
+
         const reader = new FileReader();
         reader.onload = (e) => {
             try {
-                const data = JSON.parse(e.target.result);
-                if (data.ownedCards && Array.isArray(data.ownedCards)) {
-                    this.ownedCards = new Set(data.ownedCards);
-                    this.saveToLocalStorage();
-                    this.renderCards();
-                    this.updateStats();
-                    alert('Collection imported successfully!');
+                const backup = JSON.parse(e.target.result);
+
+                // Validate backup format
+                if (!backup.sets || typeof backup.sets !== 'object') {
+                    alert('❌ Invalid backup file format.\n\nPlease select a valid Pokemon collection backup file.');
+                    return;
                 }
+
+                // Confirm before overwriting
+                const setCount = Object.keys(backup.sets).length;
+                const totalCards = Object.values(backup.sets).reduce((sum, set) => sum + (set.ownedCards?.length || 0), 0);
+
+                const confirmed = confirm(
+                    `📥 Import Collection Backup?\n\n` +
+                    `Sets: ${setCount}\n` +
+                    `Total cards: ${totalCards}\n` +
+                    `Export date: ${new Date(backup.exportDate).toLocaleDateString()}\n\n` +
+                    `⚠️ This will overwrite your current collection data.\n\n` +
+                    `Continue?`
+                );
+
+                if (!confirmed) return;
+
+                // Restore all sets
+                let restoredSets = 0;
+                let restoredCards = 0;
+
+                Object.keys(backup.sets).forEach(setCode => {
+                    const setData = backup.sets[setCode];
+                    if (setData.ownedCards && Array.isArray(setData.ownedCards)) {
+                        const storageKey = `cardCollection_${setCode}`;
+                        const saveData = {
+                            ownedCards: setData.ownedCards,
+                            lastUpdated: new Date().toISOString()
+                        };
+                        localStorage.setItem(storageKey, JSON.stringify(saveData));
+                        restoredSets++;
+                        restoredCards += setData.ownedCards.length;
+                    }
+                });
+
+                // Reload current set data
+                this.loadFromLocalStorage();
+                this.renderCards();
+                this.updateStats();
+
+                // Clear file input
+                document.getElementById('import-file-input').value = '';
+
+                alert(`✅ Collection restored successfully!\n\nSets restored: ${restoredSets}\nCards restored: ${restoredCards}\n\nYour collection has been updated!`);
+
             } catch (error) {
-                alert('Error importing collection. Please check the file format.');
+                console.error('Import error:', error);
+                alert('❌ Error importing collection.\n\nPlease check the file format and try again.');
             }
         };
         reader.readAsText(file);

@@ -40,10 +40,19 @@
             <button class="nav-btn" data-view="gallery">
                 <span class="icon">🖼️</span> Gallery
             </button>
-            <button class="nav-btn" id="refresh-prices-btn" style="margin-left: auto; background: #7EC850;">
+            <button class="nav-btn" id="export-btn" style="margin-left: auto; background: #4A90E2;">
+                <span class="icon">💾</span> Export Backup
+            </button>
+            <button class="nav-btn" id="import-btn" style="background: #9B59B6;">
+                <span class="icon">📥</span> Import Backup
+            </button>
+            <button class="nav-btn" id="refresh-prices-btn" style="background: #7EC850;">
                 <span class="icon">💰</span> Refresh Prices
             </button>
         </nav>
+
+        <!-- Hidden file input for import -->
+        <input type="file" id="import-file-input" accept=".json" style="display: none;">
 
         <!-- Main Content Area -->
         <main class="app-main">
