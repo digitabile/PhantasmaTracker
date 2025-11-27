@@ -37,13 +37,13 @@ class CardTracker {
         this.init();
     }
 
-    init() {
+    async init() {
         this.loadFromLocalStorage();
         this.setupEventListeners();
         this.loadSetSelector();
-        this.renderCards();
-        this.updateStats();
-        this.fetchPrices();
+        // Don't render cards until prices are loaded
+        await this.fetchPrices();
+        // fetchPrices() calls renderCards() and updateStats() after loading prices
         this.updateFooterApiStatus();
     }
 
@@ -55,7 +55,7 @@ class CardTracker {
         }
     }
 
-    switchSet(newSet) {
+    async switchSet(newSet) {
         if (newSet === this.currentSet) return;
 
         // Save current set's data
@@ -73,13 +73,21 @@ class CardTracker {
         // Reload from localStorage for new set
         this.loadFromLocalStorage();
 
-        // Clear filters
-        this.clearFilters();
+        // Reset filters (without rendering)
+        this.filters = {
+            search: '',
+            type: '',
+            rarity: '',
+            owned: ''
+        };
+        document.getElementById('search-input').value = '';
+        document.getElementById('filter-type').value = '';
+        document.getElementById('filter-rarity').value = '';
+        document.getElementById('filter-owned').value = '';
 
-        // Re-render everything
-        this.renderCards();
-        this.updateStats();
-        this.fetchPrices();
+        // Fetch prices first, then render everything
+        await this.fetchPrices();
+        // fetchPrices() calls renderCards() and updateStats() after loading prices
 
         console.log(`Switched to ${CARD_SETS[newSet].name} (${CARD_SETS[newSet].totalCards} cards)`);
     }
