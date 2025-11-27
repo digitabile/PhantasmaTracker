@@ -3535,7 +3535,7 @@ const CARD_PRICING = {
         "239": 28.00, // (Hyper Rare)
         "240": 32.00, // (Hyper Rare)
         "241": 26.00, // (Hyper Rare)
-        "242": 35.00 // (Hyper Rare),
+        "242": 35.00, // (Hyper Rare)
         "243": 25,
         "244": 25
     }
