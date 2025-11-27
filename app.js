@@ -796,7 +796,7 @@ class CardTracker {
         // Load real market prices from TCGPlayer and other reputable sources
         // Prices are based on current market values and updated regularly
 
-        const PRICE_VERSION = 'v9.1'; // Updated when pricing system changes (v9.1 force refresh Mega Evolution prices)
+        const PRICE_VERSION = 'v10.0'; // Updated when pricing system changes (v10.0 add all 14 Scarlet & Violet sets)
         const lastUpdate = localStorage.getItem('priceLastUpdate');
         const priceVersion = localStorage.getItem('priceVersion');
         const now = Date.now();
@@ -884,7 +884,13 @@ class CardTracker {
     exportCollection() {
         // Collect data from all sets
         const allSetsData = {};
-        const setNames = ['mega-evolution', 'phantasmal-flames', 'pokemon-go', 'scarlet-violet'];
+        const setNames = [
+            'mega-evolution', 'phantasmal-flames', 'pokemon-go',
+            'scarlet-violet-alt', 'paldea-evolved', 'obsidian-flames', 'sv-151',
+            'paradox-rift', 'paldean-fates', 'temporal-forces', 'twilight-masquerade',
+            'shrouded-fable', 'stellar-crown', 'surging-sparks', 'prismatic-evolutions',
+            'journey-together', 'destined-rivals'
+        ];
 
         setNames.forEach(setCode => {
             const storageKey = `cardCollection_${setCode}`;
@@ -906,7 +912,7 @@ class CardTracker {
         const backup = {
             exportDate: new Date().toISOString(),
             version: '1.0',
-            appVersion: 'v9.0',
+            appVersion: 'v10.0',
             totalSets: Object.keys(allSetsData).length,
             sets: allSetsData
         };
