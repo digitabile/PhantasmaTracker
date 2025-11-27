@@ -796,7 +796,7 @@ class CardTracker {
         // Load real market prices from TCGPlayer and other reputable sources
         // Prices are based on current market values and updated regularly
 
-        const PRICE_VERSION = 'v10.0'; // Updated when pricing system changes (v10.0 add all 14 Scarlet & Violet sets)
+        const PRICE_VERSION = 'v11.0'; // Updated when pricing system changes (v11.0 fix duplicate SV prices with unique individual pricing)
         const lastUpdate = localStorage.getItem('priceLastUpdate');
         const priceVersion = localStorage.getItem('priceVersion');
         const now = Date.now();
