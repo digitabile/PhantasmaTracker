@@ -1,6 +1,154 @@
 // Pokemon Card Tracker Application
 // Main application logic supporting multiple Pokemon TCG sets
 
+// ================================
+// Authentication Manager
+// ================================
+
+class AuthManager {
+    constructor() {
+        this.currentUser = null;
+        this.USERS_KEY = 'pokemon_tracker_users';
+        this.SESSION_KEY = 'pokemon_tracker_session';
+    }
+
+    // Simple hash function for passwords (client-side only - not for production use)
+    async hashPassword(password) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(password + 'pokemon_salt_2025');
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    // Get all registered users
+    getUsers() {
+        const usersData = localStorage.getItem(this.USERS_KEY);
+        return usersData ? JSON.parse(usersData) : {};
+    }
+
+    // Save users to localStorage
+    saveUsers(users) {
+        localStorage.setItem(this.USERS_KEY, JSON.stringify(users));
+    }
+
+    // Register a new user
+    async register(username, password) {
+        const trimmedUsername = username.trim().toLowerCase();
+
+        // Validation
+        if (trimmedUsername.length < 3) {
+            return { success: false, error: 'Username must be at least 3 characters' };
+        }
+        if (trimmedUsername.length > 20) {
+            return { success: false, error: 'Username must be 20 characters or less' };
+        }
+        if (!/^[a-z0-9_]+$/.test(trimmedUsername)) {
+            return { success: false, error: 'Username can only contain letters, numbers, and underscores' };
+        }
+        if (password.length < 4) {
+            return { success: false, error: 'Password must be at least 4 characters' };
+        }
+
+        const users = this.getUsers();
+
+        if (users[trimmedUsername]) {
+            return { success: false, error: 'Username already exists' };
+        }
+
+        // Create new user
+        const hashedPassword = await this.hashPassword(password);
+        users[trimmedUsername] = {
+            username: trimmedUsername,
+            passwordHash: hashedPassword,
+            createdAt: new Date().toISOString()
+        };
+
+        this.saveUsers(users);
+
+        // Auto-login after registration
+        return await this.login(trimmedUsername, password);
+    }
+
+    // Login user
+    async login(username, password) {
+        const trimmedUsername = username.trim().toLowerCase();
+        const users = this.getUsers();
+        const user = users[trimmedUsername];
+
+        if (!user) {
+            return { success: false, error: 'User not found' };
+        }
+
+        const hashedPassword = await this.hashPassword(password);
+
+        if (user.passwordHash !== hashedPassword) {
+            return { success: false, error: 'Incorrect password' };
+        }
+
+        // Create session
+        this.currentUser = {
+            username: trimmedUsername,
+            displayName: trimmedUsername
+        };
+
+        // Save session
+        localStorage.setItem(this.SESSION_KEY, JSON.stringify({
+            username: trimmedUsername,
+            loginTime: new Date().toISOString()
+        }));
+
+        return { success: true, user: this.currentUser };
+    }
+
+    // Logout user
+    logout() {
+        this.currentUser = null;
+        localStorage.removeItem(this.SESSION_KEY);
+    }
+
+    // Check if user is logged in (restore session)
+    checkSession() {
+        const sessionData = localStorage.getItem(this.SESSION_KEY);
+        if (!sessionData) {
+            return null;
+        }
+
+        try {
+            const session = JSON.parse(sessionData);
+            const users = this.getUsers();
+
+            if (users[session.username]) {
+                this.currentUser = {
+                    username: session.username,
+                    displayName: session.username
+                };
+                return this.currentUser;
+            }
+        } catch (e) {
+            console.error('Error restoring session:', e);
+        }
+
+        return null;
+    }
+
+    // Get current user
+    getCurrentUser() {
+        return this.currentUser;
+    }
+
+    // Get storage key prefix for current user
+    getUserStoragePrefix() {
+        if (!this.currentUser) {
+            throw new Error('No user logged in');
+        }
+        return `user_${this.currentUser.username}_`;
+    }
+}
+
+// Global auth manager instance
+const authManager = new AuthManager();
+
 // Type color mapping for visual elements
 const TYPE_COLORS = {
     'Grass': '#7AC74C',
@@ -21,8 +169,9 @@ const TYPE_COLORS = {
 
 class CardTracker {
     constructor() {
-        // Load saved set or default to Phantasmal Flames
-        this.currentSet = localStorage.getItem('selectedSet') || 'phantasmal-flames';
+        // Load saved set or default to Phantasmal Flames (user-scoped)
+        const userPrefix = authManager.getUserStoragePrefix();
+        this.currentSet = localStorage.getItem(`${userPrefix}selectedSet`) || 'phantasmal-flames';
         this.cards = CARD_SETS[this.currentSet].cards;
         this.ownedCards = new Set();
         this.cardPrices = new Map();
@@ -34,7 +183,18 @@ class CardTracker {
             owned: ''
         };
 
+        // Update UI with current username
+        this.updateUserDisplay();
+
         this.init();
+    }
+
+    // Update the user display in header
+    updateUserDisplay() {
+        const user = authManager.getCurrentUser();
+        if (user) {
+            document.getElementById('current-username').textContent = user.displayName;
+        }
     }
 
     async init() {
@@ -61,9 +221,9 @@ class CardTracker {
         // Save current set's data
         this.saveToLocalStorage();
 
-        // Switch to new set
+        // Switch to new set (user-scoped)
         this.currentSet = newSet;
-        localStorage.setItem('selectedSet', newSet);
+        localStorage.setItem(this.getStorageKey('selectedSet'), newSet);
 
         // Load new set's data
         this.cards = CARD_SETS[this.currentSet].cards;
@@ -92,9 +252,15 @@ class CardTracker {
         console.log(`Switched to ${CARD_SETS[newSet].name} (${CARD_SETS[newSet].totalCards} cards)`);
     }
 
-    // Local Storage Management
+    // Local Storage Management (User-scoped)
+    getStorageKey(key) {
+        // Prefix all storage keys with user identifier
+        const userPrefix = authManager.getUserStoragePrefix();
+        return `${userPrefix}${key}`;
+    }
+
     loadFromLocalStorage() {
-        const storageKey = `cardCollection_${this.currentSet}`;
+        const storageKey = this.getStorageKey(`cardCollection_${this.currentSet}`);
         const stored = localStorage.getItem(storageKey);
         if (stored) {
             try {
@@ -108,7 +274,7 @@ class CardTracker {
     }
 
     saveToLocalStorage() {
-        const storageKey = `cardCollection_${this.currentSet}`;
+        const storageKey = this.getStorageKey(`cardCollection_${this.currentSet}`);
         const data = {
             ownedCards: Array.from(this.ownedCards),
             cardPrices: Array.from(this.cardPrices.entries()),
@@ -1143,9 +1309,9 @@ class CardTracker {
         }
     }
 
-    // Export/Import functionality - backs up ALL sets
+    // Export/Import functionality - backs up ALL sets for current user
     exportCollection() {
-        // Collect data from all sets
+        // Collect data from all sets (user-scoped)
         const allSetsData = {};
         const setNames = [
             'mega-evolution', 'phantasmal-flames', 'pokemon-go',
@@ -1156,7 +1322,7 @@ class CardTracker {
         ];
 
         setNames.forEach(setCode => {
-            const storageKey = `cardCollection_${setCode}`;
+            const storageKey = this.getStorageKey(`cardCollection_${setCode}`);
             const savedData = localStorage.getItem(storageKey);
             if (savedData) {
                 try {
@@ -1172,10 +1338,12 @@ class CardTracker {
             }
         });
 
+        const user = authManager.getCurrentUser();
         const backup = {
             exportDate: new Date().toISOString(),
             version: '1.0',
-            appVersion: 'v10.0',
+            appVersion: 'v11.0',
+            username: user ? user.username : 'unknown',
             totalSets: Object.keys(allSetsData).length,
             sets: allSetsData
         };
@@ -1185,13 +1353,14 @@ class CardTracker {
         const a = document.createElement('a');
         a.href = url;
         const dateStr = new Date().toISOString().split('T')[0];
-        a.download = `pokemon-collection-backup-${dateStr}.json`;
+        const username = user ? user.username : 'guest';
+        a.download = `pokemon-collection-${username}-${dateStr}.json`;
         a.click();
         URL.revokeObjectURL(url);
 
         // Show success message
         const totalCards = Object.values(allSetsData).reduce((sum, set) => sum + set.ownedCards.length, 0);
-        alert(`✅ Backup exported successfully!\n\nSets included: ${Object.keys(allSetsData).length}\nTotal cards: ${totalCards}\n\nFile: pokemon-collection-backup-${dateStr}.json`);
+        alert(`✅ Backup exported successfully!\n\nUser: ${username}\nSets included: ${Object.keys(allSetsData).length}\nTotal cards: ${totalCards}\n\nFile: pokemon-collection-${username}-${dateStr}.json`);
     }
 
     importCollection(file) {
@@ -1211,9 +1380,12 @@ class CardTracker {
                 // Confirm before overwriting
                 const setCount = Object.keys(backup.sets).length;
                 const totalCards = Object.values(backup.sets).reduce((sum, set) => sum + (set.ownedCards?.length || 0), 0);
+                const user = authManager.getCurrentUser();
 
                 const confirmed = confirm(
                     `📥 Import Collection Backup?\n\n` +
+                    `Importing to: ${user ? user.username : 'unknown'}\n` +
+                    `From backup: ${backup.username || 'unknown'}\n` +
                     `Sets: ${setCount}\n` +
                     `Total cards: ${totalCards}\n` +
                     `Export date: ${new Date(backup.exportDate).toLocaleDateString()}\n\n` +
@@ -1223,14 +1395,14 @@ class CardTracker {
 
                 if (!confirmed) return;
 
-                // Restore all sets
+                // Restore all sets (user-scoped)
                 let restoredSets = 0;
                 let restoredCards = 0;
 
                 Object.keys(backup.sets).forEach(setCode => {
                     const setData = backup.sets[setCode];
                     if (setData.ownedCards && Array.isArray(setData.ownedCards)) {
-                        const storageKey = `cardCollection_${setCode}`;
+                        const storageKey = this.getStorageKey(`cardCollection_${setCode}`);
                         const saveData = {
                             ownedCards: setData.ownedCards,
                             lastUpdated: new Date().toISOString()
@@ -1275,9 +1447,193 @@ class CardTracker {
     }
 }
 
-// Initialize the application when DOM is loaded
-let app;
+// ================================
+// Authentication UI Controller
+// ================================
+
+class AuthUI {
+    constructor() {
+        this.overlay = document.getElementById('auth-overlay');
+        this.loginForm = document.getElementById('login-form');
+        this.registerForm = document.getElementById('register-form');
+        this.loginError = document.getElementById('login-error');
+        this.registerError = document.getElementById('register-error');
+    }
+
+    init() {
+        this.setupEventListeners();
+    }
+
+    setupEventListeners() {
+        // Toggle between login and register forms
+        document.getElementById('show-register').addEventListener('click', (e) => {
+            e.preventDefault();
+            this.showRegisterForm();
+        });
+
+        document.getElementById('show-login').addEventListener('click', (e) => {
+            e.preventDefault();
+            this.showLoginForm();
+        });
+
+        // Login form submission
+        document.getElementById('login-btn').addEventListener('click', () => {
+            this.handleLogin();
+        });
+
+        // Register form submission
+        document.getElementById('register-btn').addEventListener('click', () => {
+            this.handleRegister();
+        });
+
+        // Logout button
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            this.handleLogout();
+        });
+
+        // Enter key support for forms
+        document.getElementById('login-password').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                this.handleLogin();
+            }
+        });
+
+        document.getElementById('register-confirm').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                this.handleRegister();
+            }
+        });
+    }
+
+    showLoginForm() {
+        this.loginForm.classList.add('active');
+        this.registerForm.classList.remove('active');
+        this.clearErrors();
+        document.getElementById('login-username').focus();
+    }
+
+    showRegisterForm() {
+        this.loginForm.classList.remove('active');
+        this.registerForm.classList.add('active');
+        this.clearErrors();
+        document.getElementById('register-username').focus();
+    }
+
+    clearErrors() {
+        this.loginError.classList.remove('show');
+        this.loginError.textContent = '';
+        this.registerError.classList.remove('show');
+        this.registerError.textContent = '';
+    }
+
+    showLoginError(message) {
+        this.loginError.textContent = message;
+        this.loginError.classList.add('show');
+    }
+
+    showRegisterError(message) {
+        this.registerError.textContent = message;
+        this.registerError.classList.add('show');
+    }
+
+    async handleLogin() {
+        const username = document.getElementById('login-username').value.trim();
+        const password = document.getElementById('login-password').value;
+
+        if (!username || !password) {
+            this.showLoginError('Please enter both username and password');
+            return;
+        }
+
+        const result = await authManager.login(username, password);
+
+        if (result.success) {
+            this.onLoginSuccess();
+        } else {
+            this.showLoginError(result.error);
+        }
+    }
+
+    async handleRegister() {
+        const username = document.getElementById('register-username').value.trim();
+        const password = document.getElementById('register-password').value;
+        const confirm = document.getElementById('register-confirm').value;
+
+        if (!username || !password || !confirm) {
+            this.showRegisterError('Please fill in all fields');
+            return;
+        }
+
+        if (password !== confirm) {
+            this.showRegisterError('Passwords do not match');
+            return;
+        }
+
+        const result = await authManager.register(username, password);
+
+        if (result.success) {
+            this.onLoginSuccess();
+        } else {
+            this.showRegisterError(result.error);
+        }
+    }
+
+    handleLogout() {
+        if (confirm('Are you sure you want to sign out?')) {
+            authManager.logout();
+            app = null;
+            this.showOverlay();
+            this.showLoginForm();
+            // Clear form inputs
+            document.getElementById('login-username').value = '';
+            document.getElementById('login-password').value = '';
+            document.getElementById('register-username').value = '';
+            document.getElementById('register-password').value = '';
+            document.getElementById('register-confirm').value = '';
+        }
+    }
+
+    onLoginSuccess() {
+        this.hideOverlay();
+        this.clearErrors();
+        // Initialize the main application
+        app = new CardTracker();
+        console.log('Pokemon Card Collection Tracker initialized for user:', authManager.getCurrentUser().username);
+    }
+
+    showOverlay() {
+        this.overlay.classList.remove('hidden');
+    }
+
+    hideOverlay() {
+        this.overlay.classList.add('hidden');
+    }
+}
+
+// ================================
+// Application Initialization
+// ================================
+
+let app = null;
+let authUI = null;
+
 document.addEventListener('DOMContentLoaded', () => {
-    app = new CardTracker();
-    console.log('Pokemon Card Collection Tracker initialized');
+    // Initialize auth UI
+    authUI = new AuthUI();
+    authUI.init();
+
+    // Check for existing session
+    const existingUser = authManager.checkSession();
+
+    if (existingUser) {
+        // User is already logged in, initialize the app
+        authUI.hideOverlay();
+        app = new CardTracker();
+        console.log('Pokemon Card Collection Tracker initialized for user:', existingUser.username);
+    } else {
+        // Show login screen
+        authUI.showOverlay();
+        authUI.showLoginForm();
+        console.log('Waiting for user login...');
+    }
 });
