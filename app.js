@@ -14,11 +14,31 @@ class AuthManager {
 
     // Simple hash function for passwords (client-side only - not for production use)
     async hashPassword(password) {
-        const encoder = new TextEncoder();
-        const data = encoder.encode(password + 'pokemon_salt_2025');
-        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-        const hashArray = Array.from(new Uint8Array(hashBuffer));
-        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        const saltedPassword = password + 'pokemon_salt_2025';
+
+        // Try to use crypto.subtle (requires HTTPS)
+        if (window.crypto && window.crypto.subtle) {
+            try {
+                const encoder = new TextEncoder();
+                const data = encoder.encode(saltedPassword);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            } catch (e) {
+                console.warn('crypto.subtle not available, using fallback hash');
+            }
+        }
+
+        // Fallback: Simple hash for non-HTTPS environments
+        // Note: This is less secure but allows the app to work over HTTP
+        let hash = 0;
+        for (let i = 0; i < saltedPassword.length; i++) {
+            const char = saltedPassword.charCodeAt(i);
+            hash = ((hash << 5) - hash) + char;
+            hash = hash & hash; // Convert to 32bit integer
+        }
+        // Convert to positive hex string
+        return 'fallback_' + Math.abs(hash).toString(16).padStart(8, '0');
     }
 
     // Get all registered users
