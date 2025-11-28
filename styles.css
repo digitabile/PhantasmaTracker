@@ -729,6 +729,13 @@ body {
     opacity: 0.8;
 }
 
+.footer-version {
+    font-size: 0.75rem;
+    opacity: 0.6;
+    font-family: 'Courier New', monospace;
+    margin-top: 0.5rem;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .app-header h1 {
@@ -1152,6 +1159,16 @@ body {
 
 .auth-switch a:hover {
     text-decoration: underline;
+}
+
+.auth-version {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    font-family: 'Courier New', monospace;
 }
 
 /* ================================
