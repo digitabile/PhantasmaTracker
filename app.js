@@ -13,32 +13,29 @@ class AuthManager {
     }
 
     // Simple hash function for passwords (client-side only - not for production use)
+    // Uses consistent fallback hash to work across HTTP/HTTPS environments
     async hashPassword(password) {
         const saltedPassword = password + 'pokemon_salt_2025';
 
-        // Try to use crypto.subtle (requires HTTPS)
-        if (window.crypto && window.crypto.subtle) {
-            try {
-                const encoder = new TextEncoder();
-                const data = encoder.encode(saltedPassword);
-                const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-                const hashArray = Array.from(new Uint8Array(hashBuffer));
-                return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-            } catch (e) {
-                console.warn('crypto.subtle not available, using fallback hash');
-            }
-        }
-
-        // Fallback: Simple hash for non-HTTPS environments
-        // Note: This is less secure but allows the app to work over HTTP
+        // Use a consistent hash that works in all environments
+        // This ensures users can log in whether on HTTP or HTTPS
         let hash = 0;
         for (let i = 0; i < saltedPassword.length; i++) {
             const char = saltedPassword.charCodeAt(i);
             hash = ((hash << 5) - hash) + char;
             hash = hash & hash; // Convert to 32bit integer
         }
-        // Convert to positive hex string
-        return 'fallback_' + Math.abs(hash).toString(16).padStart(8, '0');
+
+        // Create a longer hash by running multiple rounds
+        let hash2 = hash;
+        for (let i = 0; i < saltedPassword.length; i++) {
+            const char = saltedPassword.charCodeAt(i);
+            hash2 = ((hash2 << 3) - hash2) + char + i;
+            hash2 = hash2 & hash2;
+        }
+
+        // Combine both hashes for a longer, more unique result
+        return Math.abs(hash).toString(16).padStart(8, '0') + Math.abs(hash2).toString(16).padStart(8, '0');
     }
 
     // Get all registered users
@@ -129,24 +126,35 @@ class AuthManager {
 
     // Check if user is logged in (restore session)
     checkSession() {
-        const sessionData = localStorage.getItem(this.SESSION_KEY);
-        if (!sessionData) {
-            return null;
-        }
-
         try {
+            const sessionData = localStorage.getItem(this.SESSION_KEY);
+            console.log('Checking session...', sessionData ? 'Session found' : 'No session');
+
+            if (!sessionData) {
+                return null;
+            }
+
             const session = JSON.parse(sessionData);
             const users = this.getUsers();
+
+            console.log('Session user:', session.username, 'User exists:', !!users[session.username]);
 
             if (users[session.username]) {
                 this.currentUser = {
                     username: session.username,
                     displayName: session.username
                 };
+                console.log('Session restored for:', this.currentUser.username);
                 return this.currentUser;
+            } else {
+                // User was deleted, clear invalid session
+                console.log('User no longer exists, clearing session');
+                localStorage.removeItem(this.SESSION_KEY);
             }
         } catch (e) {
             console.error('Error restoring session:', e);
+            // Clear corrupted session data
+            localStorage.removeItem(this.SESSION_KEY);
         }
 
         return null;
