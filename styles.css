@@ -729,13 +729,6 @@ body {
     opacity: 0.8;
 }
 
-.footer-version {
-    font-size: 0.75rem;
-    opacity: 0.6;
-    font-family: 'Courier New', monospace;
-    margin-top: 0.5rem;
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .app-header h1 {
@@ -1037,8 +1030,15 @@ body {
     margin-bottom: 2rem;
 }
 
+.auth-logo {
+    width: 80px;
+    height: auto;
+    margin-bottom: 1rem;
+    filter: invert(45%) sepia(100%) saturate(500%) hue-rotate(340deg);
+}
+
 .auth-header h1 {
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: var(--primary-color);
     margin-bottom: 0.5rem;
 }
@@ -1046,6 +1046,18 @@ body {
 .auth-header p {
     color: var(--text-secondary);
     font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
+
+.auth-header .auth-version {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0;
+    border-top: none;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-family: 'Courier New', monospace;
+    opacity: 0.7;
 }
 
 .auth-form {
@@ -1161,22 +1173,35 @@ body {
     text-decoration: underline;
 }
 
-.auth-version {
-    text-align: center;
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border-color);
-    color: var(--text-secondary);
-    font-size: 0.8rem;
-    font-family: 'Courier New', monospace;
-}
-
 /* ================================
    User Controls in Header
    ================================ */
 
 .app-header {
     position: relative;
+}
+
+.header-logo-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.header-logo {
+    width: 60px;
+    height: auto;
+    filter: brightness(0) invert(1);
+}
+
+.header-version {
+    font-size: 0.7rem;
+    font-family: 'Courier New', monospace;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .user-controls {
