@@ -201,10 +201,66 @@ class CardTracker {
         this.loadFromLocalStorage();
         this.setupEventListeners();
         this.loadSetSelector();
+        this.loadHeaderColor(); // Load user's header color preference
         // Don't render cards until prices are loaded
         await this.fetchPrices();
         // fetchPrices() calls renderCards() and updateStats() after loading prices
         this.updateFooterApiStatus();
+    }
+
+    // Header Color Management
+    loadHeaderColor() {
+        const savedColor = localStorage.getItem(this.getStorageKey('headerColor'));
+        if (savedColor) {
+            this.applyHeaderColor(savedColor);
+            // Update the color picker to show current color
+            const colorPicker = document.getElementById('header-color-picker');
+            if (colorPicker) {
+                colorPicker.value = savedColor;
+            }
+            this.updateColorPresetSelection(savedColor);
+        }
+    }
+
+    saveHeaderColor(color) {
+        localStorage.setItem(this.getStorageKey('headerColor'), color);
+    }
+
+    applyHeaderColor(color) {
+        const header = document.querySelector('.app-header');
+        if (header) {
+            // Create a lighter version of the color for gradient
+            const lighterColor = this.lightenColor(color, 20);
+            header.style.background = `linear-gradient(135deg, ${color} 0%, ${lighterColor} 100%)`;
+        }
+    }
+
+    lightenColor(color, percent) {
+        // Convert hex to RGB, lighten, then back to hex
+        const num = parseInt(color.replace('#', ''), 16);
+        const amt = Math.round(2.55 * percent);
+        const R = Math.min(255, (num >> 16) + amt);
+        const G = Math.min(255, ((num >> 8) & 0x00FF) + amt);
+        const B = Math.min(255, (num & 0x0000FF) + amt);
+        return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
+    }
+
+    updateColorPresetSelection(color) {
+        // Remove active class from all presets
+        document.querySelectorAll('.color-preset').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.dataset.color === color) {
+                btn.classList.add('active');
+            }
+        });
+    }
+
+    resetHeaderColor() {
+        const defaultColor = '#FF6B35';
+        localStorage.removeItem(this.getStorageKey('headerColor'));
+        this.applyHeaderColor(defaultColor);
+        document.getElementById('header-color-picker').value = defaultColor;
+        this.updateColorPresetSelection(defaultColor);
     }
 
     // Set Selection Management
@@ -380,6 +436,28 @@ class CardTracker {
 
         document.getElementById('toggle-api-key-visibility').addEventListener('click', () => {
             this.toggleApiKeyVisibility();
+        });
+
+        // Color picker event listeners
+        document.querySelectorAll('.color-preset').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const color = btn.dataset.color;
+                this.applyHeaderColor(color);
+                this.saveHeaderColor(color);
+                this.updateColorPresetSelection(color);
+                document.getElementById('header-color-picker').value = color;
+            });
+        });
+
+        document.getElementById('apply-custom-color-btn').addEventListener('click', () => {
+            const color = document.getElementById('header-color-picker').value;
+            this.applyHeaderColor(color);
+            this.saveHeaderColor(color);
+            this.updateColorPresetSelection(color);
+        });
+
+        document.getElementById('reset-header-color-btn').addEventListener('click', () => {
+            this.resetHeaderColor();
         });
     }
 
@@ -997,6 +1075,11 @@ class CardTracker {
         document.getElementById('cache-prices').checked = cachePrices;
 
         this.updateApiStatus();
+
+        // Load header color settings
+        const savedColor = localStorage.getItem(this.getStorageKey('headerColor')) || '#FF6B35';
+        document.getElementById('header-color-picker').value = savedColor;
+        this.updateColorPresetSelection(savedColor);
     }
 
     saveApiKey() {

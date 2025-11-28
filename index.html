@@ -14,7 +14,7 @@
                 <img src="assets/logo.svg" alt="Logo" class="auth-logo">
                 <h1>Pokemon Card Tracker</h1>
                 <p>Track your collection across multiple sets</p>
-                <span class="auth-version" id="auth-version">v15.0 (a3dcff3)</span>
+                <span class="auth-version" id="auth-version">v16.0 (7114627)</span>
             </div>
 
             <!-- Login Form -->
@@ -72,7 +72,7 @@
                     <h1>Pokemon Card Collection Tracker</h1>
                     <p class="subtitle">Track your Pokemon TCG collection across multiple sets</p>
                 </div>
-                <span class="header-version" id="header-version">v15.0 (a3dcff3)</span>
+                <span class="header-version" id="header-version">v16.0 (7114627)</span>
             </div>
             <div class="user-controls">
                 <span class="user-badge" id="user-badge">
@@ -336,6 +336,37 @@
                     </div>
 
                     <div class="settings-section">
+                        <h3>🎨 Appearance</h3>
+                        <p class="settings-description">
+                            Customize the look of your collection tracker.
+                        </p>
+
+                        <div class="color-picker-container">
+                            <label for="header-color-picker">Header Color:</label>
+                            <div class="color-picker-group">
+                                <div class="color-presets">
+                                    <button class="color-preset" data-color="#FF6B35" style="background: linear-gradient(135deg, #FF6B35 0%, #FF8E53 100%);" title="Orange (Default)"></button>
+                                    <button class="color-preset" data-color="#4A90E2" style="background: linear-gradient(135deg, #4A90E2 0%, #6BA3E8 100%);" title="Blue"></button>
+                                    <button class="color-preset" data-color="#7EC850" style="background: linear-gradient(135deg, #7EC850 0%, #9BD870 100%);" title="Green"></button>
+                                    <button class="color-preset" data-color="#9B59B6" style="background: linear-gradient(135deg, #9B59B6 0%, #B07CC6 100%);" title="Purple"></button>
+                                    <button class="color-preset" data-color="#E74C3C" style="background: linear-gradient(135deg, #E74C3C 0%, #EC7063 100%);" title="Red"></button>
+                                    <button class="color-preset" data-color="#1ABC9C" style="background: linear-gradient(135deg, #1ABC9C 0%, #48D1B5 100%);" title="Teal"></button>
+                                    <button class="color-preset" data-color="#F39C12" style="background: linear-gradient(135deg, #F39C12 0%, #F5B041 100%);" title="Gold"></button>
+                                    <button class="color-preset" data-color="#34495E" style="background: linear-gradient(135deg, #34495E 0%, #4A6278 100%);" title="Dark Gray"></button>
+                                </div>
+                                <div class="custom-color-row">
+                                    <label for="header-color-picker">Custom:</label>
+                                    <input type="color" id="header-color-picker" value="#FF6B35" class="color-input">
+                                    <button id="apply-custom-color-btn" class="btn-secondary btn-small">Apply</button>
+                                </div>
+                            </div>
+                            <button id="reset-header-color-btn" class="btn-secondary" style="margin-top: 10px;">
+                                🔄 Reset to Default
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
                         <h3>ℹ️ About JustTCG API</h3>
                         <ul class="info-list">
                             <li>Provides real-time Pokemon TCG card pricing</li>
@@ -366,8 +397,8 @@
     </div>
 
     <!-- Scripts -->
-    <script src="cards-data.js?v=15.0"></script>
-    <script src="card-prices.js?v=15.0"></script>
-    <script src="app.js?v=15.0"></script>
+    <script src="cards-data.js?v=16.0"></script>
+    <script src="card-prices.js?v=16.0"></script>
+    <script src="app.js?v=16.0"></script>
 </body>
 </html>
