@@ -2,162 +2,110 @@
 // Main application logic supporting multiple Pokemon TCG sets
 
 // ================================
-// Authentication Manager
+// Firebase Configuration
+// ================================
+
+const firebaseConfig = {
+    apiKey: "AIzaSyB0e85xGnyx8-9Db8tdM8QSDH-Gssfci08",
+    authDomain: "setcollector-425d5.firebaseapp.com",
+    projectId: "setcollector-425d5",
+    storageBucket: "setcollector-425d5.firebasestorage.app",
+    messagingSenderId: "1000884366226",
+    appId: "1:1000884366226:web:481d727bde9131cbebef4b",
+    measurementId: "G-YVQ8C7BGBT"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+
+// ================================
+// Authentication Manager (Firebase)
 // ================================
 
 class AuthManager {
     constructor() {
         this.currentUser = null;
-        this.USERS_KEY = 'pokemon_tracker_users';
-        this.SESSION_KEY = 'pokemon_tracker_session';
+        this.authStateListeners = [];
     }
 
-    // Simple hash function for passwords (client-side only - not for production use)
-    // Uses consistent fallback hash to work across HTTP/HTTPS environments
-    async hashPassword(password) {
-        const saltedPassword = password + 'pokemon_salt_2025';
+    // Register a new user with Firebase
+    async register(email, password) {
+        try {
+            const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+            const user = userCredential.user;
 
-        // Use a consistent hash that works in all environments
-        // This ensures users can log in whether on HTTP or HTTPS
-        let hash = 0;
-        for (let i = 0; i < saltedPassword.length; i++) {
-            const char = saltedPassword.charCodeAt(i);
-            hash = ((hash << 5) - hash) + char;
-            hash = hash & hash; // Convert to 32bit integer
+            this.currentUser = {
+                uid: user.uid,
+                email: user.email,
+                displayName: user.email.split('@')[0] // Use email prefix as display name
+            };
+
+            console.log('Registration successful for:', this.currentUser.email);
+            return { success: true, user: this.currentUser };
+        } catch (error) {
+            console.error('Registration error:', error);
+            return { success: false, error: this.getErrorMessage(error.code) };
         }
-
-        // Create a longer hash by running multiple rounds
-        let hash2 = hash;
-        for (let i = 0; i < saltedPassword.length; i++) {
-            const char = saltedPassword.charCodeAt(i);
-            hash2 = ((hash2 << 3) - hash2) + char + i;
-            hash2 = hash2 & hash2;
-        }
-
-        // Combine both hashes for a longer, more unique result
-        return Math.abs(hash).toString(16).padStart(8, '0') + Math.abs(hash2).toString(16).padStart(8, '0');
     }
 
-    // Get all registered users
-    getUsers() {
-        const usersData = localStorage.getItem(this.USERS_KEY);
-        return usersData ? JSON.parse(usersData) : {};
-    }
+    // Login user with Firebase
+    async login(email, password) {
+        try {
+            const userCredential = await auth.signInWithEmailAndPassword(email, password);
+            const user = userCredential.user;
 
-    // Save users to localStorage
-    saveUsers(users) {
-        localStorage.setItem(this.USERS_KEY, JSON.stringify(users));
-    }
+            this.currentUser = {
+                uid: user.uid,
+                email: user.email,
+                displayName: user.email.split('@')[0]
+            };
 
-    // Register a new user
-    async register(username, password) {
-        const trimmedUsername = username.trim().toLowerCase();
-
-        // Validation
-        if (trimmedUsername.length < 3) {
-            return { success: false, error: 'Username must be at least 3 characters' };
+            console.log('Login successful for:', this.currentUser.email);
+            return { success: true, user: this.currentUser };
+        } catch (error) {
+            console.error('Login error:', error);
+            return { success: false, error: this.getErrorMessage(error.code) };
         }
-        if (trimmedUsername.length > 20) {
-            return { success: false, error: 'Username must be 20 characters or less' };
-        }
-        if (!/^[a-z0-9_]+$/.test(trimmedUsername)) {
-            return { success: false, error: 'Username can only contain letters, numbers, and underscores' };
-        }
-        if (password.length < 4) {
-            return { success: false, error: 'Password must be at least 4 characters' };
-        }
-
-        const users = this.getUsers();
-
-        if (users[trimmedUsername]) {
-            return { success: false, error: 'Username already exists' };
-        }
-
-        // Create new user
-        const hashedPassword = await this.hashPassword(password);
-        users[trimmedUsername] = {
-            username: trimmedUsername,
-            passwordHash: hashedPassword,
-            createdAt: new Date().toISOString()
-        };
-
-        this.saveUsers(users);
-
-        // Auto-login after registration
-        return await this.login(trimmedUsername, password);
-    }
-
-    // Login user
-    async login(username, password) {
-        const trimmedUsername = username.trim().toLowerCase();
-        const users = this.getUsers();
-        const user = users[trimmedUsername];
-
-        if (!user) {
-            return { success: false, error: 'User not found' };
-        }
-
-        const hashedPassword = await this.hashPassword(password);
-
-        if (user.passwordHash !== hashedPassword) {
-            return { success: false, error: 'Incorrect password' };
-        }
-
-        // Create session
-        this.currentUser = {
-            username: trimmedUsername,
-            displayName: trimmedUsername
-        };
-
-        // Save session
-        localStorage.setItem(this.SESSION_KEY, JSON.stringify({
-            username: trimmedUsername,
-            loginTime: new Date().toISOString()
-        }));
-
-        return { success: true, user: this.currentUser };
     }
 
     // Logout user
-    logout() {
-        this.currentUser = null;
-        localStorage.removeItem(this.SESSION_KEY);
+    async logout() {
+        try {
+            await auth.signOut();
+            this.currentUser = null;
+            console.log('Logout successful');
+        } catch (error) {
+            console.error('Logout error:', error);
+        }
     }
 
-    // Check if user is logged in (restore session)
-    checkSession() {
+    // Send password reset email
+    async resetPassword(email) {
         try {
-            const sessionData = localStorage.getItem(this.SESSION_KEY);
-            console.log('Checking session...', sessionData ? 'Session found' : 'No session');
-
-            if (!sessionData) {
-                return null;
-            }
-
-            const session = JSON.parse(sessionData);
-            const users = this.getUsers();
-
-            console.log('Session user:', session.username, 'User exists:', !!users[session.username]);
-
-            if (users[session.username]) {
-                this.currentUser = {
-                    username: session.username,
-                    displayName: session.username
-                };
-                console.log('Session restored for:', this.currentUser.username);
-                return this.currentUser;
-            } else {
-                // User was deleted, clear invalid session
-                console.log('User no longer exists, clearing session');
-                localStorage.removeItem(this.SESSION_KEY);
-            }
-        } catch (e) {
-            console.error('Error restoring session:', e);
-            // Clear corrupted session data
-            localStorage.removeItem(this.SESSION_KEY);
+            await auth.sendPasswordResetEmail(email);
+            return { success: true };
+        } catch (error) {
+            console.error('Password reset error:', error);
+            return { success: false, error: this.getErrorMessage(error.code) };
         }
+    }
 
-        return null;
+    // Listen for auth state changes
+    onAuthStateChanged(callback) {
+        this.authStateListeners.push(callback);
+        return auth.onAuthStateChanged((user) => {
+            if (user) {
+                this.currentUser = {
+                    uid: user.uid,
+                    email: user.email,
+                    displayName: user.email.split('@')[0]
+                };
+            } else {
+                this.currentUser = null;
+            }
+            callback(this.currentUser);
+        });
     }
 
     // Get current user
@@ -165,12 +113,30 @@ class AuthManager {
         return this.currentUser;
     }
 
-    // Get storage key prefix for current user
+    // Get storage key prefix for current user (uses Firebase UID)
     getUserStoragePrefix() {
         if (!this.currentUser) {
             throw new Error('No user logged in');
         }
-        return `user_${this.currentUser.username}_`;
+        // Use Firebase UID for storage prefix to ensure uniqueness
+        return `user_${this.currentUser.uid}_`;
+    }
+
+    // Convert Firebase error codes to user-friendly messages
+    getErrorMessage(errorCode) {
+        const errorMessages = {
+            'auth/email-already-in-use': 'This email is already registered. Please sign in instead.',
+            'auth/invalid-email': 'Please enter a valid email address.',
+            'auth/operation-not-allowed': 'Email/password accounts are not enabled.',
+            'auth/weak-password': 'Password must be at least 6 characters.',
+            'auth/user-disabled': 'This account has been disabled.',
+            'auth/user-not-found': 'No account found with this email.',
+            'auth/wrong-password': 'Incorrect password.',
+            'auth/invalid-credential': 'Invalid email or password.',
+            'auth/too-many-requests': 'Too many failed attempts. Please try again later.',
+            'auth/network-request-failed': 'Network error. Please check your connection.'
+        };
+        return errorMessages[errorCode] || 'An error occurred. Please try again.';
     }
 }
 
@@ -221,6 +187,7 @@ class CardTracker {
     updateUserDisplay() {
         const user = authManager.getCurrentUser();
         if (user) {
+            // Show display name (email prefix) in header
             document.getElementById('current-username').textContent = user.displayName;
         }
     }
@@ -1453,8 +1420,9 @@ class CardTracker {
         const backup = {
             exportDate: new Date().toISOString(),
             version: '1.0',
-            appVersion: 'v11.0',
-            username: user ? user.username : 'unknown',
+            appVersion: 'v18.0',
+            userEmail: user ? user.email : 'unknown',
+            userId: user ? user.uid : 'unknown',
             totalSets: Object.keys(allSetsData).length,
             sets: allSetsData
         };
@@ -1464,14 +1432,14 @@ class CardTracker {
         const a = document.createElement('a');
         a.href = url;
         const dateStr = new Date().toISOString().split('T')[0];
-        const username = user ? user.username : 'guest';
-        a.download = `pokemon-collection-${username}-${dateStr}.json`;
+        const displayName = user ? user.displayName : 'guest';
+        a.download = `pokemon-collection-${displayName}-${dateStr}.json`;
         a.click();
         URL.revokeObjectURL(url);
 
         // Show success message
         const totalCards = Object.values(allSetsData).reduce((sum, set) => sum + set.ownedCards.length, 0);
-        alert(`✅ Backup exported successfully!\n\nUser: ${username}\nSets included: ${Object.keys(allSetsData).length}\nTotal cards: ${totalCards}\n\nFile: pokemon-collection-${username}-${dateStr}.json`);
+        alert(`✅ Backup exported successfully!\n\nUser: ${user ? user.email : 'guest'}\nSets included: ${Object.keys(allSetsData).length}\nTotal cards: ${totalCards}\n\nFile: pokemon-collection-${displayName}-${dateStr}.json`);
     }
 
     importCollection(file) {
@@ -1495,8 +1463,8 @@ class CardTracker {
 
                 const confirmed = confirm(
                     `📥 Import Collection Backup?\n\n` +
-                    `Importing to: ${user ? user.username : 'unknown'}\n` +
-                    `From backup: ${backup.username || 'unknown'}\n` +
+                    `Importing to: ${user ? user.email : 'unknown'}\n` +
+                    `From backup: ${backup.userEmail || backup.username || 'unknown'}\n` +
                     `Sets: ${setCount}\n` +
                     `Total cards: ${totalCards}\n` +
                     `Export date: ${new Date(backup.exportDate).toLocaleDateString()}\n\n` +
@@ -1573,6 +1541,7 @@ class AuthUI {
 
     init() {
         this.setupEventListeners();
+        this.setupAuthStateListener();
     }
 
     setupEventListeners() {
@@ -1585,6 +1554,12 @@ class AuthUI {
         document.getElementById('show-login').addEventListener('click', (e) => {
             e.preventDefault();
             this.showLoginForm();
+        });
+
+        // Forgot password
+        document.getElementById('forgot-password').addEventListener('click', (e) => {
+            e.preventDefault();
+            this.handleForgotPassword();
         });
 
         // Login form submission
@@ -1616,18 +1591,35 @@ class AuthUI {
         });
     }
 
+    // Listen for Firebase auth state changes (handles persistent login)
+    setupAuthStateListener() {
+        authManager.onAuthStateChanged((user) => {
+            if (user) {
+                // User is signed in
+                this.onLoginSuccess();
+            } else {
+                // User is signed out
+                if (app) {
+                    app = null;
+                }
+                this.showOverlay();
+                this.showLoginForm();
+            }
+        });
+    }
+
     showLoginForm() {
         this.loginForm.classList.add('active');
         this.registerForm.classList.remove('active');
         this.clearErrors();
-        document.getElementById('login-username').focus();
+        document.getElementById('login-email').focus();
     }
 
     showRegisterForm() {
         this.loginForm.classList.remove('active');
         this.registerForm.classList.add('active');
         this.clearErrors();
-        document.getElementById('register-username').focus();
+        document.getElementById('register-email').focus();
     }
 
     clearErrors() {
@@ -1647,31 +1639,49 @@ class AuthUI {
         this.registerError.classList.add('show');
     }
 
+    showLoginSuccess(message) {
+        this.loginError.textContent = message;
+        this.loginError.classList.add('show');
+        this.loginError.style.color = '#7EC850';
+    }
+
     async handleLogin() {
-        const username = document.getElementById('login-username').value.trim();
+        const email = document.getElementById('login-email').value.trim();
         const password = document.getElementById('login-password').value;
 
-        if (!username || !password) {
-            this.showLoginError('Please enter both username and password');
+        if (!email || !password) {
+            this.showLoginError('Please enter both email and password');
             return;
         }
 
-        const result = await authManager.login(username, password);
+        // Disable button during login
+        const loginBtn = document.getElementById('login-btn');
+        loginBtn.disabled = true;
+        loginBtn.textContent = 'Signing in...';
 
-        if (result.success) {
-            this.onLoginSuccess();
-        } else {
+        const result = await authManager.login(email, password);
+
+        loginBtn.disabled = false;
+        loginBtn.textContent = 'Sign In';
+
+        if (!result.success) {
             this.showLoginError(result.error);
         }
+        // Success is handled by auth state listener
     }
 
     async handleRegister() {
-        const username = document.getElementById('register-username').value.trim();
+        const email = document.getElementById('register-email').value.trim();
         const password = document.getElementById('register-password').value;
         const confirm = document.getElementById('register-confirm').value;
 
-        if (!username || !password || !confirm) {
+        if (!email || !password || !confirm) {
             this.showRegisterError('Please fill in all fields');
+            return;
+        }
+
+        if (password.length < 6) {
+            this.showRegisterError('Password must be at least 6 characters');
             return;
         }
 
@@ -1680,25 +1690,51 @@ class AuthUI {
             return;
         }
 
-        const result = await authManager.register(username, password);
+        // Disable button during registration
+        const registerBtn = document.getElementById('register-btn');
+        registerBtn.disabled = true;
+        registerBtn.textContent = 'Creating account...';
+
+        const result = await authManager.register(email, password);
+
+        registerBtn.disabled = false;
+        registerBtn.textContent = 'Create Account';
+
+        if (!result.success) {
+            this.showRegisterError(result.error);
+        }
+        // Success is handled by auth state listener
+    }
+
+    async handleForgotPassword() {
+        const email = document.getElementById('login-email').value.trim();
+
+        if (!email) {
+            this.showLoginError('Please enter your email address first');
+            return;
+        }
+
+        const result = await authManager.resetPassword(email);
 
         if (result.success) {
-            this.onLoginSuccess();
+            this.loginError.style.color = '#7EC850';
+            this.showLoginError('Password reset email sent! Check your inbox.');
+            setTimeout(() => {
+                this.loginError.style.color = '';
+            }, 5000);
         } else {
-            this.showRegisterError(result.error);
+            this.showLoginError(result.error);
         }
     }
 
-    handleLogout() {
+    async handleLogout() {
         if (confirm('Are you sure you want to sign out?')) {
-            authManager.logout();
-            app = null;
-            this.showOverlay();
-            this.showLoginForm();
+            await authManager.logout();
+            // Auth state listener will handle the UI update
             // Clear form inputs
-            document.getElementById('login-username').value = '';
+            document.getElementById('login-email').value = '';
             document.getElementById('login-password').value = '';
-            document.getElementById('register-username').value = '';
+            document.getElementById('register-email').value = '';
             document.getElementById('register-password').value = '';
             document.getElementById('register-confirm').value = '';
         }
@@ -1707,9 +1743,12 @@ class AuthUI {
     onLoginSuccess() {
         this.hideOverlay();
         this.clearErrors();
-        // Initialize the main application
-        app = new CardTracker();
-        console.log('Pokemon Card Collection Tracker initialized for user:', authManager.getCurrentUser().username);
+        // Initialize the main application if not already initialized
+        if (!app) {
+            app = new CardTracker();
+            const user = authManager.getCurrentUser();
+            console.log('Pokemon Card Collection Tracker initialized for user:', user.email);
+        }
     }
 
     showOverlay() {
@@ -1733,18 +1772,8 @@ document.addEventListener('DOMContentLoaded', () => {
     authUI = new AuthUI();
     authUI.init();
 
-    // Check for existing session
-    const existingUser = authManager.checkSession();
-
-    if (existingUser) {
-        // User is already logged in, initialize the app
-        authUI.hideOverlay();
-        app = new CardTracker();
-        console.log('Pokemon Card Collection Tracker initialized for user:', existingUser.username);
-    } else {
-        // Show login screen
-        authUI.showOverlay();
-        authUI.showLoginForm();
-        console.log('Waiting for user login...');
-    }
+    // Firebase auth state listener in AuthUI.init() will handle:
+    // - Showing login screen if no user
+    // - Initializing app if user is already logged in
+    console.log('Pokemon Card Collection Tracker - Waiting for Firebase auth state...');
 });
