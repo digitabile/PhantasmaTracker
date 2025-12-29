@@ -304,7 +304,7 @@ class CardTracker {
             return;
         }
 
-        container.innerHTML = filteredCards.map(card => this.createCardHTML(card)).join('');
+        container.innerHTML = filteredCards.map((card, index) => this.createCardHTML(card, index)).join('');
 
         // Add event listeners to checkboxes
         container.querySelectorAll('.card-checkbox').forEach(checkbox => {
@@ -335,7 +335,7 @@ class CardTracker {
         return card.rarity === 'Common' || card.rarity === 'Uncommon' || card.rarity === 'Rare';
     }
 
-    createCardHTML(card) {
+    createCardHTML(card, index = null) {
         const hasVariants = this.cardHasVariants(card);
 
         const typeColor = TYPE_COLORS[card.type] || '#999';
@@ -352,6 +352,10 @@ class CardTracker {
         const priceNormal = this.cardPrices.get(`${card.number}-normal`) || this.cardPrices.get(card.number);
         const priceReverseHolo = this.cardPrices.get(`${card.number}-reverseHolo`);
 
+        // Card number indicator (1, 2, 3, etc.) - only for Mega Evolution sets
+        const isMegaEvolutionSet = this.currentSet === 'mega-evolution' || this.currentSet === 'phantasmal-flames';
+        const cardNumberIndicator = (index !== null && isMegaEvolutionSet) ? `<div class="card-sequence-number">${index + 1}</div>` : '';
+
         if (hasVariants) {
             // Determine the correct label for the first variant based on rarity
             // Rare cards have Holofoil + Reverse Holo
@@ -361,6 +365,7 @@ class CardTracker {
             // Render card with two checkboxes
             return `
                 <div class="card-item ${isOwnedAny ? 'owned' : ''}" data-card-number="${card.number}">
+                    ${cardNumberIndicator}
                     <div class="card-variants">
                         <div class="variant-item">
                             <input type="checkbox"
@@ -413,6 +418,7 @@ class CardTracker {
             // Render card with single checkbox (holofoil only)
             return `
                 <div class="card-item ${isOwned ? 'owned' : ''}" data-card-number="${card.number}">
+                    ${cardNumberIndicator}
                     <input type="checkbox"
                            class="card-checkbox"
                            data-card-number="${card.number}"
@@ -604,7 +610,7 @@ class CardTracker {
             return;
         }
 
-        container.innerHTML = missingCards.map(card => this.createCardHTML(card)).join('');
+        container.innerHTML = missingCards.map((card, index) => this.createCardHTML(card, index)).join('');
 
         // Add event listeners
         container.querySelectorAll('.card-checkbox').forEach(checkbox => {

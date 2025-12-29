@@ -315,6 +315,25 @@ body {
     border: 3px solid var(--success-color);
 }
 
+.card-sequence-number {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    border: 2px solid white;
+}
+
 .card-checkbox {
     position: absolute;
     top: 10px;
