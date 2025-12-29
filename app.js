@@ -352,9 +352,8 @@ class CardTracker {
         const priceNormal = this.cardPrices.get(`${card.number}-normal`) || this.cardPrices.get(card.number);
         const priceReverseHolo = this.cardPrices.get(`${card.number}-reverseHolo`);
 
-        // Card number indicator (1, 2, 3, etc.) - only for Mega Evolution sets
-        const isMegaEvolutionSet = this.currentSet === 'mega-evolution' || this.currentSet === 'phantasmal-flames';
-        const cardNumberIndicator = (index !== null && isMegaEvolutionSet) ? `<div class="card-sequence-number">${index + 1}</div>` : '';
+        // Card number indicator (1, 2, 3, etc.) - for all sets
+        const cardNumberIndicator = index !== null ? `<div class="card-sequence-number">${index + 1}</div>` : '';
 
         if (hasVariants) {
             // Determine the correct label for the first variant based on rarity
@@ -616,7 +615,9 @@ class CardTracker {
         container.querySelectorAll('.card-checkbox').forEach(checkbox => {
             checkbox.addEventListener('change', (e) => {
                 e.stopPropagation();
-                this.toggleCardOwnership(e.target.dataset.cardNumber);
+                const cardNumber = e.target.dataset.cardNumber;
+                const variant = e.target.dataset.variant; // Will be undefined for single-variant cards
+                this.toggleCardOwnership(cardNumber, variant);
             });
         });
 
