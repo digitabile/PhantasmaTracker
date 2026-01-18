@@ -1756,3 +1756,54 @@ body {
         font-size: 0.5rem;
     }
 }
+
+/* ================================
+   My Binder View Styles
+   ================================ */
+
+.mybinder-subtitle {
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.mybinder-stats {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--success-color) 0%, #9BD870 100%);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(126, 200, 80, 0.3);
+}
+
+.mybinder-empty {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 4rem 2rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.mybinder-empty .empty-state {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.mybinder-empty .empty-icon {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.mybinder-empty h3 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.mybinder-empty p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
