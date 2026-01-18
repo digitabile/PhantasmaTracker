@@ -1089,32 +1089,59 @@ class CardTracker {
     // Avery Binder Labels Feature
     // ================================
 
-    // Get the first position slot numbers for each binder page
-    // Each page has 9 cards, so first positions are: 1, 10, 19, 28, 37, etc.
-    getFirstPositionSlots() {
+    // Get all label data: first position of each page + all EX cards
+    // Returns array of objects: { slotNumber, isEx }
+    getLabelData() {
         const binderCards = this.getBinderCards();
         const totalSlots = binderCards.length;
-        const firstPositionSlots = [];
+        const labelData = [];
+        const addedSlots = new Set();
 
+        // Add first position of each binder page (1, 10, 19, 28, etc.)
         for (let slot = 1; slot <= totalSlots; slot += this.binderCardsPerPage) {
-            firstPositionSlots.push(slot);
+            const slotInfo = binderCards[slot - 1]; // slots are 1-indexed
+            const isEx = slotInfo && this.isExCard(slotInfo.card);
+            labelData.push({ slotNumber: slot, isEx: isEx });
+            addedSlots.add(slot);
         }
 
-        return firstPositionSlots;
+        // Add all EX card slots (if not already added)
+        binderCards.forEach((slotInfo, index) => {
+            const slotNumber = index + 1;
+            if (!addedSlots.has(slotNumber) && this.isExCard(slotInfo.card)) {
+                labelData.push({ slotNumber: slotNumber, isEx: true });
+                addedSlots.add(slotNumber);
+            }
+        });
+
+        // Sort by slot number
+        labelData.sort((a, b) => a.slotNumber - b.slotNumber);
+
+        return labelData;
+    }
+
+    // Check if a card is an EX card
+    isExCard(card) {
+        if (!card) return false;
+        // Check if card name contains "ex" (case insensitive) or rarity indicates EX
+        const nameHasEx = card.name && card.name.toLowerCase().includes(' ex');
+        const rarityHasEx = card.rarity && card.rarity.toLowerCase().includes('ex');
+        return nameHasEx || rarityHasEx;
     }
 
     // Open the Avery Labels modal
     openAveryLabelsModal() {
-        const firstPositionSlots = this.getFirstPositionSlots();
+        const labelData = this.getLabelData();
 
         // Update label count
-        document.getElementById('avery-labels-count').textContent = `(${firstPositionSlots.length} labels)`;
+        document.getElementById('avery-labels-count').textContent = `(${labelData.length} labels)`;
 
         // Generate preview
         const previewContainer = document.getElementById('avery-labels-preview-grid');
-        previewContainer.innerHTML = firstPositionSlots.map(slotNum => `
-            <div class="avery-label-preview">
-                <span class="avery-label-number">${slotNum}</span>
+        previewContainer.innerHTML = labelData.map(label => `
+            <div class="avery-label-preview ${label.isEx ? 'avery-label-ex' : ''}">
+                <span class="avery-label-number">${label.slotNumber}</span>
+                ${label.isEx ? '<span class="avery-label-ex-text">ex</span>' : ''}
             </div>
         `).join('');
 
@@ -1129,7 +1156,7 @@ class CardTracker {
 
     // Print the Avery Labels in Presta 94504 format
     printAveryLabels() {
-        const firstPositionSlots = this.getFirstPositionSlots();
+        const labelData = this.getLabelData();
         const printContainer = document.getElementById('avery-labels-print-container');
 
         // Presta 94504 specifications:
@@ -1142,11 +1169,11 @@ class CardTracker {
 
         // Generate label sheets
         let printHTML = '';
-        const totalPages = Math.ceil(firstPositionSlots.length / labelsPerPage);
+        const totalPages = Math.ceil(labelData.length / labelsPerPage);
 
         for (let page = 0; page < totalPages; page++) {
             const startIndex = page * labelsPerPage;
-            const pageLabels = firstPositionSlots.slice(startIndex, startIndex + labelsPerPage);
+            const pageLabels = labelData.slice(startIndex, startIndex + labelsPerPage);
 
             printHTML += `<div class="avery-label-sheet">`;
 
@@ -1155,12 +1182,15 @@ class CardTracker {
 
                 for (let col = 0; col < labelsPerRow; col++) {
                     const labelIndex = row * labelsPerRow + col;
-                    const slotNum = pageLabels[labelIndex];
+                    const label = pageLabels[labelIndex];
 
-                    if (slotNum !== undefined) {
+                    if (label !== undefined) {
                         printHTML += `
                             <div class="avery-label">
-                                <span class="avery-label-text">${slotNum}</span>
+                                <span class="avery-label-text ${label.isEx ? 'avery-label-text-ex' : ''}">
+                                    <span class="avery-label-num">${label.slotNumber}</span>
+                                    ${label.isEx ? '<span class="avery-label-ex-print">ex</span>' : ''}
+                                </span>
                             </div>
                         `;
                     } else {

@@ -1914,15 +1914,31 @@ body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border-radius: 50%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.avery-label-preview.avery-label-ex {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
 }
 
 .avery-label-number {
     color: white;
     font-weight: 700;
     font-size: 0.9rem;
+    line-height: 1;
+}
+
+.avery-label-ex-text {
+    color: white;
+    font-weight: 700;
+    font-size: 0.6rem;
+    text-transform: lowercase;
+    font-style: italic;
+    line-height: 1;
+    margin-top: 1px;
 }
 
 /* Labels Actions */
@@ -2007,6 +2023,7 @@ body {
 
     .avery-label-text {
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         width: 0.75in;   /* Label diameter */
@@ -2019,6 +2036,22 @@ body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
+    }
+
+    .avery-label-text-ex {
+        background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    }
+
+    .avery-label-num {
+        line-height: 1;
+    }
+
+    .avery-label-ex-print {
+        font-size: 8pt;
+        font-style: italic;
+        text-transform: lowercase;
+        line-height: 1;
+        margin-top: 1px;
     }
 
     .avery-label-empty {
