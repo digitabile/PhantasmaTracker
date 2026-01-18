@@ -443,8 +443,8 @@ class CardTracker {
         });
 
         document.getElementById('mybinder-next').addEventListener('click', () => {
-            const ownedCards = this.getMyBinderCards();
-            const totalPages = Math.ceil(ownedCards.length / this.binderCardsPerPage);
+            const binderCards = this.getBinderCards();
+            const totalPages = Math.ceil(binderCards.length / this.binderCardsPerPage);
             if (this.myBinderCurrentPage < totalPages) {
                 this.myBinderCurrentPage++;
                 this.renderMyBinder();
@@ -1116,32 +1116,25 @@ class CardTracker {
         }
     }
 
-    // My Binder View (Owned Cards Only)
-    // Get only owned cards for My Binder
-    getMyBinderCards() {
-        const binderCards = this.getBinderCards();
-        // Filter to only include cards that are actually owned
-        const ownedOnly = binderCards.filter(slot => {
-            const isOwned = this.ownedCards.has(slot.ownershipKey);
-            return isOwned;
-        });
-        console.log(`My Binder: ${ownedOnly.length} owned out of ${binderCards.length} total slots`);
-        console.log('Owned cards set:', Array.from(this.ownedCards));
-        return ownedOnly;
-    }
-
+    // My Binder View (Shows all slots, but only owned cards have images)
     renderMyBinder() {
-        const ownedCards = this.getMyBinderCards();
-        const totalCards = ownedCards.length;
-        const totalPages = Math.max(1, Math.ceil(totalCards / this.binderCardsPerPage));
+        const binderCards = this.getBinderCards();
+        const totalSlots = binderCards.length;
+        const totalPages = Math.ceil(totalSlots / this.binderCardsPerPage);
+
+        // Count owned cards for display
+        const ownedCount = binderCards.filter(slot => this.ownedCards.has(slot.ownershipKey)).length;
 
         // Ensure current page is valid
         if (this.myBinderCurrentPage > totalPages) {
             this.myBinderCurrentPage = totalPages;
         }
+        if (this.myBinderCurrentPage < 1) {
+            this.myBinderCurrentPage = 1;
+        }
 
-        // Update card count
-        document.getElementById('mybinder-card-count').textContent = totalCards;
+        // Update card count (shows owned / total)
+        document.getElementById('mybinder-card-count').textContent = `${ownedCount} / ${totalSlots}`;
 
         // Update page info
         document.getElementById('mybinder-current-page').textContent = this.myBinderCurrentPage;
@@ -1161,28 +1154,20 @@ class CardTracker {
         const progress = totalPages > 1 ? ((this.myBinderCurrentPage - 1) / (totalPages - 1)) * 100 : 0;
         slider.style.setProperty('--slider-progress', `${progress}%`);
 
-        // Show/hide empty state and binder
+        // Always show the binder (hide empty state)
         const binderPage = document.querySelector('#mybinder-view .binder-page');
         const binderControls = document.querySelector('#mybinder-view .binder-controls');
         const binderSliderContainer = document.querySelector('#mybinder-view .binder-slider-container');
         const emptyState = document.getElementById('mybinder-empty');
 
-        if (totalCards === 0) {
-            binderPage.style.display = 'none';
-            binderControls.style.display = 'none';
-            binderSliderContainer.style.display = 'none';
-            emptyState.style.display = 'block';
-            return;
-        } else {
-            binderPage.style.display = 'block';
-            binderControls.style.display = 'flex';
-            binderSliderContainer.style.display = 'flex';
-            emptyState.style.display = 'none';
-        }
+        binderPage.style.display = 'block';
+        binderControls.style.display = 'flex';
+        binderSliderContainer.style.display = 'flex';
+        emptyState.style.display = 'none';
 
         // Get cards for current page
         const startIndex = (this.myBinderCurrentPage - 1) * this.binderCardsPerPage;
-        const pageCards = ownedCards.slice(startIndex, startIndex + this.binderCardsPerPage);
+        const pageCards = binderCards.slice(startIndex, startIndex + this.binderCardsPerPage);
 
         // Render binder grid
         const container = document.getElementById('mybinder-grid');
@@ -1192,26 +1177,36 @@ class CardTracker {
             const slotData = pageCards[i];
 
             if (slotData) {
+                const isOwned = this.ownedCards.has(slotData.ownershipKey);
                 const slot = document.createElement('div');
-                slot.className = 'binder-slot owned';
+                slot.className = `binder-slot ${isOwned ? 'owned' : ''}`;
                 slot.dataset.cardNumber = slotData.card.number;
                 slot.dataset.variant = slotData.variant || '';
 
-                // Calculate display number for this page (1-9 position on page)
-                const displayNumber = startIndex + i + 1;
-
-                slot.innerHTML = `
-                    <span class="binder-slot-number">${displayNumber}</span>
-                    <span class="binder-slot-owned-badge">✓</span>
-                    <img src="${slotData.card.imageUrl}"
-                         alt="${slotData.card.name}"
-                         class="binder-slot-image"
-                         onerror="this.style.display='none';">
-                    <div class="binder-slot-info">
-                        <div class="binder-slot-name">${slotData.card.name}</div>
-                        <div class="binder-slot-variant">${slotData.variantLabel}</div>
-                    </div>
-                `;
+                if (isOwned) {
+                    // Show card image for owned cards
+                    slot.innerHTML = `
+                        <span class="binder-slot-number">${slotData.slotNumber}</span>
+                        <span class="binder-slot-owned-badge">✓</span>
+                        <img src="${slotData.card.imageUrl}"
+                             alt="${slotData.card.name}"
+                             class="binder-slot-image"
+                             onerror="this.style.display='none';">
+                        <div class="binder-slot-info">
+                            <div class="binder-slot-name">${slotData.card.name}</div>
+                            <div class="binder-slot-variant">${slotData.variantLabel}</div>
+                        </div>
+                    `;
+                } else {
+                    // Show EMPTY placeholder for unowned cards
+                    slot.innerHTML = `
+                        <span class="binder-slot-number">${slotData.slotNumber}</span>
+                        <div class="binder-slot-empty">
+                            <span class="empty-icon">📄</span>
+                            <span class="empty-text">Empty</span>
+                        </div>
+                    `;
+                }
 
                 slot.addEventListener('click', () => {
                     this.showCardDetail(slotData.card.number);
@@ -1219,7 +1214,7 @@ class CardTracker {
 
                 container.appendChild(slot);
             } else {
-                // Empty slot placeholder for incomplete pages
+                // Empty slot placeholder for incomplete final page
                 const slot = document.createElement('div');
                 slot.className = 'binder-slot';
                 slot.style.visibility = 'hidden';
@@ -1230,7 +1225,7 @@ class CardTracker {
         // Update subtitle with current set name
         const subtitle = document.querySelector('.mybinder-subtitle');
         if (subtitle) {
-            subtitle.textContent = `Your owned ${CARD_SETS[this.currentSet].name} cards in a 3x3 binder format`;
+            subtitle.textContent = `Your ${CARD_SETS[this.currentSet].name} binder - owned cards shown, empty slots for missing`;
         }
     }
 
