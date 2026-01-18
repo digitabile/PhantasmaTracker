@@ -1179,12 +1179,12 @@ class CardTracker {
             if (slotData) {
                 const isOwned = this.ownedCards.has(slotData.ownershipKey);
                 const slot = document.createElement('div');
-                slot.className = `binder-slot ${isOwned ? 'owned' : ''}`;
+                slot.className = `binder-slot ${isOwned ? 'owned' : 'missing'}`;
                 slot.dataset.cardNumber = slotData.card.number;
                 slot.dataset.variant = slotData.variant || '';
 
                 if (isOwned) {
-                    // Show card image for owned cards
+                    // Show card image for owned cards (green border)
                     slot.innerHTML = `
                         <span class="binder-slot-number">${slotData.slotNumber}</span>
                         <span class="binder-slot-owned-badge">✓</span>
@@ -1198,12 +1198,17 @@ class CardTracker {
                         </div>
                     `;
                 } else {
-                    // Show EMPTY placeholder for unowned cards
+                    // Show faded card image for unowned cards (red border)
                     slot.innerHTML = `
                         <span class="binder-slot-number">${slotData.slotNumber}</span>
-                        <div class="binder-slot-empty">
-                            <span class="empty-icon">📄</span>
-                            <span class="empty-text">Empty</span>
+                        <span class="binder-slot-missing-badge">✗</span>
+                        <img src="${slotData.card.imageUrl}"
+                             alt="${slotData.card.name}"
+                             class="binder-slot-image binder-slot-image-faded"
+                             onerror="this.style.display='none';">
+                        <div class="binder-slot-info">
+                            <div class="binder-slot-name">${slotData.card.name}</div>
+                            <div class="binder-slot-variant">${slotData.variantLabel}</div>
                         </div>
                     `;
                 }
@@ -1225,7 +1230,7 @@ class CardTracker {
         // Update subtitle with current set name
         const subtitle = document.querySelector('.mybinder-subtitle');
         if (subtitle) {
-            subtitle.textContent = `Your ${CARD_SETS[this.currentSet].name} binder - owned cards shown, empty slots for missing`;
+            subtitle.textContent = `Your ${CARD_SETS[this.currentSet].name} binder - green = owned, red = missing`;
         }
     }
 

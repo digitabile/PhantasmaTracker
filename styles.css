@@ -1528,6 +1528,34 @@ body {
     box-shadow: 0 0 15px rgba(126, 200, 80, 0.3);
 }
 
+.binder-slot.missing {
+    border-color: var(--danger-color);
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+}
+
+.binder-slot-image-faded {
+    opacity: 0.3;
+    filter: grayscale(30%);
+}
+
+.binder-slot-missing-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--danger-color);
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
 .binder-slot-number {
     position: absolute;
     top: 8px;
