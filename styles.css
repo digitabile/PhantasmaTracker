@@ -1124,7 +1124,6 @@ body {
     width: 80px;
     height: auto;
     margin-bottom: 1rem;
-    filter: invert(45%) sepia(100%) saturate(500%) hue-rotate(340deg);
 }
 
 .auth-header h1 {
@@ -1282,7 +1281,6 @@ body {
 .header-logo {
     width: 60px;
     height: auto;
-    filter: brightness(0) invert(1);
 }
 
 .header-version {
