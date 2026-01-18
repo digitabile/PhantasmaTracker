@@ -348,7 +348,7 @@ body {
 /* Variant Checkboxes */
 .card-variants {
     position: absolute;
-    bottom: 135px;
+    bottom: 145px;
     right: 10px;
     display: flex;
     flex-direction: row;
@@ -394,13 +394,14 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 22px;
-    height: 22px;
+    min-width: 24px;
+    height: 24px;
+    padding: 0 4px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    border-radius: 50%;
-    font-weight: bold;
-    font-size: 0.7rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.55rem;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     border: 1.5px solid white;
     flex-shrink: 0;
@@ -409,7 +410,7 @@ body {
 /* Single checkbox wrapper for non-variant cards */
 .single-checkbox-wrapper {
     position: absolute;
-    bottom: 135px;
+    bottom: 145px;
     right: 10px;
     display: flex;
     flex-direction: row;
