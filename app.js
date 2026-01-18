@@ -473,6 +473,29 @@ class CardTracker {
         document.getElementById('reset-header-color-btn').addEventListener('click', () => {
             this.resetHeaderColor();
         });
+
+        // Avery Binder Labels
+        document.getElementById('avery-labels-btn').addEventListener('click', () => {
+            this.openAveryLabelsModal();
+        });
+
+        document.getElementById('avery-labels-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'avery-labels-modal') {
+                this.closeAveryLabelsModal();
+            }
+        });
+
+        document.querySelector('.avery-labels-close').addEventListener('click', () => {
+            this.closeAveryLabelsModal();
+        });
+
+        document.getElementById('close-avery-labels-btn').addEventListener('click', () => {
+            this.closeAveryLabelsModal();
+        });
+
+        document.getElementById('print-avery-labels-btn').addEventListener('click', () => {
+            this.printAveryLabels();
+        });
     }
 
     // View Management
@@ -1062,6 +1085,107 @@ class CardTracker {
         }
     }
 
+    // ================================
+    // Avery Binder Labels Feature
+    // ================================
+
+    // Get the first position slot numbers for each binder page
+    // Each page has 9 cards, so first positions are: 1, 10, 19, 28, 37, etc.
+    getFirstPositionSlots() {
+        const binderCards = this.getBinderCards();
+        const totalSlots = binderCards.length;
+        const firstPositionSlots = [];
+
+        for (let slot = 1; slot <= totalSlots; slot += this.binderCardsPerPage) {
+            firstPositionSlots.push(slot);
+        }
+
+        return firstPositionSlots;
+    }
+
+    // Open the Avery Labels modal
+    openAveryLabelsModal() {
+        const firstPositionSlots = this.getFirstPositionSlots();
+
+        // Update label count
+        document.getElementById('avery-labels-count').textContent = `(${firstPositionSlots.length} labels)`;
+
+        // Generate preview
+        const previewContainer = document.getElementById('avery-labels-preview-grid');
+        previewContainer.innerHTML = firstPositionSlots.map(slotNum => `
+            <div class="avery-label-preview">
+                <span class="avery-label-number">${slotNum}</span>
+            </div>
+        `).join('');
+
+        // Show modal
+        document.getElementById('avery-labels-modal').classList.add('active');
+    }
+
+    // Close the Avery Labels modal
+    closeAveryLabelsModal() {
+        document.getElementById('avery-labels-modal').classList.remove('active');
+    }
+
+    // Print the Avery Labels in Presta 94504 format
+    printAveryLabels() {
+        const firstPositionSlots = this.getFirstPositionSlots();
+        const printContainer = document.getElementById('avery-labels-print-container');
+
+        // Presta 94504 specifications:
+        // - 0.75" diameter circular labels
+        // - 9 columns x 12 rows = 108 labels per page
+        // - Letter size paper (8.5" x 11")
+        const labelsPerRow = 9;
+        const rowsPerPage = 12;
+        const labelsPerPage = labelsPerRow * rowsPerPage;
+
+        // Generate label sheets
+        let printHTML = '';
+        const totalPages = Math.ceil(firstPositionSlots.length / labelsPerPage);
+
+        for (let page = 0; page < totalPages; page++) {
+            const startIndex = page * labelsPerPage;
+            const pageLabels = firstPositionSlots.slice(startIndex, startIndex + labelsPerPage);
+
+            printHTML += `<div class="avery-label-sheet">`;
+
+            for (let row = 0; row < rowsPerPage; row++) {
+                printHTML += `<div class="avery-label-row">`;
+
+                for (let col = 0; col < labelsPerRow; col++) {
+                    const labelIndex = row * labelsPerRow + col;
+                    const slotNum = pageLabels[labelIndex];
+
+                    if (slotNum !== undefined) {
+                        printHTML += `
+                            <div class="avery-label">
+                                <span class="avery-label-text">${slotNum}</span>
+                            </div>
+                        `;
+                    } else {
+                        // Empty label placeholder
+                        printHTML += `<div class="avery-label avery-label-empty"></div>`;
+                    }
+                }
+
+                printHTML += `</div>`;
+            }
+
+            printHTML += `</div>`;
+        }
+
+        printContainer.innerHTML = printHTML;
+
+        // Close modal and trigger print
+        this.closeAveryLabelsModal();
+
+        // Small delay to ensure DOM is updated
+        setTimeout(() => {
+            window.print();
+        }, 100);
+    }
+
     // Modal
     showCardDetail(cardNumber) {
         const card = this.cards.find(c => c.number === cardNumber);
@@ -1567,7 +1691,7 @@ class CardTracker {
         const backup = {
             exportDate: new Date().toISOString(),
             version: '1.0',
-            appVersion: 'v25.1',
+            appVersion: 'v25.2',
             userEmail: user ? user.email : 'unknown',
             userId: user ? user.uid : 'unknown',
             totalSets: Object.keys(allSetsData).length,
