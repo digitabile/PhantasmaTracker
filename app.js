@@ -398,15 +398,6 @@ class CardTracker {
             this.importCollection(e.target.files[0]);
         });
 
-        // Gallery filters
-        document.querySelectorAll('.gallery-filter-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                document.querySelectorAll('.gallery-filter-btn').forEach(b => b.classList.remove('active'));
-                e.currentTarget.classList.add('active');
-                this.renderGallery(e.currentTarget.dataset.category);
-            });
-        });
-
         // My Binder navigation
         document.getElementById('mybinder-prev').addEventListener('click', () => {
             if (this.myBinderCurrentPage > 1) {
@@ -502,8 +493,6 @@ class CardTracker {
         // Render view-specific content
         if (viewName === 'statistics') {
             this.renderStatistics();
-        } else if (viewName === 'gallery') {
-            this.renderGallery('all');
         } else if (viewName === 'mybinder') {
             this.renderMyBinder();
         }
@@ -906,59 +895,6 @@ class CardTracker {
                 if (!e.target.classList.contains('card-checkbox')) {
                     this.showCardDetail(cardEl.dataset.cardNumber);
                 }
-            });
-        });
-    }
-
-    // Gallery View
-    renderGallery(category) {
-        // Update gallery subtitle with current set name
-        const subtitle = document.querySelector('.gallery-subtitle');
-        if (subtitle) {
-            subtitle.textContent = `Browse all cards in the ${CARD_SETS[this.currentSet].name} set`;
-        }
-
-        const container = document.getElementById('gallery-grid');
-        let filteredCards = this.cards;
-
-        if (category !== 'all') {
-            filteredCards = this.cards.filter(card => card.category === category);
-        }
-
-        container.innerHTML = filteredCards.map(card => {
-            const isOwned = this.ownedCards.has(card.number);
-            const typeColor = TYPE_COLORS[card.type] || '#999';
-
-            return `
-                <div class="gallery-card ${isOwned ? 'owned' : ''}" data-card-number="${card.number}">
-                    <div class="card-image-container">
-                        <img src="${card.imageUrl}"
-                             alt="${card.name}"
-                             class="card-image"
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                        <div class="card-placeholder" style="display: none;">
-                            <div class="card-number">#${card.number}</div>
-                            <div>${card.type}</div>
-                        </div>
-                    </div>
-                    <div class="card-info">
-                        <div class="card-header">
-                            <span class="card-number-badge">#${card.number}</span>
-                            <span class="card-type-badge" style="background-color: ${typeColor}">
-                                ${card.type}
-                            </span>
-                        </div>
-                        <div class="card-name">${card.name}</div>
-                        <div class="card-rarity">${card.rarity}</div>
-                    </div>
-                </div>
-            `;
-        }).join('');
-
-        // Add click listeners
-        container.querySelectorAll('.gallery-card').forEach(cardEl => {
-            cardEl.addEventListener('click', () => {
-                this.showCardDetail(cardEl.dataset.cardNumber);
             });
         });
     }
