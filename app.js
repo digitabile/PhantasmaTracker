@@ -177,6 +177,10 @@ class CardTracker {
             owned: ''
         };
 
+        // Binder view state
+        this.binderCurrentPage = 1;
+        this.binderCardsPerPage = 9; // 3x3 grid
+
         // Update UI with current username
         this.updateUserDisplay();
 
@@ -403,6 +407,23 @@ class CardTracker {
             });
         });
 
+        // Binder navigation
+        document.getElementById('binder-prev').addEventListener('click', () => {
+            if (this.binderCurrentPage > 1) {
+                this.binderCurrentPage--;
+                this.renderBinder();
+            }
+        });
+
+        document.getElementById('binder-next').addEventListener('click', () => {
+            const binderCards = this.getBinderCards();
+            const totalPages = Math.ceil(binderCards.length / this.binderCardsPerPage);
+            if (this.binderCurrentPage < totalPages) {
+                this.binderCurrentPage++;
+                this.renderBinder();
+            }
+        });
+
         // Modal
         document.getElementById('card-modal').addEventListener('click', (e) => {
             if (e.target.id === 'card-modal') {
@@ -476,6 +497,8 @@ class CardTracker {
             this.renderStatistics();
         } else if (viewName === 'gallery') {
             this.renderGallery('all');
+        } else if (viewName === 'binder') {
+            this.renderBinder();
         }
     }
 
@@ -931,6 +954,120 @@ class CardTracker {
                 this.showCardDetail(cardEl.dataset.cardNumber);
             });
         });
+    }
+
+    // Binder View
+    // Generate a flat list of all unique card slots (each checkbox = one slot)
+    getBinderCards() {
+        const binderCards = [];
+        let slotNumber = 1;
+
+        this.cards.forEach(card => {
+            const hasVariants = this.cardHasVariants(card);
+
+            if (hasVariants) {
+                // Determine the correct label for the first variant based on rarity
+                const firstVariantLabel = card.rarity === 'Rare' ? 'Holofoil' : 'Non-foil';
+
+                // Add normal variant slot
+                binderCards.push({
+                    card: card,
+                    variant: 'normal',
+                    variantLabel: firstVariantLabel,
+                    slotNumber: slotNumber++,
+                    ownershipKey: `${card.number}-normal`
+                });
+
+                // Add reverse holo variant slot
+                binderCards.push({
+                    card: card,
+                    variant: 'reverseHolo',
+                    variantLabel: 'Rev Holo',
+                    slotNumber: slotNumber++,
+                    ownershipKey: `${card.number}-reverseHolo`
+                });
+            } else {
+                // Single variant card
+                binderCards.push({
+                    card: card,
+                    variant: null,
+                    variantLabel: card.rarity,
+                    slotNumber: slotNumber++,
+                    ownershipKey: card.number
+                });
+            }
+        });
+
+        return binderCards;
+    }
+
+    renderBinder() {
+        const binderCards = this.getBinderCards();
+        const totalPages = Math.ceil(binderCards.length / this.binderCardsPerPage);
+
+        // Update page info
+        document.getElementById('binder-current-page').textContent = this.binderCurrentPage;
+        document.getElementById('binder-total-pages').textContent = totalPages;
+
+        // Update navigation buttons
+        document.getElementById('binder-prev').disabled = this.binderCurrentPage <= 1;
+        document.getElementById('binder-next').disabled = this.binderCurrentPage >= totalPages;
+
+        // Get cards for current page
+        const startIndex = (this.binderCurrentPage - 1) * this.binderCardsPerPage;
+        const pageCards = binderCards.slice(startIndex, startIndex + this.binderCardsPerPage);
+
+        // Render binder grid
+        const container = document.getElementById('binder-grid');
+        container.innerHTML = '';
+
+        for (let i = 0; i < this.binderCardsPerPage; i++) {
+            const slotData = pageCards[i];
+
+            if (slotData) {
+                const isOwned = this.ownedCards.has(slotData.ownershipKey);
+                const slot = document.createElement('div');
+                slot.className = `binder-slot ${isOwned ? 'owned' : ''}`;
+                slot.dataset.cardNumber = slotData.card.number;
+                slot.dataset.variant = slotData.variant || '';
+
+                slot.innerHTML = `
+                    <span class="binder-slot-number">${slotData.slotNumber}</span>
+                    ${isOwned ? '<span class="binder-slot-owned-badge">✓</span>' : ''}
+                    <img src="${slotData.card.imageUrl}"
+                         alt="${slotData.card.name}"
+                         class="binder-slot-image"
+                         onerror="this.style.display='none';">
+                    <div class="binder-slot-info">
+                        <div class="binder-slot-name">${slotData.card.name}</div>
+                        <div class="binder-slot-variant">${slotData.variantLabel}</div>
+                    </div>
+                `;
+
+                slot.addEventListener('click', () => {
+                    this.showCardDetail(slotData.card.number);
+                });
+
+                container.appendChild(slot);
+            } else {
+                // Empty slot
+                const slot = document.createElement('div');
+                slot.className = 'binder-slot';
+                slot.innerHTML = `
+                    <div class="binder-slot-empty">
+                        <span class="empty-icon">📄</span>
+                        <span class="empty-text">Empty</span>
+                    </div>
+                `;
+                container.appendChild(slot);
+            }
+        }
+
+        // Update subtitle with current set name
+        const subtitle = document.querySelector('.binder-subtitle');
+        if (subtitle) {
+            subtitle.textContent = `View your ${CARD_SETS[this.currentSet].name} collection in a 3x3 binder format`;
+        }
     }
 
     // Modal

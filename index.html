@@ -140,6 +140,9 @@
             <button class="nav-btn" data-view="gallery">
                 <span class="icon">🖼️</span> Gallery
             </button>
+            <button class="nav-btn" data-view="binder">
+                <span class="icon">📖</span> Binder View
+            </button>
             <button class="nav-btn" id="export-btn" style="margin-left: auto; background: #4A90E2;">
                 <span class="icon">💾</span> Export Backup
             </button>
@@ -280,6 +283,32 @@
 
                     <div id="gallery-grid" class="gallery-grid">
                         <!-- Gallery cards will be inserted here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Binder View -->
+            <div id="binder-view" class="view">
+                <div class="binder-container">
+                    <h2>Binder View</h2>
+                    <p class="binder-subtitle">View your collection in a 3x3 binder format</p>
+
+                    <div class="binder-controls">
+                        <button id="binder-prev" class="binder-nav-btn" disabled>
+                            <span class="icon">◀</span> Previous
+                        </button>
+                        <span class="binder-page-info">
+                            Page <span id="binder-current-page">1</span> of <span id="binder-total-pages">1</span>
+                        </span>
+                        <button id="binder-next" class="binder-nav-btn">
+                            Next <span class="icon">▶</span>
+                        </button>
+                    </div>
+
+                    <div class="binder-page">
+                        <div id="binder-grid" class="binder-grid">
+                            <!-- Binder slots will be inserted here -->
+                        </div>
                     </div>
                 </div>
             </div>
