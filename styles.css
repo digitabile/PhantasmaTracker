@@ -938,6 +938,20 @@ body {
     font-size: 0.9rem;
 }
 
+.backup-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.backup-buttons button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+}
+
 .setting-item {
     margin-bottom: 1rem;
 }
