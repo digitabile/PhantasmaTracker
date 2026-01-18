@@ -304,7 +304,14 @@ class CardTracker {
             return;
         }
 
-        container.innerHTML = filteredCards.map((card, index) => this.createCardHTML(card, index)).join('');
+        // Calculate cumulative checkbox index for each card
+        let checkboxIndex = 0;
+        container.innerHTML = filteredCards.map((card) => {
+            const startIndex = checkboxIndex;
+            const hasVariants = this.cardHasVariants(card);
+            checkboxIndex += hasVariants ? 2 : 1; // Increment by number of checkboxes
+            return this.createCardHTML(card, startIndex);
+        }).join('');
 
         // Add event listeners to checkboxes
         container.querySelectorAll('.card-checkbox').forEach(checkbox => {
@@ -352,8 +359,9 @@ class CardTracker {
         const priceNormal = this.cardPrices.get(`${card.number}-normal`) || this.cardPrices.get(card.number);
         const priceReverseHolo = this.cardPrices.get(`${card.number}-reverseHolo`);
 
-        // Card number indicator (1, 2, 3, etc.) - for all sets
-        const cardNumberIndicator = index !== null ? `<div class="card-sequence-number">${index + 1}</div>` : '';
+        // Checkbox number indicators (1, 2, 3, etc.) - for each checkbox variant
+        const firstCheckboxNum = index !== null ? index + 1 : null;
+        const secondCheckboxNum = index !== null ? index + 2 : null;
 
         if (hasVariants) {
             // Determine the correct label for the first variant based on rarity
@@ -361,12 +369,12 @@ class CardTracker {
             // Common/Uncommon cards have Non-foil + Reverse Holo
             const firstVariantLabel = card.rarity === 'Rare' ? 'Holofoil' : 'Non-foil';
 
-            // Render card with two checkboxes
+            // Render card with two checkboxes, each with its own number
             return `
                 <div class="card-item ${isOwnedAny ? 'owned' : ''}" data-card-number="${card.number}">
-                    ${cardNumberIndicator}
                     <div class="card-variants">
                         <div class="variant-item">
+                            ${firstCheckboxNum ? `<span class="checkbox-sequence-number">${firstCheckboxNum}</span>` : ''}
                             <input type="checkbox"
                                    class="card-checkbox variant-checkbox-input"
                                    data-card-number="${card.number}"
@@ -376,6 +384,7 @@ class CardTracker {
                             <label for="card-${card.number}-normal" class="variant-label">${firstVariantLabel}</label>
                         </div>
                         <div class="variant-item">
+                            ${secondCheckboxNum ? `<span class="checkbox-sequence-number">${secondCheckboxNum}</span>` : ''}
                             <input type="checkbox"
                                    class="card-checkbox variant-checkbox-input"
                                    data-card-number="${card.number}"
@@ -417,11 +426,13 @@ class CardTracker {
             // Render card with single checkbox (holofoil only)
             return `
                 <div class="card-item ${isOwned ? 'owned' : ''}" data-card-number="${card.number}">
-                    ${cardNumberIndicator}
-                    <input type="checkbox"
-                           class="card-checkbox"
-                           data-card-number="${card.number}"
-                           ${isOwned ? 'checked' : ''}>
+                    <div class="single-checkbox-wrapper">
+                        ${firstCheckboxNum ? `<span class="checkbox-sequence-number">${firstCheckboxNum}</span>` : ''}
+                        <input type="checkbox"
+                               class="card-checkbox"
+                               data-card-number="${card.number}"
+                               ${isOwned ? 'checked' : ''}>
+                    </div>
 
                     <div class="card-image-container">
                         <img src="${card.imageUrl}"
