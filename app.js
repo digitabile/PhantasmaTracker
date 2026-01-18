@@ -424,6 +424,13 @@ class CardTracker {
             }
         });
 
+        // Binder slider
+        const binderSlider = document.getElementById('binder-slider');
+        binderSlider.addEventListener('input', (e) => {
+            this.binderCurrentPage = parseInt(e.target.value);
+            this.renderBinder();
+        });
+
         // Modal
         document.getElementById('card-modal').addEventListener('click', (e) => {
             if (e.target.id === 'card-modal') {
@@ -1012,6 +1019,16 @@ class CardTracker {
         // Update navigation buttons
         document.getElementById('binder-prev').disabled = this.binderCurrentPage <= 1;
         document.getElementById('binder-next').disabled = this.binderCurrentPage >= totalPages;
+
+        // Update slider
+        const slider = document.getElementById('binder-slider');
+        slider.max = totalPages;
+        slider.value = this.binderCurrentPage;
+        document.getElementById('binder-slider-max').textContent = totalPages;
+
+        // Update slider progress visual
+        const progress = ((this.binderCurrentPage - 1) / (totalPages - 1)) * 100 || 0;
+        slider.style.setProperty('--slider-progress', `${progress}%`);
 
         // Get cards for current page
         const startIndex = (this.binderCurrentPage - 1) * this.binderCardsPerPage;
