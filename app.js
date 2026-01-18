@@ -1567,7 +1567,7 @@ class CardTracker {
         const backup = {
             exportDate: new Date().toISOString(),
             version: '1.0',
-            appVersion: 'v18.0',
+            appVersion: 'v25.0',
             userEmail: user ? user.email : 'unknown',
             userId: user ? user.uid : 'unknown',
             totalSets: Object.keys(allSetsData).length,
