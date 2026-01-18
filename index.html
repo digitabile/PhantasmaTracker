@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokemon Card Collection Tracker</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=25.1">
+    <link rel="icon" type="image/png" href="assets/Mohsy_pokeball.png">
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
@@ -15,10 +16,10 @@
     <div id="auth-overlay" class="auth-overlay">
         <div class="auth-container">
             <div class="auth-header">
-                <img src="assets/logo.svg" alt="Logo" class="auth-logo">
+                <img src="assets/Mohsy_pokeball.png" alt="Logo" class="auth-logo">
                 <h1>Pokemon Card Tracker</h1>
                 <p>Track your collection across multiple sets</p>
-                <span class="auth-version" id="auth-version">v18.0 (Firebase Auth)</span>
+                <span class="auth-version" id="auth-version">v25.1</span>
             </div>
 
             <!-- Login Form -->
@@ -74,18 +75,19 @@
         <!-- Header -->
         <header class="app-header">
             <div class="header-logo-section">
-                <img src="assets/logo.svg" alt="Logo" class="header-logo">
+                <img src="assets/Mohsy_pokeball.png" alt="Logo" class="header-logo">
                 <div class="header-content">
                     <h1>Pokemon Card Collection Tracker</h1>
                     <p class="subtitle">Track your Pokemon TCG collection across multiple sets</p>
                 </div>
-                <span class="header-version" id="header-version">v18.0 (Firebase Auth)</span>
+                <span class="header-version" id="header-version">v25.1</span>
             </div>
             <div class="user-controls">
                 <span class="user-badge" id="user-badge">
                     <span class="user-icon">👤</span>
                     <span id="current-username">Guest</span>
                 </span>
+                <button id="settings-btn" class="settings-btn" title="Settings">⚙️</button>
                 <button id="logout-btn" class="logout-btn" title="Sign out">
                     🚪 Logout
                 </button>
@@ -137,20 +139,11 @@
             <button class="nav-btn" data-view="statistics">
                 <span class="icon">📊</span> Statistics
             </button>
-            <button class="nav-btn" data-view="gallery">
-                <span class="icon">🖼️</span> Gallery
+            <button class="nav-btn" data-view="mybinder">
+                <span class="icon">📚</span> My Binder
             </button>
-            <button class="nav-btn" id="export-btn" style="margin-left: auto; background: #4A90E2;">
-                <span class="icon">💾</span> Export Backup
-            </button>
-            <button class="nav-btn" id="import-btn" style="background: #9B59B6;">
-                <span class="icon">📥</span> Import Backup
-            </button>
-            <button class="nav-btn" id="refresh-prices-btn" style="background: #7EC850;">
+            <button class="nav-btn" id="refresh-prices-btn" style="margin-left: auto; background: #7EC850;">
                 <span class="icon">💰</span> Refresh Prices
-            </button>
-            <button class="nav-btn" id="settings-btn" style="background: #95A5A6;">
-                <span class="icon">⚙️</span> Settings
             </button>
         </nav>
 
@@ -265,21 +258,46 @@
                 </div>
             </div>
 
-            <!-- Gallery View -->
-            <div id="gallery-view" class="view">
-                <div class="gallery-container">
-                    <h2>Card Gallery</h2>
-                    <p class="gallery-subtitle">Browse all cards in the Phantasmal Flames set</p>
+            <!-- My Binder View -->
+            <div id="mybinder-view" class="view">
+                <div class="binder-container">
+                    <h2>My Binder</h2>
+                    <p class="mybinder-subtitle">Your owned cards in a 3x3 binder format</p>
 
-                    <div class="gallery-filters">
-                        <button class="gallery-filter-btn active" data-category="all">All Cards</button>
-                        <button class="gallery-filter-btn" data-category="Pokemon">Pokemon</button>
-                        <button class="gallery-filter-btn" data-category="Trainer">Trainers</button>
-                        <button class="gallery-filter-btn" data-category="Energy">Energy</button>
+                    <div class="mybinder-stats">
+                        <span id="mybinder-card-count">0</span> cards collected
                     </div>
 
-                    <div id="gallery-grid" class="gallery-grid">
-                        <!-- Gallery cards will be inserted here -->
+                    <div class="binder-controls">
+                        <button id="mybinder-prev" class="binder-nav-btn" disabled>
+                            <span class="icon">◀</span> Previous
+                        </button>
+                        <span class="binder-page-info">
+                            Page <span id="mybinder-current-page">1</span> of <span id="mybinder-total-pages">1</span>
+                        </span>
+                        <button id="mybinder-next" class="binder-nav-btn">
+                            Next <span class="icon">▶</span>
+                        </button>
+                    </div>
+
+                    <div class="binder-slider-container">
+                        <span class="binder-slider-label">1</span>
+                        <input type="range" id="mybinder-slider" class="binder-slider" min="1" max="1" value="1">
+                        <span class="binder-slider-label" id="mybinder-slider-max">1</span>
+                    </div>
+
+                    <div class="binder-page">
+                        <div id="mybinder-grid" class="binder-grid">
+                            <!-- Owned binder slots will be inserted here -->
+                        </div>
+                    </div>
+
+                    <div id="mybinder-empty" class="mybinder-empty" style="display: none;">
+                        <div class="empty-state">
+                            <span class="empty-icon">📭</span>
+                            <h3>No Cards Yet</h3>
+                            <p>Start checking off cards in the Collection view to see them here!</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -374,6 +392,26 @@
                     </div>
 
                     <div class="settings-section">
+                        <h3>💾 Data Backup</h3>
+                        <p class="settings-description">
+                            Export your collection data as a backup file or import a previously saved backup.
+                        </p>
+
+                        <div class="backup-buttons">
+                            <button id="export-btn" class="btn-primary">
+                                <span class="icon">💾</span> Export Backup
+                            </button>
+                            <button id="import-btn" class="btn-secondary">
+                                <span class="icon">📥</span> Import Backup
+                            </button>
+                        </div>
+
+                        <div class="settings-note">
+                            <strong>Note:</strong> Backups include your collection data, settings, and preferences. Import will merge with existing data.
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
                         <h3>ℹ️ About JustTCG API</h3>
                         <ul class="info-list">
                             <li>Provides real-time Pokemon TCG card pricing</li>
@@ -406,6 +444,6 @@
     <!-- Scripts -->
     <script src="cards-data.js?v=18.0"></script>
     <script src="card-prices.js?v=18.0"></script>
-    <script src="app.js?v=18.0"></script>
+    <script src="app.js?v=25.1"></script>
 </body>
 </html>
