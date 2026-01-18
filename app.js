@@ -1120,8 +1120,14 @@ class CardTracker {
     // Get only owned cards for My Binder
     getMyBinderCards() {
         const binderCards = this.getBinderCards();
-        // Filter to only include owned cards
-        return binderCards.filter(slot => this.ownedCards.has(slot.ownershipKey));
+        // Filter to only include cards that are actually owned
+        const ownedOnly = binderCards.filter(slot => {
+            const isOwned = this.ownedCards.has(slot.ownershipKey);
+            return isOwned;
+        });
+        console.log(`My Binder: ${ownedOnly.length} owned out of ${binderCards.length} total slots`);
+        console.log('Owned cards set:', Array.from(this.ownedCards));
+        return ownedOnly;
     }
 
     renderMyBinder() {
