@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokemon Card Collection Tracker</title>
-    <link rel="stylesheet" href="styles.css?v=23.0">
+    <link rel="stylesheet" href="styles.css?v=24.0">
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
@@ -86,6 +86,7 @@
                     <span class="user-icon">👤</span>
                     <span id="current-username">Guest</span>
                 </span>
+                <button id="settings-btn" class="settings-btn" title="Settings">⚙️</button>
                 <button id="logout-btn" class="logout-btn" title="Sign out">
                     🚪 Logout
                 </button>
@@ -148,9 +149,6 @@
             </button>
             <button class="nav-btn" id="refresh-prices-btn" style="background: #7EC850;">
                 <span class="icon">💰</span> Refresh Prices
-            </button>
-            <button class="nav-btn" id="settings-btn" style="background: #95A5A6;">
-                <span class="icon">⚙️</span> Settings
             </button>
         </nav>
 
