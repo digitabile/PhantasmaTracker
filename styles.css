@@ -348,7 +348,7 @@ body {
 /* Variant Checkboxes */
 .card-variants {
     position: absolute;
-    top: 10px;
+    bottom: 120px;
     right: 10px;
     display: flex;
     flex-direction: row;
@@ -409,7 +409,7 @@ body {
 /* Single checkbox wrapper for non-variant cards */
 .single-checkbox-wrapper {
     position: absolute;
-    top: 10px;
+    bottom: 120px;
     right: 10px;
     display: flex;
     flex-direction: row;
