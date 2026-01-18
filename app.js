@@ -2,6 +2,11 @@
 // Main application logic supporting multiple Pokemon TCG sets
 
 // ================================
+// Global Version
+// ================================
+const APP_VERSION = 'v26';
+
+// ================================
 // Firebase Configuration
 // ================================
 
@@ -1721,7 +1726,7 @@ class CardTracker {
         const backup = {
             exportDate: new Date().toISOString(),
             version: '1.0',
-            appVersion: 'v26',
+            appVersion: APP_VERSION,
             userEmail: user ? user.email : 'unknown',
             userId: user ? user.uid : 'unknown',
             totalSets: Object.keys(allSetsData).length,
@@ -2069,6 +2074,12 @@ let app = null;
 let authUI = null;
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Update version displays from global constant
+    const authVersionEl = document.getElementById('auth-version');
+    const headerVersionEl = document.getElementById('header-version');
+    if (authVersionEl) authVersionEl.textContent = APP_VERSION;
+    if (headerVersionEl) headerVersionEl.textContent = APP_VERSION;
+
     // Initialize auth UI
     authUI = new AuthUI();
     authUI.init();
@@ -2076,5 +2087,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // Firebase auth state listener in AuthUI.init() will handle:
     // - Showing login screen if no user
     // - Initializing app if user is already logged in
-    console.log('Pokemon Card Collection Tracker - Waiting for Firebase auth state...');
+    console.log('Pokemon Card Collection Tracker ' + APP_VERSION + ' - Waiting for Firebase auth state...');
 });
