@@ -24,7 +24,16 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
-const database = firebase.database();
+
+// Initialize database only if configured (optional feature)
+let database = null;
+try {
+    if (firebaseConfig.databaseURL) {
+        database = firebase.database();
+    }
+} catch (e) {
+    console.warn('Firebase Realtime Database not available:', e);
+}
 
 // ================================
 // Community Counter Functions
@@ -32,6 +41,8 @@ const database = firebase.database();
 
 // Register unique user and increment counter only if new
 async function registerUniqueUser(uid) {
+    if (!database) return; // Skip if database not configured
+
     try {
         const userRef = database.ref('users/' + uid);
         const snapshot = await userRef.once('value');
@@ -54,6 +65,12 @@ async function registerUniqueUser(uid) {
 // Listen for community count changes and update display
 function initCommunityCountListener() {
     const countEl = document.getElementById('community-count');
+
+    // If database not configured, show dash immediately
+    if (!database) {
+        if (countEl) countEl.textContent = '—';
+        return;
+    }
 
     // Set timeout fallback in case database isn't configured
     const fallbackTimeout = setTimeout(() => {
