@@ -40,10 +40,10 @@ async function registerUniqueUser(uid) {
         if (!snapshot.exists()) {
             await userRef.set({ registered: Date.now() });
 
-            // Increment counter
+            // Increment counter (starts at 100 base)
             const counterRef = database.ref('stats/communityCount');
             await counterRef.transaction((currentCount) => {
-                return (currentCount || 0) + 1;
+                return (currentCount || 100) + 1;
             });
         }
     } catch (error) {
@@ -66,7 +66,7 @@ function initCommunityCountListener() {
         const counterRef = database.ref('stats/communityCount');
         counterRef.on('value', (snapshot) => {
             clearTimeout(fallbackTimeout);
-            const count = snapshot.val() || 0;
+            const count = snapshot.val() || 100;
             if (countEl) {
                 countEl.textContent = count.toLocaleString();
             }
