@@ -13,6 +13,7 @@ const APP_VERSION = 'v26.1';
 const firebaseConfig = {
     apiKey: "AIzaSyB0e85xGnyx8-9Db8tdM8QSDH-Gssfci08",
     authDomain: "setcollector-425d5.firebaseapp.com",
+    databaseURL: "https://setcollector-425d5-default-rtdb.firebaseio.com",
     projectId: "setcollector-425d5",
     storageBucket: "setcollector-425d5.firebasestorage.app",
     messagingSenderId: "1000884366226",
@@ -23,6 +24,41 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
+const database = firebase.database();
+
+// ================================
+// Community Counter Functions
+// ================================
+
+// Increment community counter when a new user registers
+async function incrementCommunityCounter() {
+    try {
+        const counterRef = database.ref('stats/communityCount');
+        await counterRef.transaction((currentCount) => {
+            return (currentCount || 0) + 1;
+        });
+    } catch (error) {
+        console.error('Error incrementing community counter:', error);
+    }
+}
+
+// Listen for community count changes and update display
+function initCommunityCountListener() {
+    const counterRef = database.ref('stats/communityCount');
+    counterRef.on('value', (snapshot) => {
+        const count = snapshot.val() || 0;
+        const countEl = document.getElementById('community-count');
+        if (countEl) {
+            countEl.textContent = count.toLocaleString();
+        }
+    }, (error) => {
+        console.error('Error reading community counter:', error);
+        const countEl = document.getElementById('community-count');
+        if (countEl) {
+            countEl.textContent = '—';
+        }
+    });
+}
 
 // ================================
 // Authentication Manager (Firebase)
@@ -47,6 +83,10 @@ class AuthManager {
             };
 
             console.log('Registration successful for:', this.currentUser.email);
+
+            // Increment community counter for new user
+            await incrementCommunityCounter();
+
             return { success: true, user: this.currentUser };
         } catch (error) {
             console.error('Registration error:', error);
@@ -2079,6 +2119,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const headerVersionEl = document.getElementById('header-version');
     if (authVersionEl) authVersionEl.textContent = APP_VERSION;
     if (headerVersionEl) headerVersionEl.textContent = APP_VERSION;
+
+    // Initialize community counter listener
+    initCommunityCountListener();
 
     // Initialize auth UI
     authUI = new AuthUI();
