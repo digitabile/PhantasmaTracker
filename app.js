@@ -30,15 +30,24 @@ const database = firebase.database();
 // Community Counter Functions
 // ================================
 
-// Increment community counter when a new user registers
-async function incrementCommunityCounter() {
+// Register unique user and increment counter only if new
+async function registerUniqueUser(uid) {
     try {
-        const counterRef = database.ref('stats/communityCount');
-        await counterRef.transaction((currentCount) => {
-            return (currentCount || 0) + 1;
-        });
+        const userRef = database.ref('users/' + uid);
+        const snapshot = await userRef.once('value');
+
+        // Only increment if this user doesn't exist yet
+        if (!snapshot.exists()) {
+            await userRef.set({ registered: Date.now() });
+
+            // Increment counter
+            const counterRef = database.ref('stats/communityCount');
+            await counterRef.transaction((currentCount) => {
+                return (currentCount || 0) + 1;
+            });
+        }
     } catch (error) {
-        console.error('Error incrementing community counter:', error);
+        console.error('Error registering unique user:', error);
     }
 }
 
@@ -101,8 +110,8 @@ class AuthManager {
 
             console.log('Registration successful for:', this.currentUser.email);
 
-            // Increment community counter for new user
-            await incrementCommunityCounter();
+            // Register unique user in database and increment counter
+            await registerUniqueUser(user.uid);
 
             return { success: true, user: this.currentUser };
         } catch (error) {
