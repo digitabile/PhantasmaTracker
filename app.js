@@ -2,6 +2,11 @@
 // Main application logic supporting multiple Pokemon TCG sets
 
 // ================================
+// Global Version
+// ================================
+const APP_VERSION = 'v26';
+
+// ================================
 // Firebase Configuration
 // ================================
 
@@ -472,6 +477,29 @@ class CardTracker {
 
         document.getElementById('reset-header-color-btn').addEventListener('click', () => {
             this.resetHeaderColor();
+        });
+
+        // Avery Binder Labels
+        document.getElementById('avery-labels-btn').addEventListener('click', () => {
+            this.openAveryLabelsModal();
+        });
+
+        document.getElementById('avery-labels-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'avery-labels-modal') {
+                this.closeAveryLabelsModal();
+            }
+        });
+
+        document.querySelector('.avery-labels-close').addEventListener('click', () => {
+            this.closeAveryLabelsModal();
+        });
+
+        document.getElementById('close-avery-labels-btn').addEventListener('click', () => {
+            this.closeAveryLabelsModal();
+        });
+
+        document.getElementById('print-avery-labels-btn').addEventListener('click', () => {
+            this.printAveryLabels();
         });
     }
 
@@ -1062,6 +1090,137 @@ class CardTracker {
         }
     }
 
+    // ================================
+    // Avery Binder Labels Feature
+    // ================================
+
+    // Get all label data: first position of each page + all EX cards
+    // Returns array of objects: { slotNumber, isEx }
+    getLabelData() {
+        const binderCards = this.getBinderCards();
+        const totalSlots = binderCards.length;
+        const labelData = [];
+        const addedSlots = new Set();
+
+        // Add first position of each binder page (1, 10, 19, 28, etc.)
+        for (let slot = 1; slot <= totalSlots; slot += this.binderCardsPerPage) {
+            const slotInfo = binderCards[slot - 1]; // slots are 1-indexed
+            const isEx = slotInfo && this.isExCard(slotInfo.card);
+            labelData.push({ slotNumber: slot, isEx: isEx });
+            addedSlots.add(slot);
+        }
+
+        // Add all EX card slots (if not already added)
+        binderCards.forEach((slotInfo, index) => {
+            const slotNumber = index + 1;
+            if (!addedSlots.has(slotNumber) && this.isExCard(slotInfo.card)) {
+                labelData.push({ slotNumber: slotNumber, isEx: true });
+                addedSlots.add(slotNumber);
+            }
+        });
+
+        // Sort by slot number
+        labelData.sort((a, b) => a.slotNumber - b.slotNumber);
+
+        return labelData;
+    }
+
+    // Check if a card is an EX card
+    isExCard(card) {
+        if (!card) return false;
+        // Check if card name contains "ex" (case insensitive) or rarity indicates EX
+        const nameHasEx = card.name && card.name.toLowerCase().includes(' ex');
+        const rarityHasEx = card.rarity && card.rarity.toLowerCase().includes('ex');
+        return nameHasEx || rarityHasEx;
+    }
+
+    // Open the Avery Labels modal
+    openAveryLabelsModal() {
+        const labelData = this.getLabelData();
+
+        // Update label count
+        document.getElementById('avery-labels-count').textContent = `(${labelData.length} labels)`;
+
+        // Generate preview
+        const previewContainer = document.getElementById('avery-labels-preview-grid');
+        previewContainer.innerHTML = labelData.map(label => `
+            <div class="avery-label-preview ${label.isEx ? 'avery-label-ex' : ''}">
+                <span class="avery-label-number">${label.slotNumber}</span>
+                ${label.isEx ? '<span class="avery-label-ex-text">ex</span>' : ''}
+            </div>
+        `).join('');
+
+        // Show modal
+        document.getElementById('avery-labels-modal').classList.add('active');
+    }
+
+    // Close the Avery Labels modal
+    closeAveryLabelsModal() {
+        document.getElementById('avery-labels-modal').classList.remove('active');
+    }
+
+    // Print the Avery Labels in Presta 94504 format
+    printAveryLabels() {
+        const labelData = this.getLabelData();
+        const printContainer = document.getElementById('avery-labels-print-container');
+
+        // Presta 94504 specifications:
+        // - 0.75" diameter circular labels
+        // - 9 columns x 12 rows = 108 labels per page
+        // - Letter size paper (8.5" x 11")
+        const labelsPerRow = 9;
+        const rowsPerPage = 12;
+        const labelsPerPage = labelsPerRow * rowsPerPage;
+
+        // Generate label sheets
+        let printHTML = '';
+        const totalPages = Math.ceil(labelData.length / labelsPerPage);
+
+        for (let page = 0; page < totalPages; page++) {
+            const startIndex = page * labelsPerPage;
+            const pageLabels = labelData.slice(startIndex, startIndex + labelsPerPage);
+
+            printHTML += `<div class="avery-label-sheet">`;
+
+            for (let row = 0; row < rowsPerPage; row++) {
+                printHTML += `<div class="avery-label-row">`;
+
+                for (let col = 0; col < labelsPerRow; col++) {
+                    const labelIndex = row * labelsPerRow + col;
+                    const label = pageLabels[labelIndex];
+
+                    if (label !== undefined) {
+                        printHTML += `
+                            <div class="avery-label">
+                                <span class="avery-label-text ${label.isEx ? 'avery-label-text-ex' : ''}">
+                                    <span class="avery-label-num">${label.slotNumber}</span>
+                                    ${label.isEx ? '<span class="avery-label-ex-print">ex</span>' : ''}
+                                </span>
+                            </div>
+                        `;
+                    } else {
+                        // Empty label placeholder
+                        printHTML += `<div class="avery-label avery-label-empty"></div>`;
+                    }
+                }
+
+                printHTML += `</div>`;
+            }
+
+            printHTML += `</div>`;
+        }
+
+        printContainer.innerHTML = printHTML;
+
+        // Close modal and trigger print
+        this.closeAveryLabelsModal();
+
+        // Small delay to ensure DOM is updated
+        setTimeout(() => {
+            window.print();
+        }, 100);
+    }
+
     // Modal
     showCardDetail(cardNumber) {
         const card = this.cards.find(c => c.number === cardNumber);
@@ -1567,7 +1726,7 @@ class CardTracker {
         const backup = {
             exportDate: new Date().toISOString(),
             version: '1.0',
-            appVersion: 'v25.1',
+            appVersion: APP_VERSION,
             userEmail: user ? user.email : 'unknown',
             userId: user ? user.uid : 'unknown',
             totalSets: Object.keys(allSetsData).length,
@@ -1915,6 +2074,12 @@ let app = null;
 let authUI = null;
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Update version displays from global constant
+    const authVersionEl = document.getElementById('auth-version');
+    const headerVersionEl = document.getElementById('header-version');
+    if (authVersionEl) authVersionEl.textContent = APP_VERSION;
+    if (headerVersionEl) headerVersionEl.textContent = APP_VERSION;
+
     // Initialize auth UI
     authUI = new AuthUI();
     authUI.init();
@@ -1922,5 +2087,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // Firebase auth state listener in AuthUI.init() will handle:
     // - Showing login screen if no user
     // - Initializing app if user is already logged in
-    console.log('Pokemon Card Collection Tracker - Waiting for Firebase auth state...');
+    console.log('Pokemon Card Collection Tracker ' + APP_VERSION + ' - Waiting for Firebase auth state...');
 });

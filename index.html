@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokemon Card Collection Tracker</title>
-    <link rel="stylesheet" href="styles.css?v=25.1">
+    <link rel="stylesheet" href="styles.css?v=26">
     <link rel="icon" type="image/png" href="assets/Mohsy_pokeball.png">
 
     <!-- Firebase SDK -->
@@ -19,7 +19,7 @@
                 <img src="assets/Mohsy_pokeball.png" alt="Logo" class="auth-logo">
                 <h1>Pokemon Card Tracker</h1>
                 <p>Track your collection across multiple sets</p>
-                <span class="auth-version" id="auth-version">v25.1</span>
+                <span class="auth-version" id="auth-version">v26</span>
             </div>
 
             <!-- Login Form -->
@@ -80,7 +80,7 @@
                     <h1>Pokemon Card Collection Tracker</h1>
                     <p class="subtitle">Track your Pokemon TCG collection across multiple sets</p>
                 </div>
-                <span class="header-version" id="header-version">v25.1</span>
+                <span class="header-version" id="header-version">v26</span>
             </div>
             <div class="user-controls">
                 <span class="user-badge" id="user-badge">
@@ -268,6 +268,12 @@
                         <span id="mybinder-card-count">0</span> cards collected
                     </div>
 
+                    <div class="binder-labels-btn-container">
+                        <button id="avery-labels-btn" class="btn-primary avery-labels-btn">
+                            <span class="icon">🏷️</span> Avery Binder Labels
+                        </button>
+                    </div>
+
                     <div class="binder-controls">
                         <button id="mybinder-prev" class="binder-nav-btn" disabled>
                             <span class="icon">◀</span> Previous
@@ -426,7 +432,7 @@
 
         <!-- Footer -->
         <footer class="app-footer">
-            <p>&copy; 2025 Pokemon Card Collection Tracker | Multi-Set Support</p>
+            <p>&copy; 2026 Pokemon Card Collection Tracker | Multi-Set Support</p>
             <p class="footer-note">Card prices updated from TCGPlayer and other reputable sources</p>
         </footer>
     </div>
@@ -441,9 +447,50 @@
         </div>
     </div>
 
+    <!-- Avery Binder Labels Modal -->
+    <div id="avery-labels-modal" class="modal">
+        <div class="modal-content avery-labels-modal-content">
+            <span class="modal-close avery-labels-close">&times;</span>
+            <div class="avery-labels-header">
+                <h2>Avery Binder Labels</h2>
+                <p class="avery-labels-description">
+                    Generate 0.75" circular labels for binder page dividers.
+                    Labels are created for the first position of each binder page.
+                </p>
+                <div class="avery-labels-info">
+                    <span class="info-badge">Presta 94504 Format</span>
+                    <span class="info-badge">0.75" Diameter</span>
+                    <span class="info-badge">108 Labels/Sheet</span>
+                </div>
+            </div>
+            <div class="avery-labels-preview">
+                <h3>Preview <span id="avery-labels-count">(0 labels)</span></h3>
+                <div id="avery-labels-preview-grid" class="avery-labels-preview-grid">
+                    <!-- Label previews will be inserted here -->
+                </div>
+            </div>
+            <div class="avery-labels-actions">
+                <button id="print-avery-labels-btn" class="btn-primary">
+                    <span class="icon">🖨️</span> Print Labels
+                </button>
+                <button id="close-avery-labels-btn" class="btn-secondary">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Avery Labels Print Container (Hidden, used for printing) -->
+    <div id="avery-labels-print-container" class="avery-labels-print-container">
+        <!-- Labels for printing will be generated here -->
+    </div>
+
     <!-- Scripts -->
     <script src="cards-data.js?v=18.0"></script>
     <script src="card-prices.js?v=18.0"></script>
-    <script src="app.js?v=25.1"></script>
+    <script src="app.js?v=26"></script>
+
+    <!-- Buy Me a Coffee Widget -->
+    <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="setcollector" data-description="Support me on Buy me a coffee!" data-message="Thank you, Hope you are enjoying the tool!" data-color="#5F7FFF" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
 </body>
 </html>
