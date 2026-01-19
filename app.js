@@ -44,20 +44,37 @@ async function incrementCommunityCounter() {
 
 // Listen for community count changes and update display
 function initCommunityCountListener() {
-    const counterRef = database.ref('stats/communityCount');
-    counterRef.on('value', (snapshot) => {
-        const count = snapshot.val() || 0;
-        const countEl = document.getElementById('community-count');
-        if (countEl) {
-            countEl.textContent = count.toLocaleString();
+    const countEl = document.getElementById('community-count');
+
+    // Set timeout fallback in case database isn't configured
+    const fallbackTimeout = setTimeout(() => {
+        if (countEl && countEl.textContent === '...') {
+            countEl.textContent = '—';
         }
-    }, (error) => {
-        console.error('Error reading community counter:', error);
-        const countEl = document.getElementById('community-count');
+    }, 5000);
+
+    try {
+        const counterRef = database.ref('stats/communityCount');
+        counterRef.on('value', (snapshot) => {
+            clearTimeout(fallbackTimeout);
+            const count = snapshot.val() || 0;
+            if (countEl) {
+                countEl.textContent = count.toLocaleString();
+            }
+        }, (error) => {
+            clearTimeout(fallbackTimeout);
+            console.error('Error reading community counter:', error);
+            if (countEl) {
+                countEl.textContent = '—';
+            }
+        });
+    } catch (error) {
+        clearTimeout(fallbackTimeout);
+        console.error('Error initializing community counter:', error);
         if (countEl) {
             countEl.textContent = '—';
         }
-    });
+    }
 }
 
 // ================================
