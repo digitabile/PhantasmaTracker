@@ -623,9 +623,13 @@ class CardTracker {
 
     // Helper function to check if a card has variants
     cardHasVariants(card) {
-        // Only Common, Uncommon, and regular Rare cards have reverse holo variants
+        // First check if the card has an explicit variants field
+        if (card.variants && card.variants.length > 1) {
+            return true;
+        }
+        // Fallback for sets without variants field: Common, Uncommon, and Rare cards have reverse holo variants
         // EX cards (Double Rare) and other special rarities have only one variant
-        return card.rarity === 'Common' || card.rarity === 'Uncommon' || card.rarity === 'Rare';
+        return card.rarity === 'Common' || card.rarity === 'Uncommon' || card.rarity === 'Rare' || card.rarity === 'Rare Holo';
     }
 
     createCardHTML(card, index = null) {
@@ -650,10 +654,16 @@ class CardTracker {
         const secondCheckboxNum = index !== null ? index + 2 : null;
 
         if (hasVariants) {
-            // Determine the correct label for the first variant based on rarity
-            // Rare cards have Holofoil + Reverse Holo
-            // Common/Uncommon cards have Non-foil + Reverse Holo
-            const firstVariantLabel = card.rarity === 'Rare' ? 'Holofoil' : 'Non-foil';
+            // Determine the correct label for the first variant
+            // Use variants field if available, otherwise fall back to rarity-based logic
+            let firstVariantLabel;
+            if (card.variants && card.variants.length > 0) {
+                firstVariantLabel = card.variants[0]; // Use the first variant from the data (e.g., "Holo", "Non-Holo")
+            } else if (card.rarity === 'Rare' || card.rarity === 'Rare Holo') {
+                firstVariantLabel = 'Holofoil';
+            } else {
+                firstVariantLabel = 'Non-foil';
+            }
 
             // Render card with two checkboxes, each with its own number
             return `
@@ -937,8 +947,19 @@ class CardTracker {
             const hasVariants = this.cardHasVariants(card);
 
             if (hasVariants) {
-                // Determine the correct label for the first variant based on rarity
-                const firstVariantLabel = card.rarity === 'Rare' ? 'Holofoil' : 'Non-foil';
+                // Determine the correct labels for variants
+                // Use variants field if available, otherwise fall back to rarity-based logic
+                let firstVariantLabel, secondVariantLabel;
+                if (card.variants && card.variants.length >= 2) {
+                    firstVariantLabel = card.variants[0]; // e.g., "Holo" or "Non-Holo"
+                    secondVariantLabel = card.variants[1]; // e.g., "Reverse Holo"
+                } else if (card.rarity === 'Rare' || card.rarity === 'Rare Holo') {
+                    firstVariantLabel = 'Holofoil';
+                    secondVariantLabel = 'Rev Holo';
+                } else {
+                    firstVariantLabel = 'Non-foil';
+                    secondVariantLabel = 'Rev Holo';
+                }
 
                 // Add normal variant slot
                 binderCards.push({
@@ -953,7 +974,7 @@ class CardTracker {
                 binderCards.push({
                     card: card,
                     variant: 'reverseHolo',
-                    variantLabel: 'Rev Holo',
+                    variantLabel: secondVariantLabel,
                     slotNumber: slotNumber++,
                     ownershipKey: `${card.number}-reverseHolo`
                 });
@@ -1238,16 +1259,27 @@ class CardTracker {
 
             isOwned = isOwnedNormal || isOwnedReverseHolo;
 
-            // Determine the correct label for the first variant
-            const firstVariantLabel = card.rarity === 'Rare' ? 'Holofoil' : 'Non-foil';
+            // Determine the correct labels for variants
+            // Use variants field if available, otherwise fall back to rarity-based logic
+            let firstVariantLabel, secondVariantLabel;
+            if (card.variants && card.variants.length >= 2) {
+                firstVariantLabel = card.variants[0]; // e.g., "Holo" or "Non-Holo"
+                secondVariantLabel = card.variants[1]; // e.g., "Reverse Holo"
+            } else if (card.rarity === 'Rare' || card.rarity === 'Rare Holo') {
+                firstVariantLabel = 'Holofoil';
+                secondVariantLabel = 'Reverse Holo';
+            } else {
+                firstVariantLabel = 'Non-foil';
+                secondVariantLabel = 'Reverse Holo';
+            }
 
             // Show ownership status for both variants
             if (isOwnedNormal && isOwnedReverseHolo) {
                 ownershipStatus = '✅ Both variants owned';
             } else if (isOwnedNormal) {
-                ownershipStatus = `✅ ${firstVariantLabel} owned | ❌ Reverse Holo needed`;
+                ownershipStatus = `✅ ${firstVariantLabel} owned | ❌ ${secondVariantLabel} needed`;
             } else if (isOwnedReverseHolo) {
-                ownershipStatus = `❌ ${firstVariantLabel} needed | ✅ Reverse Holo owned`;
+                ownershipStatus = `❌ ${firstVariantLabel} needed | ✅ ${secondVariantLabel} owned`;
             } else {
                 ownershipStatus = '❌ Neither variant owned';
             }
@@ -1257,7 +1289,7 @@ class CardTracker {
                 <p><strong>Estimated Prices:</strong></p>
                 <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
                     <li><strong>${firstVariantLabel}:</strong> ${priceNormal ? `$${priceNormal.toFixed(2)}` : 'Loading...'}</li>
-                    <li><strong>Reverse Holo:</strong> ${priceReverseHolo ? `$${priceReverseHolo.toFixed(2)}` : 'Loading...'}</li>
+                    <li><strong>${secondVariantLabel}:</strong> ${priceReverseHolo ? `$${priceReverseHolo.toFixed(2)}` : 'Loading...'}</li>
                 </ul>
             `;
         } else {
