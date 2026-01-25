@@ -1777,7 +1777,8 @@ const CARD_SETS = {
         "type": "Grass",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/1.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/1.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "2",
@@ -1785,7 +1786,8 @@ const CARD_SETS = {
         "type": "Grass",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/2.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/2.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "3",
@@ -1801,7 +1803,8 @@ const CARD_SETS = {
         "type": "Grass",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/4.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/4.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "5",
@@ -1809,7 +1812,8 @@ const CARD_SETS = {
         "type": "Grass",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/5.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/5.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "6",
@@ -1817,7 +1821,8 @@ const CARD_SETS = {
         "type": "Grass",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/6.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/6.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "7",
@@ -1825,7 +1830,8 @@ const CARD_SETS = {
         "type": "Grass",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/7.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/7.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "8",
@@ -1833,7 +1839,8 @@ const CARD_SETS = {
         "type": "Grass",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/8.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/8.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "9",
@@ -1841,7 +1848,8 @@ const CARD_SETS = {
         "type": "Grass",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/9.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/9.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "10",
@@ -1849,7 +1857,8 @@ const CARD_SETS = {
         "type": "Grass",
         "rarity": "Rare Holo",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/10.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/10.png",
+        "variants": ["Holo", "Reverse Holo"]
     },
     {
         "number": "11",
@@ -1857,7 +1866,8 @@ const CARD_SETS = {
         "type": "Grass",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/11.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/11.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "12",
@@ -1865,7 +1875,8 @@ const CARD_SETS = {
         "type": "Grass",
         "rarity": "Rare Holo",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/12.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/12.png",
+        "variants": ["Holo", "Reverse Holo"]
     },
     {
         "number": "13",
@@ -1873,7 +1884,8 @@ const CARD_SETS = {
         "type": "Grass",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/13.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/13.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "14",
@@ -1881,7 +1893,8 @@ const CARD_SETS = {
         "type": "Grass",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/14.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/14.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "15",
@@ -1889,7 +1902,8 @@ const CARD_SETS = {
         "type": "Grass",
         "rarity": "Rare Holo",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/15.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/15.png",
+        "variants": ["Holo", "Reverse Holo"]
     },
     {
         "number": "16",
@@ -1897,7 +1911,8 @@ const CARD_SETS = {
         "type": "Grass",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/16.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/16.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "17",
@@ -1905,7 +1920,8 @@ const CARD_SETS = {
         "type": "Grass",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/17.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/17.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "18",
@@ -1913,7 +1929,8 @@ const CARD_SETS = {
         "type": "Grass",
         "rarity": "Rare Holo",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/18.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/18.png",
+        "variants": ["Holo", "Reverse Holo"]
     },
     {
         "number": "19",
@@ -1921,7 +1938,8 @@ const CARD_SETS = {
         "type": "Fire",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/19.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/19.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "20",
@@ -1929,7 +1947,8 @@ const CARD_SETS = {
         "type": "Fire",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/20.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/20.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "21",
@@ -1937,7 +1956,8 @@ const CARD_SETS = {
         "type": "Fire",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/21.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/21.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "22",
@@ -1953,7 +1973,8 @@ const CARD_SETS = {
         "type": "Fire",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/23.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/23.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "24",
@@ -1961,7 +1982,8 @@ const CARD_SETS = {
         "type": "Fire",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/24.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/24.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "25",
@@ -1969,7 +1991,8 @@ const CARD_SETS = {
         "type": "Fire",
         "rarity": "Rare Holo",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/25.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/25.png",
+        "variants": ["Holo", "Reverse Holo"]
     },
     {
         "number": "26",
@@ -1977,7 +2000,8 @@ const CARD_SETS = {
         "type": "Fire",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/26.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/26.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "27",
@@ -1985,7 +2009,8 @@ const CARD_SETS = {
         "type": "Fire",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/27.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/27.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "28",
@@ -1993,7 +2018,8 @@ const CARD_SETS = {
         "type": "Fire",
         "rarity": "Rare Holo",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/28.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/28.png",
+        "variants": ["Holo", "Reverse Holo"]
     },
     {
         "number": "29",
@@ -2001,7 +2027,8 @@ const CARD_SETS = {
         "type": "Fire",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/29.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/29.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "30",
@@ -2009,7 +2036,8 @@ const CARD_SETS = {
         "type": "Fire",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/30.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/30.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "31",
@@ -2017,7 +2045,8 @@ const CARD_SETS = {
         "type": "Fire",
         "rarity": "Rare Holo",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/31.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/31.png",
+        "variants": ["Holo", "Reverse Holo"]
     },
     {
         "number": "32",
@@ -2025,7 +2054,8 @@ const CARD_SETS = {
         "type": "Water",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/32.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/32.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "33",
@@ -2033,7 +2063,8 @@ const CARD_SETS = {
         "type": "Water",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/33.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/33.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "34",
@@ -2041,7 +2072,8 @@ const CARD_SETS = {
         "type": "Water",
         "rarity": "Rare Holo",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/34.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/34.png",
+        "variants": ["Holo", "Reverse Holo"]
     },
     {
         "number": "35",
@@ -2049,7 +2081,8 @@ const CARD_SETS = {
         "type": "Water",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/35.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/35.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "36",
@@ -2065,7 +2098,8 @@ const CARD_SETS = {
         "type": "Water",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/37.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/37.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "38",
@@ -2073,7 +2107,8 @@ const CARD_SETS = {
         "type": "Water",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/38.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/38.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "39",
@@ -2081,7 +2116,8 @@ const CARD_SETS = {
         "type": "Water",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/39.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/39.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "40",
@@ -2089,7 +2125,8 @@ const CARD_SETS = {
         "type": "Water",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/40.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/40.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "41",
@@ -2097,7 +2134,8 @@ const CARD_SETS = {
         "type": "Water",
         "rarity": "Rare Holo",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/41.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/41.png",
+        "variants": ["Holo", "Reverse Holo"]
     },
     {
         "number": "42",
@@ -2105,7 +2143,8 @@ const CARD_SETS = {
         "type": "Water",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/42.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/42.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "43",
@@ -2113,7 +2152,8 @@ const CARD_SETS = {
         "type": "Water",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/43.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/43.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "44",
@@ -2121,7 +2161,8 @@ const CARD_SETS = {
         "type": "Water",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/44.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/44.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "45",
@@ -2129,7 +2170,8 @@ const CARD_SETS = {
         "type": "Lightning",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/45.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/45.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "46",
@@ -2137,7 +2179,8 @@ const CARD_SETS = {
         "type": "Lightning",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/46.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/46.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "47",
@@ -2145,7 +2188,8 @@ const CARD_SETS = {
         "type": "Lightning",
         "rarity": "Rare Holo",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/47.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/47.png",
+        "variants": ["Holo", "Reverse Holo"]
     },
     {
         "number": "48",
@@ -2153,7 +2197,8 @@ const CARD_SETS = {
         "type": "Lightning",
         "rarity": "Rare Holo",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/48.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/48.png",
+        "variants": ["Holo", "Reverse Holo"]
     },
     {
         "number": "49",
@@ -2161,7 +2206,8 @@ const CARD_SETS = {
         "type": "Lightning",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/49.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/49.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "50",
@@ -2177,7 +2223,8 @@ const CARD_SETS = {
         "type": "Lightning",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/51.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/51.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "52",
@@ -2185,7 +2232,8 @@ const CARD_SETS = {
         "type": "Lightning",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/52.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/52.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "53",
@@ -2193,7 +2241,8 @@ const CARD_SETS = {
         "type": "Lightning",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/53.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/53.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "54",
@@ -2201,7 +2250,8 @@ const CARD_SETS = {
         "type": "Psychic",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/54.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/54.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "55",
@@ -2209,7 +2259,8 @@ const CARD_SETS = {
         "type": "Psychic",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/55.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/55.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "56",
@@ -2217,7 +2268,8 @@ const CARD_SETS = {
         "type": "Psychic",
         "rarity": "Rare Holo",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/56.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/56.png",
+        "variants": ["Holo", "Reverse Holo"]
     },
     {
         "number": "57",
@@ -2225,7 +2277,8 @@ const CARD_SETS = {
         "type": "Psychic",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/57.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/57.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "58",
@@ -2233,7 +2286,8 @@ const CARD_SETS = {
         "type": "Psychic",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/58.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/58.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "59",
@@ -2241,7 +2295,8 @@ const CARD_SETS = {
         "type": "Psychic",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/59.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/59.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "60",
@@ -2257,7 +2312,8 @@ const CARD_SETS = {
         "type": "Psychic",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/61.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/61.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "62",
@@ -2265,7 +2321,8 @@ const CARD_SETS = {
         "type": "Psychic",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/62.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/62.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "63",
@@ -2273,7 +2330,8 @@ const CARD_SETS = {
         "type": "Psychic",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/63.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/63.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "64",
@@ -2281,7 +2339,8 @@ const CARD_SETS = {
         "type": "Psychic",
         "rarity": "Rare Holo",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/64.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/64.png",
+        "variants": ["Holo", "Reverse Holo"]
     },
     {
         "number": "65",
@@ -2289,7 +2348,8 @@ const CARD_SETS = {
         "type": "Psychic",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/65.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/65.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "66",
@@ -2297,7 +2357,8 @@ const CARD_SETS = {
         "type": "Psychic",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/66.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/66.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "67",
@@ -2305,7 +2366,8 @@ const CARD_SETS = {
         "type": "Psychic",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/67.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/67.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "68",
@@ -2313,7 +2375,8 @@ const CARD_SETS = {
         "type": "Fighting",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/68.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/68.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "69",
@@ -2321,7 +2384,8 @@ const CARD_SETS = {
         "type": "Fighting",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/69.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/69.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "70",
@@ -2329,7 +2393,8 @@ const CARD_SETS = {
         "type": "Fighting",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/70.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/70.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "71",
@@ -2337,7 +2402,8 @@ const CARD_SETS = {
         "type": "Fighting",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/71.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/71.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "72",
@@ -2345,7 +2411,8 @@ const CARD_SETS = {
         "type": "Fighting",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/72.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/72.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "73",
@@ -2353,7 +2420,8 @@ const CARD_SETS = {
         "type": "Fighting",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/73.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/73.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "74",
@@ -2361,7 +2429,8 @@ const CARD_SETS = {
         "type": "Fighting",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/74.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/74.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "75",
@@ -2369,7 +2438,8 @@ const CARD_SETS = {
         "type": "Fighting",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/75.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/75.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "76",
@@ -2377,7 +2447,8 @@ const CARD_SETS = {
         "type": "Fighting",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/76.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/76.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "77",
@@ -2393,7 +2464,8 @@ const CARD_SETS = {
         "type": "Fighting",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/78.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/78.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "79",
@@ -2401,7 +2473,8 @@ const CARD_SETS = {
         "type": "Fighting",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/79.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/79.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "80",
@@ -2409,7 +2482,8 @@ const CARD_SETS = {
         "type": "Fighting",
         "rarity": "Rare Holo",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/80.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/80.png",
+        "variants": ["Holo", "Reverse Holo"]
     },
     {
         "number": "81",
@@ -2417,7 +2491,8 @@ const CARD_SETS = {
         "type": "Fighting",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/81.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/81.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "82",
@@ -2425,7 +2500,8 @@ const CARD_SETS = {
         "type": "Fighting",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/82.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/82.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "83",
@@ -2433,7 +2509,8 @@ const CARD_SETS = {
         "type": "Fighting",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/83.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/83.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "84",
@@ -2441,7 +2518,8 @@ const CARD_SETS = {
         "type": "Fighting",
         "rarity": "Rare Holo",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/84.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/84.png",
+        "variants": ["Holo", "Reverse Holo"]
     },
     {
         "number": "85",
@@ -2449,7 +2527,8 @@ const CARD_SETS = {
         "type": "Darkness",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/85.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/85.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "86",
@@ -2465,7 +2544,8 @@ const CARD_SETS = {
         "type": "Darkness",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/87.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/87.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "88",
@@ -2473,7 +2553,8 @@ const CARD_SETS = {
         "type": "Darkness",
         "rarity": "Rare Holo",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/88.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/88.png",
+        "variants": ["Holo", "Reverse Holo"]
     },
     {
         "number": "89",
@@ -2481,7 +2562,8 @@ const CARD_SETS = {
         "type": "Darkness",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/89.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/89.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "90",
@@ -2489,7 +2571,8 @@ const CARD_SETS = {
         "type": "Darkness",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/90.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/90.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "91",
@@ -2497,7 +2580,8 @@ const CARD_SETS = {
         "type": "Darkness",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/91.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/91.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "92",
@@ -2505,7 +2589,8 @@ const CARD_SETS = {
         "type": "Darkness",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/92.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/92.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "93",
@@ -2513,7 +2598,8 @@ const CARD_SETS = {
         "type": "Metal",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/93.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/93.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "94",
@@ -2529,7 +2615,8 @@ const CARD_SETS = {
         "type": "Metal",
         "rarity": "Rare Holo",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/95.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/95.png",
+        "variants": ["Holo", "Reverse Holo"]
     },
     {
         "number": "96",
@@ -2537,7 +2624,8 @@ const CARD_SETS = {
         "type": "Metal",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/96.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/96.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "97",
@@ -2545,7 +2633,8 @@ const CARD_SETS = {
         "type": "Metal",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/97.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/97.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "98",
@@ -2553,7 +2642,8 @@ const CARD_SETS = {
         "type": "Metal",
         "rarity": "Rare Holo",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/98.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/98.png",
+        "variants": ["Holo", "Reverse Holo"]
     },
     {
         "number": "99",
@@ -2561,7 +2651,8 @@ const CARD_SETS = {
         "type": "Metal",
         "rarity": "Rare Holo",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/99.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/99.png",
+        "variants": ["Holo", "Reverse Holo"]
     },
     {
         "number": "100",
@@ -2577,7 +2668,8 @@ const CARD_SETS = {
         "type": "Dragon",
         "rarity": "Rare Holo",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/101.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/101.png",
+        "variants": ["Holo", "Reverse Holo"]
     },
     {
         "number": "102",
@@ -2585,7 +2677,8 @@ const CARD_SETS = {
         "type": "Colorless",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/102.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/102.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "103",
@@ -2593,7 +2686,8 @@ const CARD_SETS = {
         "type": "Colorless",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/103.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/103.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "104",
@@ -2609,7 +2703,8 @@ const CARD_SETS = {
         "type": "Colorless",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/105.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/105.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "106",
@@ -2617,7 +2712,8 @@ const CARD_SETS = {
         "type": "Colorless",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/106.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/106.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "107",
@@ -2625,7 +2721,8 @@ const CARD_SETS = {
         "type": "Colorless",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/107.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/107.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "108",
@@ -2633,7 +2730,8 @@ const CARD_SETS = {
         "type": "Colorless",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/108.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/108.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "109",
@@ -2641,7 +2739,8 @@ const CARD_SETS = {
         "type": "Colorless",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/109.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/109.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "110",
@@ -2649,7 +2748,8 @@ const CARD_SETS = {
         "type": "Colorless",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/110.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/110.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "111",
@@ -2657,7 +2757,8 @@ const CARD_SETS = {
         "type": "Colorless",
         "rarity": "Common",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/111.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/111.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "112",
@@ -2665,7 +2766,8 @@ const CARD_SETS = {
         "type": "Colorless",
         "rarity": "Uncommon",
         "category": "Pokémon",
-        "imageUrl": "https://images.pokemontcg.io/me1/112.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/112.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "113",
@@ -2673,7 +2775,8 @@ const CARD_SETS = {
         "type": "Trainer",
         "rarity": "Uncommon",
         "category": "Trainer",
-        "imageUrl": "https://images.pokemontcg.io/me1/113.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/113.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "114",
@@ -2681,7 +2784,8 @@ const CARD_SETS = {
         "type": "Trainer",
         "rarity": "Uncommon",
         "category": "Trainer",
-        "imageUrl": "https://images.pokemontcg.io/me1/114.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/114.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "115",
@@ -2689,7 +2793,8 @@ const CARD_SETS = {
         "type": "Trainer",
         "rarity": "Uncommon",
         "category": "Trainer",
-        "imageUrl": "https://images.pokemontcg.io/me1/115.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/115.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "116",
@@ -2697,7 +2802,8 @@ const CARD_SETS = {
         "type": "Trainer",
         "rarity": "Uncommon",
         "category": "Trainer",
-        "imageUrl": "https://images.pokemontcg.io/me1/116.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/116.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "117",
@@ -2705,7 +2811,8 @@ const CARD_SETS = {
         "type": "Trainer",
         "rarity": "Uncommon",
         "category": "Trainer",
-        "imageUrl": "https://images.pokemontcg.io/me1/117.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/117.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "118",
@@ -2713,7 +2820,8 @@ const CARD_SETS = {
         "type": "Trainer",
         "rarity": "Uncommon",
         "category": "Trainer",
-        "imageUrl": "https://images.pokemontcg.io/me1/118.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/118.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "119",
@@ -2721,7 +2829,8 @@ const CARD_SETS = {
         "type": "Trainer",
         "rarity": "Uncommon",
         "category": "Trainer",
-        "imageUrl": "https://images.pokemontcg.io/me1/119.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/119.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "120",
@@ -2729,7 +2838,8 @@ const CARD_SETS = {
         "type": "Trainer",
         "rarity": "Uncommon",
         "category": "Trainer",
-        "imageUrl": "https://images.pokemontcg.io/me1/120.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/120.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "121",
@@ -2737,7 +2847,8 @@ const CARD_SETS = {
         "type": "Trainer",
         "rarity": "Uncommon",
         "category": "Trainer",
-        "imageUrl": "https://images.pokemontcg.io/me1/121.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/121.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "122",
@@ -2745,7 +2856,8 @@ const CARD_SETS = {
         "type": "Trainer",
         "rarity": "Uncommon",
         "category": "Trainer",
-        "imageUrl": "https://images.pokemontcg.io/me1/122.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/122.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "123",
@@ -2753,7 +2865,8 @@ const CARD_SETS = {
         "type": "Trainer",
         "rarity": "Uncommon",
         "category": "Trainer",
-        "imageUrl": "https://images.pokemontcg.io/me1/123.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/123.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "124",
@@ -2761,7 +2874,8 @@ const CARD_SETS = {
         "type": "Trainer",
         "rarity": "Uncommon",
         "category": "Trainer",
-        "imageUrl": "https://images.pokemontcg.io/me1/124.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/124.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "125",
@@ -2769,7 +2883,8 @@ const CARD_SETS = {
         "type": "Trainer",
         "rarity": "Uncommon",
         "category": "Trainer",
-        "imageUrl": "https://images.pokemontcg.io/me1/125.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/125.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "126",
@@ -2777,7 +2892,8 @@ const CARD_SETS = {
         "type": "Trainer",
         "rarity": "Uncommon",
         "category": "Trainer",
-        "imageUrl": "https://images.pokemontcg.io/me1/126.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/126.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "127",
@@ -2785,7 +2901,8 @@ const CARD_SETS = {
         "type": "Trainer",
         "rarity": "Uncommon",
         "category": "Trainer",
-        "imageUrl": "https://images.pokemontcg.io/me1/127.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/127.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "128",
@@ -2793,7 +2910,8 @@ const CARD_SETS = {
         "type": "Trainer",
         "rarity": "Uncommon",
         "category": "Trainer",
-        "imageUrl": "https://images.pokemontcg.io/me1/128.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/128.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "129",
@@ -2801,7 +2919,8 @@ const CARD_SETS = {
         "type": "Trainer",
         "rarity": "Uncommon",
         "category": "Trainer",
-        "imageUrl": "https://images.pokemontcg.io/me1/129.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/129.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "130",
@@ -2809,7 +2928,8 @@ const CARD_SETS = {
         "type": "Trainer",
         "rarity": "Uncommon",
         "category": "Trainer",
-        "imageUrl": "https://images.pokemontcg.io/me1/130.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/130.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "131",
@@ -2817,7 +2937,8 @@ const CARD_SETS = {
         "type": "Trainer",
         "rarity": "Uncommon",
         "category": "Trainer",
-        "imageUrl": "https://images.pokemontcg.io/me1/131.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/131.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "132",
@@ -2825,7 +2946,8 @@ const CARD_SETS = {
         "type": "Trainer",
         "rarity": "Uncommon",
         "category": "Trainer",
-        "imageUrl": "https://images.pokemontcg.io/me1/132.png"
+        "imageUrl": "https://images.pokemontcg.io/me1/132.png",
+        "variants": ["Non-Holo", "Reverse Holo"]
     },
     {
         "number": "133",
