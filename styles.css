@@ -1986,43 +1986,39 @@ body {
    ================================ */
 
 @media print {
-    /* Hide everything except print container */
-    body * {
-        visibility: hidden;
+    /* Reset everything for clean print */
+    html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+        height: auto !important;
+        overflow: visible !important;
     }
 
-    .avery-labels-print-container,
-    .avery-labels-print-container * {
-        visibility: visible;
+    /* Hide everything except print container */
+    body > *:not(.avery-labels-print-container) {
+        display: none !important;
     }
 
     .avery-labels-print-container {
         display: block !important;
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
+        position: static !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 8.5in;
     }
 
     /* Label Sheet - Letter size */
     .avery-label-sheet {
         width: 8.5in;
-        min-height: auto;
         padding-top: 0.5in;    /* Top margin */
         padding-left: 0.25in;  /* Left margin: (8.5" - 8 cols × 1.0") / 2 */
         padding-right: 0.25in;
+        padding-bottom: 0;
+        margin: 0;
         box-sizing: border-box;
-        page-break-after: always;
+        page-break-after: auto;
         page-break-inside: avoid;
         background: white;
-    }
-
-    .avery-label-sheet:last-child {
-        page-break-after: avoid;
-    }
-
-    .avery-label-sheet:only-child {
-        page-break-after: avoid;
     }
 
     /* Label Row */
