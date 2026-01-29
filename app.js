@@ -4,7 +4,7 @@
 // ================================
 // Global Version
 // ================================
-const APP_VERSION = 'v26';
+const APP_VERSION = 'v26.1';
 
 // ================================
 // Firebase Configuration
@@ -13,6 +13,7 @@ const APP_VERSION = 'v26';
 const firebaseConfig = {
     apiKey: "AIzaSyB0e85xGnyx8-9Db8tdM8QSDH-Gssfci08",
     authDomain: "setcollector-425d5.firebaseapp.com",
+    databaseURL: "https://setcollector-425d5-default-rtdb.firebaseio.com",
     projectId: "setcollector-425d5",
     storageBucket: "setcollector-425d5.firebasestorage.app",
     messagingSenderId: "1000884366226",
@@ -23,6 +24,84 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
+
+// Initialize database only if configured (optional feature)
+let database = null;
+try {
+    if (firebaseConfig.databaseURL) {
+        database = firebase.database();
+    }
+} catch (e) {
+    console.warn('Firebase Realtime Database not available:', e);
+}
+
+// ================================
+// Community Counter Functions
+// ================================
+
+// Register unique user and increment counter only if new
+async function registerUniqueUser(uid) {
+    if (!database) return; // Skip if database not configured
+
+    try {
+        const userRef = database.ref('users/' + uid);
+        const snapshot = await userRef.once('value');
+
+        // Only increment if this user doesn't exist yet
+        if (!snapshot.exists()) {
+            await userRef.set({ registered: Date.now() });
+
+            // Increment counter (display adds 100 base)
+            const counterRef = database.ref('stats/communityCount');
+            await counterRef.transaction((currentCount) => {
+                return (currentCount || 0) + 1;
+            });
+        }
+    } catch (error) {
+        console.error('Error registering unique user:', error);
+    }
+}
+
+// Listen for community count changes and update display
+function initCommunityCountListener() {
+    const countEl = document.getElementById('community-count');
+
+    // If database not configured, show dash immediately
+    if (!database) {
+        if (countEl) countEl.textContent = '—';
+        return;
+    }
+
+    // Set timeout fallback in case database isn't configured
+    const fallbackTimeout = setTimeout(() => {
+        if (countEl && countEl.textContent === '...') {
+            countEl.textContent = '—';
+        }
+    }, 5000);
+
+    try {
+        const counterRef = database.ref('stats/communityCount');
+        counterRef.on('value', (snapshot) => {
+            clearTimeout(fallbackTimeout);
+            const count = (snapshot.val() || 0) + 100;
+            if (countEl) {
+                countEl.textContent = count.toLocaleString();
+            }
+        }, (error) => {
+            clearTimeout(fallbackTimeout);
+            console.error('Error reading community counter:', error);
+            if (countEl) {
+                countEl.textContent = '—';
+            }
+        });
+    } catch (error) {
+        clearTimeout(fallbackTimeout);
+        console.error('Error initializing community counter:', error);
+        if (countEl) {
+            countEl.textContent = '—';
+        }
+    }
+}
 
 // ================================
 // Authentication Manager (Firebase)
@@ -47,6 +126,10 @@ class AuthManager {
             };
 
             console.log('Registration successful for:', this.currentUser.email);
+
+            // Register unique user in database and increment counter
+            await registerUniqueUser(user.uid);
+
             return { success: true, user: this.currentUser };
         } catch (error) {
             console.error('Registration error:', error);
@@ -2079,6 +2162,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const headerVersionEl = document.getElementById('header-version');
     if (authVersionEl) authVersionEl.textContent = APP_VERSION;
     if (headerVersionEl) headerVersionEl.textContent = APP_VERSION;
+
+    // Initialize community counter listener
+    initCommunityCountListener();
 
     // Initialize auth UI
     authUI = new AuthUI();
