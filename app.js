@@ -1206,11 +1206,15 @@ class CardTracker {
         const labelData = [];
         const addedSlots = new Set();
 
-        // Helper to get card name, stripping " ex" suffix since we show it separately
+        // Helper to get card name for label display
         const getCleanCardName = (card) => {
             if (!card || !card.name) return '';
+            let name = card.name;
             // Remove " ex" suffix (case insensitive) since we display ex indicator separately
-            return card.name.replace(/ ex$/i, '').trim();
+            name = name.replace(/ ex$/i, '').trim();
+            // Add line break after "Mega" for better label formatting
+            name = name.replace(/^Mega /i, 'Mega<br>');
+            return name;
         };
 
         // Add first position of each binder page (1, 10, 19, 28, etc.)
