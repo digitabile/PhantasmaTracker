@@ -4,7 +4,7 @@
 // ================================
 // Global Version
 // ================================
-const APP_VERSION = 'v27';
+const APP_VERSION = 'v27.1';
 
 // ================================
 // Firebase Configuration
