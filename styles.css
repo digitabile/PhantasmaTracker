@@ -1966,8 +1966,8 @@ body {
 /* ================================
    Avery Labels Print Styles
    Presta 94504 Format:
-   - 0.75" (54pt) diameter circular labels
-   - 9 columns x 12 rows = 108 labels per page
+   - 0.75" (3/4") diameter circular labels
+   - 8 columns x 10 rows = 80 labels per page
    - Letter size (8.5" x 11")
    ================================ */
 
@@ -1994,9 +1994,9 @@ body {
     .avery-label-sheet {
         width: 8.5in;
         height: 11in;
-        padding-top: 0.472in;   /* Top margin */
-        padding-left: 0.3125in; /* Left margin */
-        padding-right: 0.3125in;
+        padding-top: 0.5in;    /* Top margin: (11" - 10 rows × 1.0") / 2 */
+        padding-left: 0.25in;  /* Left margin: (8.5" - 8 cols × 1.0") / 2 */
+        padding-right: 0.25in;
         box-sizing: border-box;
         page-break-after: always;
         background: white;
@@ -2010,15 +2010,15 @@ body {
     .avery-label-row {
         display: flex;
         justify-content: flex-start;
-        height: 0.875in; /* Row height (label + spacing) */
+        height: 1.0in; /* Row height: vertical pitch for 10 rows */
         margin: 0;
         padding: 0;
     }
 
     /* Individual Label - 0.75" diameter circle */
     .avery-label {
-        width: 0.875in;  /* Cell width to accommodate label + spacing */
-        height: 0.875in;
+        width: 1.0in;   /* Cell width: horizontal pitch for 8 columns */
+        height: 1.0in;
         display: flex;
         align-items: center;
         justify-content: center;

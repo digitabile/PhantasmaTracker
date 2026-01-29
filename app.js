@@ -1269,11 +1269,11 @@ class CardTracker {
         const printContainer = document.getElementById('avery-labels-print-container');
 
         // Presta 94504 specifications:
-        // - 0.75" diameter circular labels
-        // - 9 columns x 12 rows = 108 labels per page
+        // - 0.75" (3/4") diameter circular labels
+        // - 8 columns x 10 rows = 80 labels per page
         // - Letter size paper (8.5" x 11")
-        const labelsPerRow = 9;
-        const rowsPerPage = 12;
+        const labelsPerRow = 8;
+        const rowsPerPage = 10;
         const labelsPerPage = labelsPerRow * rowsPerPage;
 
         // Generate label sheets
