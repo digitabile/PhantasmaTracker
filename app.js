@@ -1206,11 +1206,18 @@ class CardTracker {
         const labelData = [];
         const addedSlots = new Set();
 
+        // Helper to get card name, stripping " ex" suffix since we show it separately
+        const getCleanCardName = (card) => {
+            if (!card || !card.name) return '';
+            // Remove " ex" suffix (case insensitive) since we display ex indicator separately
+            return card.name.replace(/ ex$/i, '').trim();
+        };
+
         // Add first position of each binder page (1, 10, 19, 28, etc.)
         for (let slot = 1; slot <= totalSlots; slot += this.binderCardsPerPage) {
             const slotInfo = binderCards[slot - 1]; // slots are 1-indexed
             const isEx = slotInfo && this.isExCard(slotInfo.card);
-            const cardName = slotInfo && slotInfo.card ? slotInfo.card.name : '';
+            const cardName = slotInfo ? getCleanCardName(slotInfo.card) : '';
             labelData.push({ slotNumber: slot, isEx: isEx, cardName: cardName });
             addedSlots.add(slot);
         }
@@ -1219,7 +1226,7 @@ class CardTracker {
         binderCards.forEach((slotInfo, index) => {
             const slotNumber = index + 1;
             if (!addedSlots.has(slotNumber) && this.isExCard(slotInfo.card)) {
-                const cardName = slotInfo.card ? slotInfo.card.name : '';
+                const cardName = getCleanCardName(slotInfo.card);
                 labelData.push({ slotNumber: slotNumber, isEx: true, cardName: cardName });
                 addedSlots.add(slotNumber);
             }
