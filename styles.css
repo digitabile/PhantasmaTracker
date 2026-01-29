@@ -1987,16 +1987,26 @@ body {
 
 @media print {
     /* Reset everything for clean print */
+    *, *::before, *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
     html, body {
+        width: 8.5in;
+        height: auto;
         margin: 0 !important;
         padding: 0 !important;
-        height: auto !important;
-        overflow: visible !important;
+        overflow: hidden !important;
+        background: white;
     }
 
     /* Hide everything except print container */
     body > *:not(.avery-labels-print-container) {
         display: none !important;
+        height: 0 !important;
+        overflow: hidden !important;
     }
 
     .avery-labels-print-container {
@@ -2005,20 +2015,26 @@ body {
         margin: 0 !important;
         padding: 0 !important;
         width: 8.5in;
+        overflow: hidden;
     }
 
     /* Label Sheet - Letter size */
     .avery-label-sheet {
         width: 8.5in;
+        max-height: 10.5in;
         padding-top: 0.5in;    /* Top margin */
         padding-left: 0.25in;  /* Left margin: (8.5" - 8 cols × 1.0") / 2 */
         padding-right: 0.25in;
         padding-bottom: 0;
         margin: 0;
         box-sizing: border-box;
+        overflow: hidden;
+        background: white;
+        /* Modern break properties for Chrome */
+        break-after: auto;
+        break-inside: avoid;
         page-break-after: auto;
         page-break-inside: avoid;
-        background: white;
     }
 
     /* Label Row */
@@ -2092,9 +2108,13 @@ body {
         /* Empty labels - no visual content */
     }
 
-    /* Print settings */
+    /* Print settings - Chrome specific */
     @page {
-        size: letter;
+        size: 8.5in 11in;
+        margin: 0;
+    }
+
+    @page :first {
         margin: 0;
     }
 }
