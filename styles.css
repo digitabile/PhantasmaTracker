@@ -2007,16 +2007,21 @@ body {
     /* Label Sheet - Letter size */
     .avery-label-sheet {
         width: 8.5in;
-        height: 11in;
-        padding-top: 0.5in;    /* Top margin: (11" - 10 rows × 1.0") / 2 */
+        min-height: auto;
+        padding-top: 0.5in;    /* Top margin */
         padding-left: 0.25in;  /* Left margin: (8.5" - 8 cols × 1.0") / 2 */
         padding-right: 0.25in;
         box-sizing: border-box;
         page-break-after: always;
+        page-break-inside: avoid;
         background: white;
     }
 
     .avery-label-sheet:last-child {
+        page-break-after: avoid;
+    }
+
+    .avery-label-sheet:only-child {
         page-break-after: avoid;
     }
 
