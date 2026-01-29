@@ -4,7 +4,7 @@
 // ================================
 // Global Version
 // ================================
-const APP_VERSION = 'v27';
+const APP_VERSION = 'v27.1';
 
 // ================================
 // Firebase Configuration
@@ -1199,18 +1199,38 @@ class CardTracker {
     // ================================
 
     // Get all label data: first position of each page + all EX cards
-    // Returns array of objects: { slotNumber, isEx }
+    // Returns array of objects: { slotNumber, isEx, isMega, cardName }
     getLabelData() {
         const binderCards = this.getBinderCards();
         const totalSlots = binderCards.length;
         const labelData = [];
         const addedSlots = new Set();
 
+        // Helper to check if card is a Mega card
+        const isMegaCard = (card) => {
+            return card && card.name && card.name.toLowerCase().startsWith('mega ');
+        };
+
+        // Helper to get card name for label display
+        const getCleanCardName = (card, isMega) => {
+            if (!card || !card.name) return '';
+            let name = card.name;
+            // Remove " ex" suffix (case insensitive) since we display ex indicator separately
+            name = name.replace(/ ex$/i, '').trim();
+            // Add line break after "Mega" for better label formatting (only for Mega cards)
+            if (isMega) {
+                name = name.replace(/^Mega /i, 'Mega<br>');
+            }
+            return name;
+        };
+
         // Add first position of each binder page (1, 10, 19, 28, etc.)
         for (let slot = 1; slot <= totalSlots; slot += this.binderCardsPerPage) {
             const slotInfo = binderCards[slot - 1]; // slots are 1-indexed
             const isEx = slotInfo && this.isExCard(slotInfo.card);
-            labelData.push({ slotNumber: slot, isEx: isEx });
+            const isMega = slotInfo && isMegaCard(slotInfo.card);
+            const cardName = slotInfo ? getCleanCardName(slotInfo.card, isMega) : '';
+            labelData.push({ slotNumber: slot, isEx: isEx, isMega: isMega, cardName: cardName });
             addedSlots.add(slot);
         }
 
@@ -1218,7 +1238,9 @@ class CardTracker {
         binderCards.forEach((slotInfo, index) => {
             const slotNumber = index + 1;
             if (!addedSlots.has(slotNumber) && this.isExCard(slotInfo.card)) {
-                labelData.push({ slotNumber: slotNumber, isEx: true });
+                const isMega = isMegaCard(slotInfo.card);
+                const cardName = getCleanCardName(slotInfo.card, isMega);
+                labelData.push({ slotNumber: slotNumber, isEx: true, isMega: isMega, cardName: cardName });
                 addedSlots.add(slotNumber);
             }
         });
@@ -1248,7 +1270,8 @@ class CardTracker {
         // Generate preview
         const previewContainer = document.getElementById('avery-labels-preview-grid');
         previewContainer.innerHTML = labelData.map(label => `
-            <div class="avery-label-preview ${label.isEx ? 'avery-label-ex' : ''}">
+            <div class="avery-label-preview ${label.isEx ? 'avery-label-ex' : ''} ${label.isMega ? 'avery-label-mega' : ''}">
+                <span class="avery-label-name">${label.cardName}</span>
                 <span class="avery-label-number">${label.slotNumber}</span>
                 ${label.isEx ? '<span class="avery-label-ex-text">ex</span>' : ''}
             </div>
@@ -1269,11 +1292,11 @@ class CardTracker {
         const printContainer = document.getElementById('avery-labels-print-container');
 
         // Presta 94504 specifications:
-        // - 0.75" diameter circular labels
-        // - 9 columns x 12 rows = 108 labels per page
+        // - 0.75" (3/4") diameter circular labels
+        // - 8 columns x 10 rows = 80 labels per page
         // - Letter size paper (8.5" x 11")
-        const labelsPerRow = 9;
-        const rowsPerPage = 12;
+        const labelsPerRow = 8;
+        const rowsPerPage = 10;
         const labelsPerPage = labelsPerRow * rowsPerPage;
 
         // Generate label sheets
@@ -1284,9 +1307,12 @@ class CardTracker {
             const startIndex = page * labelsPerPage;
             const pageLabels = labelData.slice(startIndex, startIndex + labelsPerPage);
 
+            // Only generate rows needed for this page's labels
+            const rowsNeeded = Math.ceil(pageLabels.length / labelsPerRow);
+
             printHTML += `<div class="avery-label-sheet">`;
 
-            for (let row = 0; row < rowsPerPage; row++) {
+            for (let row = 0; row < rowsNeeded; row++) {
                 printHTML += `<div class="avery-label-row">`;
 
                 for (let col = 0; col < labelsPerRow; col++) {
@@ -1296,14 +1322,15 @@ class CardTracker {
                     if (label !== undefined) {
                         printHTML += `
                             <div class="avery-label">
-                                <span class="avery-label-text ${label.isEx ? 'avery-label-text-ex' : ''}">
+                                <span class="avery-label-text ${label.isEx ? 'avery-label-text-ex' : ''} ${label.isMega ? 'avery-label-text-mega' : ''}">
+                                    <span class="avery-label-name-print">${label.cardName}</span>
                                     <span class="avery-label-num">${label.slotNumber}</span>
                                     ${label.isEx ? '<span class="avery-label-ex-print">ex</span>' : ''}
                                 </span>
                             </div>
                         `;
                     } else {
-                        // Empty label placeholder
+                        // Empty label placeholder for incomplete row
                         printHTML += `<div class="avery-label avery-label-empty"></div>`;
                     }
                 }

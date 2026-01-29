@@ -1923,6 +1923,8 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 4px;
+    box-sizing: border-box;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
@@ -1930,10 +1932,22 @@ body {
     background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
 }
 
+.avery-label-name {
+    color: white;
+    font-weight: 600;
+    font-size: 0.4rem;
+    line-height: 1.1;
+    text-align: center;
+    max-width: 42px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
 .avery-label-number {
     color: white;
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 0.75rem;
     line-height: 1;
 }
 
@@ -1966,59 +1980,76 @@ body {
 /* ================================
    Avery Labels Print Styles
    Presta 94504 Format:
-   - 0.75" (54pt) diameter circular labels
-   - 9 columns x 12 rows = 108 labels per page
+   - 0.75" (3/4") diameter circular labels
+   - 8 columns x 10 rows = 80 labels per page
    - Letter size (8.5" x 11")
    ================================ */
 
 @media print {
-    /* Hide everything except print container */
-    body * {
-        visibility: hidden;
+    /* Reset everything for clean print */
+    *, *::before, *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
     }
 
-    .avery-labels-print-container,
-    .avery-labels-print-container * {
-        visibility: visible;
+    html, body {
+        width: 8.5in;
+        height: auto;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+        background: white;
+    }
+
+    /* Hide everything except print container */
+    body > *:not(.avery-labels-print-container) {
+        display: none !important;
+        height: 0 !important;
+        overflow: hidden !important;
     }
 
     .avery-labels-print-container {
         display: block !important;
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
+        position: static !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 8.5in;
+        overflow: hidden;
     }
 
     /* Label Sheet - Letter size */
     .avery-label-sheet {
         width: 8.5in;
-        height: 11in;
-        padding-top: 0.472in;   /* Top margin */
-        padding-left: 0.3125in; /* Left margin */
-        padding-right: 0.3125in;
+        max-height: 10.5in;
+        padding-top: 0.5in;    /* Top margin */
+        padding-left: 0.25in;  /* Left margin: (8.5" - 8 cols × 1.0") / 2 */
+        padding-right: 0.25in;
+        padding-bottom: 0;
+        margin: 0;
         box-sizing: border-box;
-        page-break-after: always;
+        overflow: hidden;
         background: white;
-    }
-
-    .avery-label-sheet:last-child {
-        page-break-after: avoid;
+        /* Modern break properties for Chrome */
+        break-after: auto;
+        break-inside: avoid;
+        page-break-after: auto;
+        page-break-inside: avoid;
     }
 
     /* Label Row */
     .avery-label-row {
         display: flex;
         justify-content: flex-start;
-        height: 0.875in; /* Row height (label + spacing) */
+        height: 1.0in; /* Row height: vertical pitch for 10 rows */
         margin: 0;
         padding: 0;
     }
 
     /* Individual Label - 0.75" diameter circle */
     .avery-label {
-        width: 0.875in;  /* Cell width to accommodate label + spacing */
-        height: 0.875in;
+        width: 1.0in;   /* Cell width: horizontal pitch for 8 columns */
+        height: 1.0in;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -2034,6 +2065,8 @@ body {
         justify-content: center;
         width: 0.75in;   /* Label diameter */
         height: 0.75in;
+        padding: 0.05in;
+        box-sizing: border-box;
         border-radius: 50%;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
@@ -2046,6 +2079,17 @@ body {
 
     .avery-label-text-ex {
         background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    }
+
+    .avery-label-name-print {
+        font-size: 5pt;
+        font-weight: 600;
+        line-height: 1.1;
+        text-align: center;
+        max-width: 0.6in;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
     }
 
     .avery-label-num {
@@ -2064,9 +2108,13 @@ body {
         /* Empty labels - no visual content */
     }
 
-    /* Print settings */
+    /* Print settings - Chrome specific */
     @page {
-        size: letter;
+        size: 8.5in 11in;
+        margin: 0;
+    }
+
+    @page :first {
         margin: 0;
     }
 }
