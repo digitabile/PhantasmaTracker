@@ -1930,6 +1930,19 @@ body {
     background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
 }
 
+.avery-label-name {
+    color: white;
+    font-weight: 600;
+    font-size: 0.45rem;
+    line-height: 1.1;
+    text-align: center;
+    max-width: 45px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 1px;
+}
+
 .avery-label-number {
     color: white;
     font-weight: 700;
@@ -2046,6 +2059,18 @@ body {
 
     .avery-label-text-ex {
         background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    }
+
+    .avery-label-name-print {
+        font-size: 5pt;
+        font-weight: 600;
+        line-height: 1.1;
+        text-align: center;
+        max-width: 0.65in;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-bottom: 1px;
     }
 
     .avery-label-num {

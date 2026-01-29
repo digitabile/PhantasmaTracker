@@ -1199,7 +1199,7 @@ class CardTracker {
     // ================================
 
     // Get all label data: first position of each page + all EX cards
-    // Returns array of objects: { slotNumber, isEx }
+    // Returns array of objects: { slotNumber, isEx, cardName }
     getLabelData() {
         const binderCards = this.getBinderCards();
         const totalSlots = binderCards.length;
@@ -1210,7 +1210,8 @@ class CardTracker {
         for (let slot = 1; slot <= totalSlots; slot += this.binderCardsPerPage) {
             const slotInfo = binderCards[slot - 1]; // slots are 1-indexed
             const isEx = slotInfo && this.isExCard(slotInfo.card);
-            labelData.push({ slotNumber: slot, isEx: isEx });
+            const cardName = slotInfo && slotInfo.card ? slotInfo.card.name : '';
+            labelData.push({ slotNumber: slot, isEx: isEx, cardName: cardName });
             addedSlots.add(slot);
         }
 
@@ -1218,7 +1219,8 @@ class CardTracker {
         binderCards.forEach((slotInfo, index) => {
             const slotNumber = index + 1;
             if (!addedSlots.has(slotNumber) && this.isExCard(slotInfo.card)) {
-                labelData.push({ slotNumber: slotNumber, isEx: true });
+                const cardName = slotInfo.card ? slotInfo.card.name : '';
+                labelData.push({ slotNumber: slotNumber, isEx: true, cardName: cardName });
                 addedSlots.add(slotNumber);
             }
         });
@@ -1249,6 +1251,7 @@ class CardTracker {
         const previewContainer = document.getElementById('avery-labels-preview-grid');
         previewContainer.innerHTML = labelData.map(label => `
             <div class="avery-label-preview ${label.isEx ? 'avery-label-ex' : ''}">
+                <span class="avery-label-name">${label.cardName}</span>
                 <span class="avery-label-number">${label.slotNumber}</span>
                 ${label.isEx ? '<span class="avery-label-ex-text">ex</span>' : ''}
             </div>
@@ -1297,6 +1300,7 @@ class CardTracker {
                         printHTML += `
                             <div class="avery-label">
                                 <span class="avery-label-text ${label.isEx ? 'avery-label-text-ex' : ''}">
+                                    <span class="avery-label-name-print">${label.cardName}</span>
                                     <span class="avery-label-num">${label.slotNumber}</span>
                                     ${label.isEx ? '<span class="avery-label-ex-print">ex</span>' : ''}
                                 </span>
