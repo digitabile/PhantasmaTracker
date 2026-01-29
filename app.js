@@ -1307,9 +1307,12 @@ class CardTracker {
             const startIndex = page * labelsPerPage;
             const pageLabels = labelData.slice(startIndex, startIndex + labelsPerPage);
 
+            // Only generate rows needed for this page's labels
+            const rowsNeeded = Math.ceil(pageLabels.length / labelsPerRow);
+
             printHTML += `<div class="avery-label-sheet">`;
 
-            for (let row = 0; row < rowsPerPage; row++) {
+            for (let row = 0; row < rowsNeeded; row++) {
                 printHTML += `<div class="avery-label-row">`;
 
                 for (let col = 0; col < labelsPerRow; col++) {
@@ -1327,7 +1330,7 @@ class CardTracker {
                             </div>
                         `;
                     } else {
-                        // Empty label placeholder
+                        // Empty label placeholder for incomplete row
                         printHTML += `<div class="avery-label avery-label-empty"></div>`;
                     }
                 }
