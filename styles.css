@@ -1922,14 +1922,20 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    padding: 6px 4px 8px 4px;
+    justify-content: center;
+    padding: 4px;
     box-sizing: border-box;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .avery-label-preview.avery-label-ex {
     background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+}
+
+/* Mega labels: name at top, number pushed down */
+.avery-label-preview.avery-label-mega {
+    justify-content: flex-start;
+    padding: 6px 4px 8px 4px;
 }
 
 .avery-label-name {
@@ -1949,6 +1955,10 @@ body {
     font-weight: 700;
     font-size: 0.75rem;
     line-height: 1;
+}
+
+/* Mega labels: push number down */
+.avery-label-mega .avery-label-number {
     margin-top: auto;
 }
 
@@ -2046,10 +2056,10 @@ body {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: center;
         width: 0.75in;   /* Label diameter */
         height: 0.75in;
-        padding: 0.08in 0.05in 0.12in 0.05in;
+        padding: 0.05in;
         box-sizing: border-box;
         border-radius: 50%;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -2065,6 +2075,12 @@ body {
         background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
     }
 
+    /* Mega labels: name at top, number pushed down */
+    .avery-label-text-mega {
+        justify-content: flex-start;
+        padding: 0.08in 0.05in 0.12in 0.05in;
+    }
+
     .avery-label-name-print {
         font-size: 5pt;
         font-weight: 600;
@@ -2078,6 +2094,10 @@ body {
 
     .avery-label-num {
         line-height: 1;
+    }
+
+    /* Mega labels: push number down */
+    .avery-label-text-mega .avery-label-num {
         margin-top: auto;
     }
 

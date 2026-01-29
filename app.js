@@ -1199,21 +1199,28 @@ class CardTracker {
     // ================================
 
     // Get all label data: first position of each page + all EX cards
-    // Returns array of objects: { slotNumber, isEx, cardName }
+    // Returns array of objects: { slotNumber, isEx, isMega, cardName }
     getLabelData() {
         const binderCards = this.getBinderCards();
         const totalSlots = binderCards.length;
         const labelData = [];
         const addedSlots = new Set();
 
+        // Helper to check if card is a Mega card
+        const isMegaCard = (card) => {
+            return card && card.name && card.name.toLowerCase().startsWith('mega ');
+        };
+
         // Helper to get card name for label display
-        const getCleanCardName = (card) => {
+        const getCleanCardName = (card, isMega) => {
             if (!card || !card.name) return '';
             let name = card.name;
             // Remove " ex" suffix (case insensitive) since we display ex indicator separately
             name = name.replace(/ ex$/i, '').trim();
-            // Add line break after "Mega" for better label formatting
-            name = name.replace(/^Mega /i, 'Mega<br>');
+            // Add line break after "Mega" for better label formatting (only for Mega cards)
+            if (isMega) {
+                name = name.replace(/^Mega /i, 'Mega<br>');
+            }
             return name;
         };
 
@@ -1221,8 +1228,9 @@ class CardTracker {
         for (let slot = 1; slot <= totalSlots; slot += this.binderCardsPerPage) {
             const slotInfo = binderCards[slot - 1]; // slots are 1-indexed
             const isEx = slotInfo && this.isExCard(slotInfo.card);
-            const cardName = slotInfo ? getCleanCardName(slotInfo.card) : '';
-            labelData.push({ slotNumber: slot, isEx: isEx, cardName: cardName });
+            const isMega = slotInfo && isMegaCard(slotInfo.card);
+            const cardName = slotInfo ? getCleanCardName(slotInfo.card, isMega) : '';
+            labelData.push({ slotNumber: slot, isEx: isEx, isMega: isMega, cardName: cardName });
             addedSlots.add(slot);
         }
 
@@ -1230,8 +1238,9 @@ class CardTracker {
         binderCards.forEach((slotInfo, index) => {
             const slotNumber = index + 1;
             if (!addedSlots.has(slotNumber) && this.isExCard(slotInfo.card)) {
-                const cardName = getCleanCardName(slotInfo.card);
-                labelData.push({ slotNumber: slotNumber, isEx: true, cardName: cardName });
+                const isMega = isMegaCard(slotInfo.card);
+                const cardName = getCleanCardName(slotInfo.card, isMega);
+                labelData.push({ slotNumber: slotNumber, isEx: true, isMega: isMega, cardName: cardName });
                 addedSlots.add(slotNumber);
             }
         });
@@ -1261,7 +1270,7 @@ class CardTracker {
         // Generate preview
         const previewContainer = document.getElementById('avery-labels-preview-grid');
         previewContainer.innerHTML = labelData.map(label => `
-            <div class="avery-label-preview ${label.isEx ? 'avery-label-ex' : ''}">
+            <div class="avery-label-preview ${label.isEx ? 'avery-label-ex' : ''} ${label.isMega ? 'avery-label-mega' : ''}">
                 <span class="avery-label-name">${label.cardName}</span>
                 <span class="avery-label-number">${label.slotNumber}</span>
                 ${label.isEx ? '<span class="avery-label-ex-text">ex</span>' : ''}
@@ -1310,7 +1319,7 @@ class CardTracker {
                     if (label !== undefined) {
                         printHTML += `
                             <div class="avery-label">
-                                <span class="avery-label-text ${label.isEx ? 'avery-label-text-ex' : ''}">
+                                <span class="avery-label-text ${label.isEx ? 'avery-label-text-ex' : ''} ${label.isMega ? 'avery-label-text-mega' : ''}">
                                     <span class="avery-label-name-print">${label.cardName}</span>
                                     <span class="avery-label-num">${label.slotNumber}</span>
                                     ${label.isEx ? '<span class="avery-label-ex-print">ex</span>' : ''}
